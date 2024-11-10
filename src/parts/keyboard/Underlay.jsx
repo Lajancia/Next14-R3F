@@ -21,7 +21,7 @@ const Center = styled.div`
   justify-content: center; /* Horizontally center */
   align-items: center; /* Vertically center */
   height: 100%; /* Adjust as needed */
-  font-size: 15rem;
+  font-size: 12rem;
 `
 
 export default function Underlay() {

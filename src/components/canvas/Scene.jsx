@@ -11,7 +11,7 @@ export default function Scene({ ...props }) {
   return (
     <Canvas {...props}
       onCreated={(state) => (state.gl.toneMapping = THREE.AgXToneMapping)}
-      camera={{ position: [0, 0, 0], fov: 30 }}
+      camera={{ position: [0, 1, 12], fov: 30 }}
     >
       {/* @ts-ignore */}
       <r3f.Out />

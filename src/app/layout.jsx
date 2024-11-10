@@ -1,7 +1,7 @@
 import { Layout } from '@/components/dom/Layout'
 import '@/global.css'
-import '@/components/canvas/Underlay'
-import Underlay from '@/components/canvas/Underlay'
+import '@/parts/keyboard/Underlay'
+import Underlay from '@/parts/keyboard/Underlay'
 import { Jersey_25 } from 'next/font/google'
 
 const jersey25 = Jersey_25({

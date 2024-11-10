@@ -1,6 +1,6 @@
 'use client'
 
-import KeyboardParts from '@/parts/Keyboard'
+import KeyboardParts from '@/parts/keyboard/Keyboard'
 import styled from 'styled-components'
 
 export default function Page() {
