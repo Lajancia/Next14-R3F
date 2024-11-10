@@ -49,21 +49,8 @@ export default function KeyboardParts() {
         <EffectComposer disableNormalPass>
           <Bloom />
         </EffectComposer>
-      <OrbitControls/>
-        {/* <Rig /> */}
+        <OrbitControls enableZoom={false} />
       </View>
     </>
   )
-}
-
-function Rig() {
-  useFrame((state, delta) => {
-    easing.damp3(
-      state.camera.position,
-      [Math.sin(-state.pointer.x) * 1, state.pointer.y * 1, 15 + Math.cos(state.pointer.x) * 1],
-      0.2,
-      delta,
-    )
-    state.camera.lookAt(0, 0, 0)
-  })
 }
