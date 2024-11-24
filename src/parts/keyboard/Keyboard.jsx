@@ -1,19 +1,17 @@
-'use client'
-
 import { useFrame } from '@react-three/fiber'
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 import { Lightformer, Environment, Float, ContactShadows, Text, OrbitControls } from '@react-three/drei'
 import { Bloom, EffectComposer, N8AO, TiltShift2 } from '@react-three/postprocessing'
 import { easing } from 'maath'
-import styled from 'styled-components'
+import { css } from 'styled-system/css'
 
 const Keyboard = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Keyboard), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
     <div>
-      <svg className='-ml-1 mr-3 h-5 w-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
+      <svg className={spinnerStyles} fill='none' viewBox='0 0 24 24'>
         <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
         <path
           className='opacity-75'
@@ -28,7 +26,7 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 export default function KeyboardParts() {
   return (
     <>
-      <View orbit className='h-full'>
+      <View orbit className={css({ height: '100%' })}>
         <spotLight position={[10, 10, 10]} penumbra={3} castShadow angle={1} />
         <ambientLight position={[10, 10, 10]} />
         <pointLight position={[10, 10, 10]} />
@@ -54,3 +52,16 @@ export default function KeyboardParts() {
     </>
   )
 }
+
+const spinnerStyles = css({
+  marginLeft: '-0.25rem', // Equivalent to -ml-1
+  marginRight: '0.75rem', // Equivalent to mr-3
+  height: '1.25rem', // Equivalent to h-5
+  width: '1.25rem', // Equivalent to w-5
+  animation: 'spin 1s linear infinite', // Equivalent to animate-spin
+  color: 'black', // Equivalent to text-black
+  '@keyframes spin': {
+    from: { transform: 'rotate(0deg)' },
+    to: { transform: 'rotate(360deg)' },
+  },
+})

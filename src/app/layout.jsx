@@ -1,5 +1,5 @@
 import { Layout } from '@/components/dom/Layout'
-import '@/global.css'
+import 'index.css'
 import '@/parts/keyboard/Underlay'
 import Underlay from '@/parts/keyboard/Underlay'
 import { Jersey_25 } from 'next/font/google'

@@ -1,36 +1,23 @@
 'use client'
-
 import KeyboardParts from '@/parts/keyboard/Keyboard'
-import styled from 'styled-components'
 import Header from '@/components/header'
 import Info from '@/parts/keyboard/Info'
+import { css } from 'styled-system/css'
+const FlexContainer = css({ display: 'flex', alignItems: 'center', height: '100%' })
+const HalfWidthContainer = css({ width: '50%', height: '100%' })
 
 export default function Page() {
   return (
     <>
       <Header />
-      <FlexContainer>
-        <HalfWidthContainer>
+      <div className={FlexContainer}>
+        <div className={HalfWidthContainer}>
           <KeyboardParts />
-        </HalfWidthContainer>
-
-        <HalfWidthContainer>
+        </div>
+        <div className={HalfWidthContainer}>
           <Info />
-        </HalfWidthContainer>
-      </FlexContainer>
+        </div>
+      </div>
     </>
   )
 }
-
-const FlexContainer = styled.div`
-  display: flex;
-  align-items: center;
-  height: 100%;
-`
-const HalfWidthContainer = styled.div`
-  width: 50%;
-  height: 100%;
-`
-const Spacer = styled.div`
-  margin-right: 1rem;
-`

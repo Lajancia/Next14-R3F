@@ -1,5 +1,4 @@
 'use client'
-
 import { forwardRef, Suspense, useImperativeHandle, useRef } from 'react'
 import { OrbitControls, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
 import { Three } from '@/helpers/components/Three'
@@ -22,9 +21,7 @@ const View = forwardRef(({ children, orbit, ...props }, ref) => {
     <>
       <div ref={localRef} {...props} />
       <Three>
-        <ViewImpl track={localRef}>
-          {children}
-        </ViewImpl>
+        <ViewImpl track={localRef}>{children}</ViewImpl>
       </Three>
     </>
   )
