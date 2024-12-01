@@ -10,9 +10,21 @@ export default defineConfig({
   // Files to exclude
   exclude: [],
 
+  conditions: {
+    light: '[data-color-mode=light] &',
+    dark: '[data-color-mode=dark] &',
+  },
   // Useful for theme customization
   theme: {
-    extend: {},
+    extend: {
+      semanticTokens: {
+        colors: {
+          background: { value: { base: '#E9E9E9', _dark: '#1e1e1e' } },
+          MainText: { value: { base: '#000', _dark: '#fff' } },
+          primary: { value: { base: '#07c', _dark: '#0cf' } },
+        },
+      },
+    },
   },
   jsxFramework: 'react',
 

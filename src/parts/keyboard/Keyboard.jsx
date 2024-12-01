@@ -4,10 +4,10 @@ import { Suspense } from 'react'
 import { Lightformer, Environment, Float, ContactShadows, Text, OrbitControls } from '@react-three/drei'
 import { Bloom, EffectComposer, N8AO, TiltShift2 } from '@react-three/postprocessing'
 import { easing } from 'maath'
-import { css } from 'styled-system/css'
+import { css } from '../../../styled-system/css'
 
-const Keyboard = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Keyboard), { ssr: false })
-const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
+const Keyboard = dynamic(() => import('../../components/canvas/Examples').then((mod) => mod.Keyboard), { ssr: false })
+const View = dynamic(() => import('../../components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
     <div>

@@ -1,4 +1,5 @@
-import { css } from 'styled-system/css'
+'use client'
+import { css } from '../../../styled-system/css'
 import Image from 'next/image'
 
 const Info = () => {
@@ -7,9 +8,9 @@ const Info = () => {
       <div className={StyledCategory}>Modern Art</div>
       <h1 className={StyledTitle}>MACRO KEYBOARD</h1>
       <div className={StyledCircle}>
-        <button className={circleButton({ color: '#fff' })} />
-        <button className={circleButton({ color: '#000' })} />
-        <button className={circleButton({ color: '#F99417' })} />
+        <div className={circleButton({ color: 'white' })} />
+        <button className={circleButton({ color: 'Orange' })} />
+        <button className={circleButton({ color: 'black' })} />
       </div>
       <p className={StyledDate}>2024-10-19</p>
       <article className={StyledText}>
@@ -59,13 +60,13 @@ const StyledInfoWrapper = css({
 const StyledCategory = css({
   fontSize: '2rem',
   lineHeight: '0.1rem',
-  color: 'white',
+  color: 'MainText',
 })
 
 const StyledTitle = css({
   fontSize: '5rem',
   lineHeight: '100%',
-  color: 'white',
+  color: 'MainText',
 })
 
 const StyledCircle = css({
@@ -75,19 +76,19 @@ const StyledCircle = css({
 
 const StyledDate = css({
   fontSize: '2.5rem',
-  color: 'white',
+  color: 'MainText',
 })
 
 const StyledText = css({
   fontSize: '1.5rem',
-  color: 'white',
+  color: 'MainText',
 })
 
 const circleButton = (props) =>
   css({
     width: '3rem',
     height: '3rem',
-    backgroundColor: props.color,
+    backgroundColor: props.color === 'white' ? 'white' : props.color === 'Orange' ? 'Orange' : 'Black',
     border: 'none',
     borderRadius: '50%',
     textAlign: 'center',

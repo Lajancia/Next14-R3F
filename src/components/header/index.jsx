@@ -1,6 +1,17 @@
 import Link from 'next/link'
 import { css } from '../../../styled-system/css'
-import 'styled-system/styles.css'
+import '../../../styled-system/styles.css'
+
+const toggleTheme = () => {
+  console.log('toggle')
+  const currentTheme = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('theme='))
+    ?.split('=')[1]
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
+  document.cookie = `theme=${newTheme}; path=/`
+  window.document.documentElement.setAttribute('data-color-mode', newTheme)
+}
 
 const Header = () => {
   return (
@@ -13,12 +24,9 @@ const Header = () => {
         </div>
       </div>
       <div className={StyledHeaderSetting}>
-        <button className={StyledLanguageButton} href='/'>
-          KO
-        </button>
-        <button className={StyledLanguageButton} href='/'>
-          EN
-        </button>
+        <button className={StyledLanguageButton}>KO</button>
+        <button className={StyledLanguageButton}>EN</button>
+        <button className={StyledThemeButton} onClick={toggleTheme} />
       </div>
     </div>
   )
@@ -36,7 +44,7 @@ const StyledHeaderWrapper = css({
   height: '10%',
 })
 
-const StyledHomeButton = css({ color: 'white', fontSize: '3rem' })
+const StyledHomeButton = css({ color: 'MainText', fontSize: '3rem' })
 
 const StyledHeaderMenu = css({
   width: '50%',
@@ -45,10 +53,11 @@ const StyledHeaderMenu = css({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  borderBottom: '1px solid white',
+  borderBottom: '1px solid',
+  borderBottomColor: 'MainText',
 })
 
-const StyledOption = css({ display: 'flex', flexDirection: 'row', fontSize: '1.5rem', gap: '2rem', color: 'white' })
+const StyledOption = css({ display: 'flex', flexDirection: 'row', fontSize: '1.5rem', gap: '2rem', color: 'MainText' })
 
 const StyledHeaderSetting = css({
   display: 'flex',
@@ -58,7 +67,16 @@ const StyledHeaderSetting = css({
   gap: '1rem',
   width: '50%',
   height: '100%',
-  color: 'white',
+  color: 'MainText',
 })
 
 const StyledLanguageButton = css({ fontSize: '1.5rem' })
+
+const StyledThemeButton = css({
+  color: 'MainText',
+  backgroundColor: 'MainText',
+  width: '2rem', // Adjust the size as needed
+  height: '2rem', // Adjust the size as needed
+  borderRadius: '50%',
+  cursor: 'pointer',
+})
