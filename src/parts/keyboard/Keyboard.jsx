@@ -1,6 +1,6 @@
 import { useFrame } from '@react-three/fiber'
 import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Lightformer, Environment, Float, ContactShadows, Text, OrbitControls } from '@react-three/drei'
 import { Bloom, EffectComposer, N8AO, TiltShift2 } from '@react-three/postprocessing'
 import { easing } from 'maath'
@@ -31,7 +31,7 @@ export default function KeyboardParts() {
         <ambientLight position={[10, 10, 10]} />
         <pointLight position={[10, 10, 10]} />
         <Suspense fallback={null}>
-          <Float floatIntensity={0.5}>
+          <Float floatIntensity={2}>
             <Keyboard scale={0.3} position={[0, 0, 0]} rotation={[Math.PI / 3.7, 5.5, 0]} />
           </Float>
           <ContactShadows position={[0, -5, 0]} opacity={0.8} scale={30} blur={1.75} far={4.5} />

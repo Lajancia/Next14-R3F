@@ -15,7 +15,7 @@ export const Common = ({ color }) => (
 
 const View = forwardRef(({ children, orbit, ...props }, ref) => {
   const localRef = useRef(null)
-  useImperativeHandle(ref, () => localRef.current)
+  // useImperativeHandle(ref, () => localRef.current)
 
   return (
     <>

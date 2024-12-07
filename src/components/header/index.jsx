@@ -3,7 +3,6 @@ import { css } from '../../../styled-system/css'
 import '../../../styled-system/styles.css'
 
 const toggleTheme = () => {
-  console.log('toggle')
   const currentTheme = document.cookie
     .split('; ')
     .find((row) => row.startsWith('theme='))
@@ -17,10 +16,16 @@ const Header = () => {
   return (
     <div className={StyledHeaderWrapper}>
       <div className={StyledHeaderMenu}>
-        <button className={StyledHomeButton}>Soominlab</button>
+        <Link className={StyledHomeLink} href={'/'}>
+          Soominlab
+        </Link>
         <div className={StyledOption}>
-          <Link href='/'>About Me</Link>
-          <Link href='/'>Gallery</Link>
+          <Link href='/' className={StyledLink}>
+            About Me
+          </Link>
+          <Link href='/gallery' className={StyledLink}>
+            Gallery
+          </Link>
         </div>
       </div>
       <div className={StyledHeaderSetting}>
@@ -34,6 +39,12 @@ const Header = () => {
 
 export default Header
 
+const StyledLink = css({
+  color: 'MainText',
+  transition: 'color 0.3s',
+  '&:hover': { color: 'orange' },
+})
+
 const StyledHeaderWrapper = css({
   position: 'fixed',
   display: 'flex',
@@ -44,7 +55,7 @@ const StyledHeaderWrapper = css({
   height: '10%',
 })
 
-const StyledHomeButton = css({ color: 'MainText', fontSize: '3rem' })
+const StyledHomeLink = css({ color: 'MainText', fontSize: '3rem' })
 
 const StyledHeaderMenu = css({
   width: '50%',
@@ -75,8 +86,8 @@ const StyledLanguageButton = css({ fontSize: '1.5rem' })
 const StyledThemeButton = css({
   color: 'MainText',
   backgroundColor: 'MainText',
-  width: '2rem', // Adjust the size as needed
-  height: '2rem', // Adjust the size as needed
+  width: '2rem',
+  height: '2rem',
   borderRadius: '50%',
   cursor: 'pointer',
 })
