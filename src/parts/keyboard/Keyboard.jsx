@@ -1,11 +1,16 @@
-import { useFrame } from '@react-three/fiber'
+import { useFrame, Canvas } from '@react-three/fiber'
 import dynamic from 'next/dynamic'
 import { Suspense, useEffect, useState } from 'react'
 import { Lightformer, Environment, Float, ContactShadows, Text, OrbitControls } from '@react-three/drei'
 import { Bloom, EffectComposer, N8AO, TiltShift2 } from '@react-three/postprocessing'
 import { easing } from 'maath'
 import { css } from '../../../styled-system/css'
-
+import { usePathname, useSearchParams } from 'next/navigation'
+import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
+// import { Keyboard } from '../../components/canvas/Examples'
+// import { View } from '../../components/canvas/View'
+// import { useRef } from 'react'
 const Keyboard = dynamic(() => import('../../components/canvas/Examples').then((mod) => mod.Keyboard), { ssr: false })
 const View = dynamic(() => import('../../components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -23,7 +28,10 @@ const View = dynamic(() => import('../../components/canvas/View').then((mod) => 
   ),
 })
 
-export default function KeyboardParts() {
+export default function KeyboardParts({ onExitComplete }) {
+  const router = useRouter()
+  const [showView, setShowView] = useState(true)
+
   return (
     <>
       <View orbit className={css({ height: '100%' })}>
@@ -32,7 +40,7 @@ export default function KeyboardParts() {
         <pointLight position={[10, 10, 10]} />
         <Suspense fallback={null}>
           <Float floatIntensity={2}>
-            <Keyboard scale={0.3} position={[0, 0, 0]} rotation={[Math.PI / 3.7, 5.5, 0]} />
+            {showView && <Keyboard scale={0.3} position={[0, 0, 0]} rotation={[Math.PI / 3.7, 5.5, 0]} />}
           </Float>
           <ContactShadows position={[0, -5, 0]} opacity={0.8} scale={30} blur={1.75} far={4.5} />
         </Suspense>

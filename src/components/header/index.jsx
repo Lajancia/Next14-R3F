@@ -1,7 +1,8 @@
+'use client'
 import Link from 'next/link'
 import { css } from '../../../styled-system/css'
 import '../../../styled-system/styles.css'
-
+import { useRouter } from 'next/navigation'
 const toggleTheme = () => {
   const currentTheme = document.cookie
     .split('; ')
@@ -13,6 +14,7 @@ const toggleTheme = () => {
 }
 
 const Header = () => {
+  const router = useRouter()
   return (
     <div className={StyledHeaderWrapper}>
       <div className={StyledHeaderMenu}>
@@ -23,9 +25,9 @@ const Header = () => {
           <Link href='/' className={StyledLink}>
             About Me
           </Link>
-          <Link href='/gallery' className={StyledLink}>
+          <a href='/gallery' className={StyledLink}>
             Gallery
-          </Link>
+          </a>
         </div>
       </div>
       <div className={StyledHeaderSetting}>

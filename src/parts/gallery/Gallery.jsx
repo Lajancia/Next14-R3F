@@ -1,14 +1,30 @@
 'use client'
 
 import * as THREE from 'three'
-import { useRef, useState } from 'react'
+import { useRef, useState, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Image, ScrollControls, Scroll, useScroll, Text } from '@react-three/drei'
 import { proxy, useSnapshot } from 'valtio'
 import { easing } from 'maath'
 import { css } from '../../../styled-system/css'
 import Jersey from './Jersey 25_Regular.json'
-import { suspend } from 'suspend-react'
+import dynamic from 'next/dynamic'
+
+const View = dynamic(() => import('../../components/canvas/View').then((mod) => mod.View), {
+  ssr: false,
+  loading: () => (
+    <div>
+      <svg className={spinnerStyles} fill='none' viewBox='0 0 24 24'>
+        <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
+        <path
+          className='opacity-75'
+          fill='currentColor'
+          d='M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+        />
+      </svg>
+    </div>
+  ),
+})
 
 const material = new THREE.LineBasicMaterial({ color: 'white' })
 const geometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, -0.5, 0), new THREE.Vector3(0, 0.5, 0)])
@@ -119,7 +135,9 @@ const App = () => (
       onPointerMissed={() => (state.clicked = null)}
       className={css({ height: '90%' })}
     >
-      <Items />
+      <Suspense fallback={null}>
+        <Items />
+      </Suspense>
     </Canvas>
   </>
 )

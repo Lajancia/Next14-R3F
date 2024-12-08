@@ -6,6 +6,7 @@ import { useMemo, useRef, useState } from 'react'
 import { Line, useCursor, MeshDistortMaterial } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
 import { CameraControls, Lightformer, Environment, MeshTransmissionMaterial, Text } from '@react-three/drei'
+
 export const Blob = ({ route = '/', ...props }) => {
   const router = useRouter()
   const [hovered, hover] = useState(false)
