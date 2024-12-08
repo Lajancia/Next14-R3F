@@ -13,8 +13,15 @@ const toggleTheme = () => {
   window.document.documentElement.setAttribute('data-color-mode', newTheme)
 }
 
-const Header = () => {
+const Header = ({ handleKeyboard }) => {
   const router = useRouter()
+
+  const handleGalleryMove = () => {
+    handleKeyboard()
+    setTimeout(() => {
+      router.push('/gallery')
+    }, 300)
+  }
   return (
     <div className={StyledHeaderWrapper}>
       <div className={StyledHeaderMenu}>
@@ -25,9 +32,9 @@ const Header = () => {
           <Link href='/' className={StyledLink}>
             About Me
           </Link>
-          <a href='/gallery' className={StyledLink}>
+          <button onClick={() => handleGalleryMove()} className={StyledLink}>
             Gallery
-          </a>
+          </button>
         </div>
       </div>
       <div className={StyledHeaderSetting}>
