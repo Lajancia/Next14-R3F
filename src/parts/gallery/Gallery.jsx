@@ -3,28 +3,12 @@
 import * as THREE from 'three'
 import { useRef, useState, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Image, ScrollControls, Scroll, useScroll, Text } from '@react-three/drei'
+import { Image, ScrollControls, Scroll, useScroll, Text, View } from '@react-three/drei'
 import { proxy, useSnapshot } from 'valtio'
 import { easing } from 'maath'
 import { css } from '../../../styled-system/css'
 import Jersey from './Jersey 25_Regular.json'
-import dynamic from 'next/dynamic'
-
-const View = dynamic(() => import('../../components/canvas/View').then((mod) => mod.View), {
-  ssr: false,
-  loading: () => (
-    <div>
-      <svg className={spinnerStyles} fill='none' viewBox='0 0 24 24'>
-        <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
-        <path
-          className='opacity-75'
-          fill='currentColor'
-          d='M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-        />
-      </svg>
-    </div>
-  ),
-})
+import PageTransition from '../../templates/PageAnimation'
 
 const material = new THREE.LineBasicMaterial({ color: 'white' })
 const geometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, -0.5, 0), new THREE.Vector3(0, 0.5, 0)])
@@ -45,10 +29,6 @@ function Minimap() {
   const { height } = useThree((state) => state.viewport)
   useFrame((state, delta) => {
     ref.current.children.forEach((child, index) => {
-      // Give me a value between 0 and 1
-      //   starting at the position of my item
-      //   ranging across 4 / total length
-      //   make it a sine, so the value goes from 0 to 1 to 0.
       const y = scroll.curve(index / urls.length - 1.5 / urls.length, 4 / urls.length)
       easing.damp(child.scale, 'y', 0.15 + y / 6, 0.15, delta)
     })

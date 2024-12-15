@@ -2,7 +2,9 @@
 import Link from 'next/link'
 import { css } from '../../../styled-system/css'
 import '../../../styled-system/styles.css'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
+
 const toggleTheme = () => {
   const currentTheme = document.cookie
     .split('; ')
@@ -13,26 +15,48 @@ const toggleTheme = () => {
   window.document.documentElement.setAttribute('data-color-mode', newTheme)
 }
 
-const Header = ({ handleKeyboard }) => {
+const Header = ({ handleClose }) => {
   const router = useRouter()
+  const pathname = usePathname()
+
+  const [currentPath, setCurrentPath] = useState(pathname)
 
   const handleGalleryMove = () => {
-    handleKeyboard()
+    if (pathname === '/gallery') return
+
+    handleClose()
     setTimeout(() => {
       router.push('/gallery')
-    }, 300)
+    }, 800)
   }
+
+  const handleMain = () => {
+    if (pathname === '/') return
+    handleClose()
+    setTimeout(() => {
+      router.push('/')
+    }, 800)
+  }
+
+  useEffect(() => {
+    console.log('pathname', pathname)
+    setCurrentPath(pathname)
+  }, [pathname])
+
   return (
     <div className={StyledHeaderWrapper}>
       <div className={StyledHeaderMenu}>
-        <Link className={StyledHomeLink} href={'/'}>
+        <button className={StyledHomeLink({ currentPath: currentPath })} onClick={() => handleMain()}>
           Soominlab
-        </Link>
+        </button>
         <div className={StyledOption}>
           <Link href='/' className={StyledLink}>
             About Me
           </Link>
-          <button onClick={() => handleGalleryMove()} className={StyledLink}>
+          <button
+            onClick={() => handleGalleryMove()}
+            className={StyledLink({ currentPath: currentPath === '/gallery' ? true : false })}
+          >
             Gallery
           </button>
         </div>
@@ -48,11 +72,12 @@ const Header = ({ handleKeyboard }) => {
 
 export default Header
 
-const StyledLink = css({
-  color: 'MainText',
-  transition: 'color 0.3s',
-  '&:hover': { color: 'orange' },
-})
+const StyledLink = (props) =>
+  css({
+    color: props.currentPath ? 'orange' : 'MainText',
+    transition: 'color 0.3s',
+    '&:hover': { color: 'orange' },
+  })
 
 const StyledHeaderWrapper = css({
   position: 'fixed',
@@ -64,7 +89,13 @@ const StyledHeaderWrapper = css({
   height: '10%',
 })
 
-const StyledHomeLink = css({ color: 'MainText', fontSize: '3rem' })
+const StyledHomeLink = (props) =>
+  css({
+    color: props.currentPath === '/' ? 'orange' : 'MainText',
+    fontSize: '3rem',
+    transition: 'color 0.3s',
+    '&:hover': { color: 'orange' },
+  })
 
 const StyledHeaderMenu = css({
   width: '50%',

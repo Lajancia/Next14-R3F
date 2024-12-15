@@ -1,46 +1,49 @@
 'use client'
 import { css } from '../../../styled-system/css'
 import Image from 'next/image'
+import PageTransition from '../../templates/PageAnimation'
 
-const Info = () => {
+const Info = ({ showKeyboard }) => {
   return (
-    <div className={StyledInfoWrapper}>
-      <div className={StyledCategory}>Modern Art</div>
-      <h1 className={StyledTitle}>MACRO KEYBOARD</h1>
-      <div className={StyledCircle}>
-        <div className={circleButton({ color: 'white' })} />
-        <button className={circleButton({ color: 'Orange' })} />
-        <button className={circleButton({ color: 'black' })} />
+    <PageTransition transition={showKeyboard}>
+      <div className={StyledInfoWrapper}>
+        <div className={StyledCategory}>Modern Art</div>
+        <h1 className={StyledTitle}>MACRO KEYBOARD</h1>
+        <div className={StyledCircle}>
+          <div className={circleButton({ color: 'white' })} />
+          <button className={circleButton({ color: 'Orange' })} />
+          <button className={circleButton({ color: 'black' })} />
+        </div>
+        <p className={StyledDate}>2024-10-19</p>
+        <article className={StyledText}>
+          Bla nskdanlkwdnwa asdanwdalsndalwd . asdnjawd askdjawjdad asdna asljdnadw asdaiawoif asdaowijaoijd
+          asidjaowdjowijd aosidoawjdo oasdiajwdiaojd aojdoawdiwo aosdlanosd. aosidjaw. aosdaiowdi. aosjdaowdjidjaoasd.
+        </article>
+        <div className={StyledImages}>
+          <Image
+            src='/img/keyboard/keyboard-1.png'
+            alt='Example Image'
+            width={1000}
+            height={1000}
+            className={StyledImage}
+          />
+          <Image
+            src='/img/keyboard/keyboard-2.png'
+            alt='Example Image'
+            width={1000}
+            height={1000}
+            className={StyledImage}
+          />
+          <Image
+            src='/img/keyboard/keyboard-3.png'
+            alt='Example Image'
+            width={1000}
+            height={1000}
+            className={StyledImage}
+          />
+        </div>
       </div>
-      <p className={StyledDate}>2024-10-19</p>
-      <article className={StyledText}>
-        Bla nskdanlkwdnwa asdanwdalsndalwd . asdnjawd askdjawjdad asdna asljdnadw asdaiawoif asdaowijaoijd
-        asidjaowdjowijd aosidoawjdo oasdiajwdiaojd aojdoawdiwo aosdlanosd. aosidjaw. aosdaiowdi. aosjdaowdjidjaoasd.
-      </article>
-      <div className={StyledImages}>
-        <Image
-          src='/img/keyboard/keyboard-1.png'
-          alt='Example Image'
-          width={1000}
-          height={1000}
-          className={StyledImage}
-        />
-        <Image
-          src='/img/keyboard/keyboard-2.png'
-          alt='Example Image'
-          width={1000}
-          height={1000}
-          className={StyledImage}
-        />
-        <Image
-          src='/img/keyboard/keyboard-3.png'
-          alt='Example Image'
-          width={1000}
-          height={1000}
-          className={StyledImage}
-        />
-      </div>
-    </div>
+    </PageTransition>
   )
 }
 export default Info
