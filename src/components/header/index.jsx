@@ -23,7 +23,7 @@ const Header = ({ handleClose }) => {
 
   const handleGalleryMove = () => {
     if (pathname === '/gallery') return
-
+    setCurrentPath('/gallery')
     handleClose()
     setTimeout(() => {
       router.push('/gallery')
@@ -32,6 +32,7 @@ const Header = ({ handleClose }) => {
 
   const handleMain = () => {
     if (pathname === '/') return
+    setCurrentPath('/')
     handleClose()
     setTimeout(() => {
       router.push('/')
@@ -41,7 +42,7 @@ const Header = ({ handleClose }) => {
   useEffect(() => {
     console.log('pathname', pathname)
     setCurrentPath(pathname)
-  }, [pathname])
+  }, [])
 
   return (
     <div className={StyledHeaderWrapper}>
@@ -62,8 +63,8 @@ const Header = ({ handleClose }) => {
         </div>
       </div>
       <div className={StyledHeaderSetting}>
-        <button className={StyledLanguageButton}>KO</button>
-        <button className={StyledLanguageButton}>EN</button>
+        <button className={StyledLanguageButton({ currentPath: false })}>KO</button>
+        <button className={StyledLanguageButton({ currentPath: true })}>EN</button>
         <button className={StyledThemeButton} onClick={toggleTheme} />
       </div>
     </div>
@@ -121,7 +122,7 @@ const StyledHeaderSetting = css({
   color: 'MainText',
 })
 
-const StyledLanguageButton = css({ fontSize: '1.5rem' })
+const StyledLanguageButton = (props) => css({ fontSize: '1.5rem', color: props.currentPath ? 'orange' : 'MainText' })
 
 const StyledThemeButton = css({
   color: 'MainText',

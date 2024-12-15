@@ -16,8 +16,9 @@ const Info = ({ showKeyboard }) => {
         </div>
         <p className={StyledDate}>2024-10-19</p>
         <article className={StyledText}>
-          Bla nskdanlkwdnwa asdanwdalsndalwd . asdnjawd askdjawjdad asdna asljdnadw asdaiawoif asdaowijaoijd
-          asidjaowdjowijd aosidoawjdo oasdiajwdiaojd aojdoawdiwo aosdlanosd. aosidjaw. aosdaiowdi. aosjdaowdjidjaoasd.
+          This 3D object could be control by the mouse. It is created with Blender software and displayed with Three.js.
+          Recently, I got inspired by some of the modern object industry design and made this macro keyboard as side
+          project. Feel free to look around.
         </article>
         <div className={StyledImages}>
           <Image
