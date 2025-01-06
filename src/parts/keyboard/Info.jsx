@@ -1,26 +1,39 @@
 'use client'
 import { css } from '../../../styled-system/css'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
 
 const Info = ({ showKeyboard }) => {
+  const childVariants = {
+    hidden: { x: 50, opacity: 0 },
+    visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
+    exit: { x: 50, opacity: 0, transition: { duration: 0.8 } },
+  }
+
   return (
     <PageTransition transition={showKeyboard}>
       <div className={StyledInfoWrapper}>
-        <div className={StyledCategory}>Modern Art</div>
-        <h1 className={StyledTitle}>MACRO KEYBOARD</h1>
-        <div className={StyledCircle}>
+        <motion.div variants={childVariants} className={StyledCategory}>
+          Modern Art
+        </motion.div>
+        <motion.h1 variants={childVariants} className={StyledTitle}>
+          MACRO KEYBOARD
+        </motion.h1>
+        <motion.div variants={childVariants} className={StyledCircle}>
           <div className={circleButton({ color: 'white' })} />
           <button className={circleButton({ color: 'Orange' })} />
           <button className={circleButton({ color: 'black' })} />
-        </div>
-        <p className={StyledDate}>2024-10-19</p>
-        <article className={StyledText}>
-          This 3D object could be control by the mouse. It is created with Blender software and displayed with Three.js.
-          Recently, I got inspired by some of the modern object industry design and made this macro keyboard as side
-          project. Feel free to look around.
-        </article>
-        <div className={StyledImages}>
+        </motion.div>
+        <motion.p variants={childVariants} className={StyledDate}>
+          2024-10-19
+        </motion.p>
+        <motion.article variants={childVariants} className={StyledText}>
+          This 3D object can be controlled by the mouse. It is created with Blender software and displayed with
+          Three.js.Recently, I got inspired by some of the modern industrial design objects and made this macro keyboard
+          as a side project. Feel free to look around.
+        </motion.article>
+        <motion.div variants={childVariants} className={StyledImages}>
           <Image
             src='/img/keyboard/keyboard-1.png'
             alt='Example Image'
@@ -42,7 +55,7 @@ const Info = ({ showKeyboard }) => {
             height={1000}
             className={StyledImage}
           />
-        </div>
+        </motion.div>
       </div>
     </PageTransition>
   )
