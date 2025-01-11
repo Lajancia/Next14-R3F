@@ -20,7 +20,7 @@ export default defineConfig({
       semanticTokens: {
         colors: {
           background: { value: { base: '#E9E9E9', _dark: '#1e1e1e' } },
-          MainText: { value: { base: '#000', _dark: '#fff' } },
+          MainText: { value: { base: '#1e1e1e', _dark: '#E9E9E9' } },
           primary: { value: { base: '#07c', _dark: '#0cf' } },
         },
       },
