@@ -1,13 +1,14 @@
-import { useFrame } from '@react-three/fiber'
+import { useFrame, Canvas } from '@react-three/fiber'
 import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
+import { Suspense, use, useEffect, useState } from 'react'
 import { Lightformer, Environment, Float, ContactShadows, Text, OrbitControls } from '@react-three/drei'
 import { Bloom, EffectComposer, N8AO, TiltShift2 } from '@react-three/postprocessing'
-import { easing } from 'maath'
-import { css } from 'styled-system/css'
+import { css } from '../../../styled-system/css'
+import { useSpring, animated } from '@react-spring/three'
 
-const Keyboard = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Keyboard), { ssr: false })
-const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
+const Keyboard = dynamic(() => import('../../components/canvas/Examples').then((mod) => mod.Keyboard), { ssr: false })
+const AnimatedKeyboard = animated(Keyboard)
+const View = dynamic(() => import('../../components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
     <div>
@@ -23,7 +24,9 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
   ),
 })
 
-export default function KeyboardParts() {
+export default function KeyboardParts({ showKeyboard }) {
+  const { scale } = useSpring({ scale: showKeyboard ? 0.3 : 0, config: { duration: 200 } })
+
   return (
     <>
       <View orbit className={css({ height: '100%' })}>
@@ -31,8 +34,8 @@ export default function KeyboardParts() {
         <ambientLight position={[10, 10, 10]} />
         <pointLight position={[10, 10, 10]} />
         <Suspense fallback={null}>
-          <Float floatIntensity={0.5}>
-            <Keyboard scale={0.3} position={[0, 0, 0]} rotation={[Math.PI / 3.7, 5.5, 0]} />
+          <Float floatIntensity={2}>
+            <AnimatedKeyboard scale={scale} position={[0, 0, 0]} rotation={[Math.PI / 3.7, 5.5, 0]} />
           </Float>
           <ContactShadows position={[0, -5, 0]} opacity={0.8} scale={30} blur={1.75} far={4.5} />
         </Suspense>

@@ -6,6 +6,7 @@ import { useMemo, useRef, useState } from 'react'
 import { Line, useCursor, MeshDistortMaterial } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
 import { CameraControls, Lightformer, Environment, MeshTransmissionMaterial, Text } from '@react-three/drei'
+
 export const Blob = ({ route = '/', ...props }) => {
   const router = useRouter()
   const [hovered, hover] = useState(false)
@@ -52,19 +53,6 @@ export const Logo = ({ route = '/blob', ...props }) => {
       </mesh>
     </group>
   )
-}
-
-export function Duck(props) {
-  const { scene } = useGLTF('/duck.glb')
-
-  useFrame((state, delta) => (scene.rotation.y += delta))
-
-  return <primitive object={scene} {...props} />
-}
-export function Dog(props) {
-  const { scene } = useGLTF('/dog.glb')
-
-  return <primitive object={scene} {...props} />
 }
 
 export function Keyboard(props) {

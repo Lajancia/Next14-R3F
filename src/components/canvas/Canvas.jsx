@@ -1,6 +1,6 @@
 'use client'
 import { forwardRef, Suspense, useImperativeHandle, useRef } from 'react'
-import { OrbitControls, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
+import { OrbitControls, PerspectiveCamera, Canvas as CanvasImpl } from '@react-three/drei'
 import { Three } from '../../helpers/components/Three'
 
 export const Common = ({ color }) => (
@@ -13,18 +13,17 @@ export const Common = ({ color }) => (
   </Suspense>
 )
 
-const View = forwardRef(({ children, orbit, ...props }, ref) => {
+const Canvas = forwardRef(({ children, orbit, ...props }, ref) => {
   const localRef = useRef(null)
 
   return (
     <>
-      <div ref={localRef} {...props} />
-      <Three>
-        <ViewImpl track={localRef}>{children}</ViewImpl>
-      </Three>
+      <CanvasImpl ref={localRef} {...props}>
+        {children}
+      </CanvasImpl>
     </>
   )
 })
-View.displayName = 'View'
+Canvas.displayName = 'Canvas'
 
-export { View }
+export { Canvas }

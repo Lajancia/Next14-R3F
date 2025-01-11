@@ -1,6 +1,7 @@
-import { css } from 'styled-system/css'
+import { css } from '../../../styled-system/css'
+
 const gridStyles = css({
-  backgroundColor: '#1e1e1e',
+  backgroundColor: 'background',
   position: 'absolute',
   width: '100%',
   height: '100%',
@@ -8,6 +9,7 @@ const gridStyles = css({
   justifyContent: 'center',
   alignItems: 'center',
   '@media (max-width: 425px)': { gridTemplateColumns: '1fr' },
+  transition: 'all 0.5s',
 })
 const centerStyles = css({
   display: 'flex',
@@ -15,6 +17,7 @@ const centerStyles = css({
   alignItems: 'center',
   height: '100%',
   fontSize: '12rem',
+  transition: 'all 0.5s',
 })
 
 export default function Underlay() {

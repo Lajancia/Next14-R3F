@@ -1,30 +1,84 @@
+'use client'
 import Link from 'next/link'
 import { css } from '../../../styled-system/css'
-import 'styled-system/styles.css'
+import '../../../styled-system/styles.css'
+import { usePathname, useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
 
-const Header = () => {
+const toggleTheme = () => {
+  const currentTheme = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('theme='))
+    ?.split('=')[1]
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
+  document.cookie = `theme=${newTheme}; path=/`
+  window.document.documentElement.setAttribute('data-color-mode', newTheme)
+}
+
+const Header = ({ handleClose }) => {
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const [currentPath, setCurrentPath] = useState(pathname)
+
+  const handleGalleryMove = () => {
+    if (pathname === '/gallery') return
+    setCurrentPath('/gallery')
+    handleClose()
+    setTimeout(() => {
+      router.push('/gallery')
+    }, 800)
+  }
+
+  const handleMain = () => {
+    if (pathname === '/') return
+    setCurrentPath('/')
+    handleClose()
+    setTimeout(() => {
+      router.push('/')
+    }, 800)
+  }
+
+  useEffect(() => {
+    console.log('pathname', pathname)
+    setCurrentPath(pathname)
+  }, [])
+
   return (
     <div className={StyledHeaderWrapper}>
       <div className={StyledHeaderMenu}>
-        <button className={StyledHomeButton}>Soominlab</button>
+        <button className={StyledHomeLink({ currentPath: currentPath })} onClick={() => handleMain()}>
+          Soominlab
+        </button>
         <div className={StyledOption}>
-          <Link href='/'>About Me</Link>
-          <Link href='/'>Gallery</Link>
+          <Link href='/' className={StyledLink}>
+            About Me
+          </Link>
+          <button
+            onClick={() => handleGalleryMove()}
+            className={StyledLink({ currentPath: currentPath === '/gallery' ? true : false })}
+          >
+            Gallery
+          </button>
         </div>
       </div>
       <div className={StyledHeaderSetting}>
-        <button className={StyledLanguageButton} href='/'>
-          KO
-        </button>
-        <button className={StyledLanguageButton} href='/'>
-          EN
-        </button>
+        <button className={StyledLanguageButton({ currentPath: false })}>KO</button>
+        <button className={StyledLanguageButton({ currentPath: true })}>EN</button>
+        <button className={StyledThemeButton} onClick={toggleTheme} />
       </div>
     </div>
   )
 }
 
 export default Header
+
+const StyledLink = (props) =>
+  css({
+    color: props.currentPath ? 'orange' : 'MainText',
+    transition: 'color 0.3s',
+    '&:hover': { color: 'orange' },
+  })
 
 const StyledHeaderWrapper = css({
   position: 'fixed',
@@ -36,7 +90,13 @@ const StyledHeaderWrapper = css({
   height: '10%',
 })
 
-const StyledHomeButton = css({ color: 'white', fontSize: '3rem' })
+const StyledHomeLink = (props) =>
+  css({
+    color: props.currentPath === '/' ? 'orange' : 'MainText',
+    fontSize: '3rem',
+    transition: 'color 0.3s',
+    '&:hover': { color: 'orange' },
+  })
 
 const StyledHeaderMenu = css({
   width: '50%',
@@ -45,10 +105,11 @@ const StyledHeaderMenu = css({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  borderBottom: '1px solid white',
+  borderBottom: '1px solid',
+  borderBottomColor: 'MainText',
 })
 
-const StyledOption = css({ display: 'flex', flexDirection: 'row', fontSize: '1.5rem', gap: '2rem', color: 'white' })
+const StyledOption = css({ display: 'flex', flexDirection: 'row', fontSize: '1.5rem', gap: '2rem', color: 'MainText' })
 
 const StyledHeaderSetting = css({
   display: 'flex',
@@ -58,7 +119,16 @@ const StyledHeaderSetting = css({
   gap: '1rem',
   width: '50%',
   height: '100%',
-  color: 'white',
+  color: 'MainText',
 })
 
-const StyledLanguageButton = css({ fontSize: '1.5rem' })
+const StyledLanguageButton = (props) => css({ fontSize: '1.5rem', color: props.currentPath ? 'orange' : 'MainText' })
+
+const StyledThemeButton = css({
+  color: 'MainText',
+  backgroundColor: 'MainText',
+  width: '2rem',
+  height: '2rem',
+  borderRadius: '50%',
+  cursor: 'pointer',
+})

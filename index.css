@@ -3,7 +3,9 @@
   * {
     box-sizing: border-box;
   }
-
+  :root {
+    scrollbar-color: transparent transparent;
+  }
   html,
   body,
   #root {
