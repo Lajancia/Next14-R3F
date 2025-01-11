@@ -6,6 +6,7 @@ import { useMemo, useRef, useState } from 'react'
 import { Line, useCursor, MeshDistortMaterial } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
 import { CameraControls, Lightformer, Environment, MeshTransmissionMaterial, Text } from '@react-three/drei'
+import { applyProps } from '@react-three/fiber'
 
 export const Blob = ({ route = '/', ...props }) => {
   const router = useRouter()
@@ -57,11 +58,21 @@ export const Logo = ({ route = '/blob', ...props }) => {
 
 export function Keyboard(props) {
   const Keyboard = useRef()
-  const { scene } = useGLTF('/keyboard_website.glb')
+  const { scene, nodes, materials } = useGLTF('/keyboard_website.glb')
 
+  useMemo(() => {
+    nodes.Transparent_Pannel.material = new THREE.MeshPhysicalMaterial({
+      roughness: 0.2, // Slightly smoother
+      metalness: 0, // Non-metallic
+      color: '#ffffff', // White color
+      envMapIntensity: 1, // Stronger reflection
+      clearcoat: 1, // High clear coat for that glossy look
+      clearcoatRoughness: 0.1,
+    })
+  }, [nodes, materials])
   return (
     <>
-      <primitive ref={Keyboard} object={scene} {...props} />
+      <primitive ref={Keyboard} object={scene} castShadow {...props} />
     </>
   )
 }

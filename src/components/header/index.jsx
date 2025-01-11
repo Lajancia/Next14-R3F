@@ -39,6 +39,15 @@ const Header = ({ handleClose }) => {
     }, 800)
   }
 
+  const handleAboutMe = () => {
+    if (pathname === '/aboutMe') return
+    setCurrentPath('/aboutMe')
+    handleClose()
+    setTimeout(() => {
+      router.push('/aboutMe')
+    }, 800)
+  }
+
   useEffect(() => {
     console.log('pathname', pathname)
     setCurrentPath(pathname)
@@ -51,21 +60,21 @@ const Header = ({ handleClose }) => {
           Soominlab
         </button>
         <div className={StyledOption}>
-          <Link href='/' className={StyledLink}>
-            About Me
-          </Link>
-          <button
-            onClick={() => handleGalleryMove()}
-            className={StyledLink({ currentPath: currentPath === '/gallery' ? true : false })}
-          >
-            Gallery
-          </button>
+          <button onClick={() => handleAboutMe()}>About Me</button>
         </div>
       </div>
-      <div className={StyledHeaderSetting}>
-        <button className={StyledLanguageButton({ currentPath: false })}>KO</button>
-        <button className={StyledLanguageButton({ currentPath: true })}>EN</button>
-        <button className={StyledThemeButton} onClick={toggleTheme} />
+      <div className={StyledRightSetting}>
+        <button
+          onClick={() => handleGalleryMove()}
+          className={StyledLink({ currentPath: currentPath === '/gallery' ? true : false })}
+        >
+          Gallery
+        </button>
+        <div className={StyledHeaderSetting}>
+          {/* <button className={StyledLanguageButton({ currentPath: false })}>KO</button>
+          <button className={StyledLanguageButton({ currentPath: true })}>EN</button> */}
+          <button className={StyledThemeButton} onClick={toggleTheme} />
+        </div>
       </div>
     </div>
   )
@@ -101,24 +110,21 @@ const StyledHomeLink = (props) =>
 const StyledHeaderMenu = css({
   width: '50%',
   height: '100%',
-  margin: '0 5rem',
+  padding: '0 2.5rem 0 5rem',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  borderBottom: '1px solid',
+
   borderBottomColor: 'MainText',
 })
 
 const StyledOption = css({ display: 'flex', flexDirection: 'row', fontSize: '1.5rem', gap: '2rem', color: 'MainText' })
-
 const StyledHeaderSetting = css({
   display: 'flex',
   justifyContent: 'flex-end',
   alignItems: 'center',
-  margin: '0 5rem',
+
   gap: '1rem',
-  width: '50%',
-  height: '100%',
   color: 'MainText',
 })
 
@@ -131,4 +137,15 @@ const StyledThemeButton = css({
   height: '2rem',
   borderRadius: '50%',
   cursor: 'pointer',
+})
+
+const StyledRightSetting = css({
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: '0 5rem 0 2.5rem',
+  width: '50%',
+  height: '100%',
+  fontSize: '1.5rem',
+  gap: '2rem',
+  color: 'MainText',
 })

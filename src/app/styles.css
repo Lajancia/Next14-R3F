@@ -1,0 +1,7 @@
+body::-webkit-scrollbar {
+  display: none; /* 웹킷 기반 브라우저에서 스크롤바를 숨깁니다 */
+}
+body {
+  -ms-overflow-style: none; /* 인터넷 익스플로러에서 스크롤바를 숨깁니다 */
+  scrollbar-width: none; /* 파이어폭스에서 스크롤바를 숨깁니다 */
+}

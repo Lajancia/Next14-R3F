@@ -5,17 +5,18 @@ import React, { useEffect, ReactNode, useRef } from 'react'
 type PageAnimationProps = {
   children: ReactNode
   transition: boolean
+  parentVariant?: any
 }
 
-const PageTransition: React.FC<PageAnimationProps> = ({ children, transition }) => {
+const parentVariants = {
+  hidden: { x: -50, y: 0, opacity: 0, height: '100%' },
+  visible: { x: 0, y: 0, opacity: 1, height: '100%', transition: { duration: 0.8, staggerChildren: 0.3 } },
+  exit: { x: -50, y: 0, opacity: 0, transition: { duration: 0.8 } },
+}
+
+const PageTransition: React.FC<PageAnimationProps> = ({ children, transition, parentVariant = parentVariants }) => {
   const router = useRouter()
   const prevTransition = useRef(transition)
-
-  const parentVariants = {
-    hidden: { x: 50, y: 0, opacity: 0, height: '100%' },
-    visible: { x: 0, y: 0, opacity: 1, height: '100%', transition: { duration: 0.8, staggerChildren: 0.3 } },
-    exit: { x: 50, y: 0, opacity: 0, transition: { duration: 0.8 } },
-  }
 
   useEffect(() => {
     if (transition !== prevTransition.current) {
@@ -28,7 +29,7 @@ const PageTransition: React.FC<PageAnimationProps> = ({ children, transition }) 
     <AnimatePresence wait>
       {transition && (
         // @ts-ignore
-        <motion.div key={router.pathname} initial='hidden' animate='visible' exit='exit' variants={parentVariants}>
+        <motion.div key={router.pathname} initial='hidden' animate='visible' exit='exit' variants={parentVariant}>
           {children}
         </motion.div>
       )}

@@ -1,69 +1,72 @@
 import dynamic from 'next/dynamic'
-import { Suspense, use, useEffect, useState } from 'react'
+import { Suspense, use, useEffect, useState, useRef } from 'react'
 import { Lightformer, Environment, Float, ContactShadows, Text, OrbitControls } from '@react-three/drei'
 import { Bloom, EffectComposer, N8AO, TiltShift2 } from '@react-three/postprocessing'
 import { css } from '../../../styled-system/css'
 import { useSpring, animated } from '@react-spring/three'
-
-const Keyboard = dynamic(() => import('../../components/canvas/Examples').then((mod) => mod.Keyboard), { ssr: false })
+import { Keyboard } from '../../components/canvas/Examples'
+import { Canvas } from '@react-three/fiber'
 const AnimatedKeyboard = animated(Keyboard)
-const View = dynamic(() => import('../../components/canvas/View').then((mod) => mod.View), {
-  ssr: false,
-  loading: () => (
-    <div>
-      <svg className={spinnerStyles} fill='none' viewBox='0 0 24 24'>
-        <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
-        <path
-          className='opacity-75'
-          fill='currentColor'
-          d='M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-        />
-      </svg>
-    </div>
-  ),
-})
+export default function Keyboards({ showKeyboard }) {
+  const shadowRef = useRef()
+  const animatedKeyboardRef = useRef()
 
-export default function KeyboardParts({ showKeyboard }) {
-  const { scale } = useSpring({ scale: showKeyboard ? 0.3 : 0, config: { duration: 200 } })
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      const { clientX, clientY } = event
+      const x = (clientX / window.innerWidth - 0.5) * 2 // -1 to 1 range
+      const y = (0.5 - clientY / window.innerHeight) * 2 // -1 to 1 range
+      if (shadowRef.current) {
+        // @ts-ignore
+        shadowRef.current.position.set(x, y, shadowRef.current.position.z) // 조정된 x, y 값을 적용
+      }
+    }
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [])
+
+  const { scale } = useSpring({ scale: showKeyboard ? 0.35 : 0, config: { duration: 200 } })
 
   return (
-    <>
-      <View orbit className={css({ height: '100%' })}>
-        <spotLight position={[10, 10, 10]} penumbra={3} castShadow angle={1} />
-        <ambientLight position={[10, 10, 10]} />
-        <pointLight position={[10, 10, 10]} />
-        <Suspense fallback={null}>
-          <Float floatIntensity={2}>
-            <AnimatedKeyboard scale={scale} position={[0, 0, 0]} rotation={[Math.PI / 3.7, 5.5, 0]} />
-          </Float>
-          <ContactShadows position={[0, -5, 0]} opacity={0.8} scale={30} blur={1.75} far={4.5} />
-        </Suspense>
-        <Environment preset='city'>
-          <Lightformer
-            intensity={1}
-            position={[10, 5, 10]}
-            scale={[10, 10, 1]}
-            onUpdate={(self) => self.lookAt(10, 10, 0)}
-          />
-        </Environment>
-        <EffectComposer disableNormalPass>
-          <Bloom />
-        </EffectComposer>
-        <OrbitControls enableZoom={false} />
-      </View>
-    </>
+    <Canvas
+      shadows
+      gl={{ logarithmicDepthBuffer: true, antialias: false }}
+      dpr={[1, 2]}
+      camera={{ position: [0, 10, 2], fov: 30 }}
+    >
+      <ambientLight position={[10, 10, 10]} />
+      <Suspense fallback={null}>
+        <Float ref={animatedKeyboardRef} floatIntensity={2}>
+          {/* @ts-ignore */}
+          <AnimatedKeyboard castShadow scale={scale} position={[0, 0, 0]} rotation={[Math.PI / 1.2, 3.5, 3]} />
+        </Float>
+      </Suspense>
+      <hemisphereLight intensity={0.5} />
+      <directionalLight
+        castShadow
+        // position={[5, 10, 7.5]}
+        intensity={1}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-camera-far={50}
+        shadow-camera-left={-10}
+        shadow-camera-right={10}
+        shadow-camera-top={10}
+        shadow-camera-bottom={-10}
+      />
+      {/* <ContactShadows ref={shadowRef} resolution={2048} frames={1} scale={40} blur={0.2} opacity={1} far={10} /> */}
+      <Environment preset='city'>
+        <Lightformer intensity={2} rotation-x={Math.PI / 2} position={[0, 4, 0]} scale={[10, 1, 1]} />
+        <Lightformer intensity={2} rotation-x={Math.PI / 2} position={[0, 4, 1]} scale={[10, 1, 1]} />
+        <Lightformer intensity={2} rotation-x={Math.PI / 2} position={[0, 4, 2]} scale={[10, 1, 1]} />
+        <Lightformer intensity={2} rotation-x={Math.PI / 2} position={[0, 4, 0]} scale={[10, 1, 1]} />
+        <Lightformer intensity={2} rotation-x={Math.PI / 2} position={[0, 4, 3]} scale={[10, 1, 1]} />
+        <Lightformer intensity={2} rotation-x={Math.PI / 2} position={[0, 4, 6]} scale={[10, 1, 1]} />
+        <Lightformer intensity={2} rotation-x={Math.PI / 2} position={[0, 4, 9]} scale={[10, 1, 1]} />
+      </Environment>
+      {/* <OrbitControls enableZoom={false} /> */}
+    </Canvas>
   )
 }
-
-const spinnerStyles = css({
-  marginLeft: '-0.25rem', // Equivalent to -ml-1
-  marginRight: '0.75rem', // Equivalent to mr-3
-  height: '1.25rem', // Equivalent to h-5
-  width: '1.25rem', // Equivalent to w-5
-  animation: 'spin 1s linear infinite', // Equivalent to animate-spin
-  color: 'black', // Equivalent to text-black
-  '@keyframes spin': {
-    from: { transform: 'rotate(0deg)' },
-    to: { transform: 'rotate(360deg)' },
-  },
-})
