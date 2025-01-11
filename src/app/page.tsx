@@ -3,10 +3,9 @@ import KeyboardParts from '../parts/keyboard/Keyboard'
 import Header from '../components/header'
 import Info from '../parts/keyboard/Info'
 import { css } from '../../styled-system/css'
-import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-const FlexContainer = css({ display: 'flex', alignItems: 'center', height: '100%' })
+const FlexContainer = css({ display: 'flex', alignItems: 'center', height: '100vh', width: '100vw' })
 const HalfWidthContainer = css({ width: '50%', height: '100%' })
 const HalfWidthInfoContainer = css({ width: '50%', height: '70%' })
 
