@@ -1,4 +1,3 @@
-import { useFrame, Canvas } from '@react-three/fiber'
 import dynamic from 'next/dynamic'
 import { Suspense, use, useEffect, useState } from 'react'
 import { Lightformer, Environment, Float, ContactShadows, Text, OrbitControls } from '@react-three/drei'

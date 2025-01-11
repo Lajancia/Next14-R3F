@@ -7,8 +7,15 @@ import { Image, ScrollControls, Scroll, useScroll, Text, View } from '@react-thr
 import { proxy, useSnapshot } from 'valtio'
 import { easing } from 'maath'
 import { css } from '../../../styled-system/css'
-import Jersey from './Jersey 25_Regular.json'
-import PageTransition from '../../templates/PageAnimation'
+import { Group } from 'three'
+
+type MinimapProps = {
+  geometry: THREE.BufferGeometry
+  material: THREE.Material
+  easing: {
+    damp: (target: any, key: string, value: number, factor: number, delta: number) => void
+  }
+}
 
 const material = new THREE.LineBasicMaterial({ color: 'white' })
 const geometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, -0.5, 0), new THREE.Vector3(0, 0.5, 0)])
@@ -22,16 +29,18 @@ const state = proxy({
   urls: imagePaths,
 })
 
-function Minimap() {
-  const ref = useRef()
+function Minimap({ geometry, material, easing }: MinimapProps) {
+  const ref = useRef<Group>(null)
   const scroll = useScroll()
   const { urls } = useSnapshot(state)
   const { height } = useThree((state) => state.viewport)
   useFrame((state, delta) => {
-    ref.current.children.forEach((child, index) => {
-      const y = scroll.curve(index / urls.length - 1.5 / urls.length, 4 / urls.length)
-      easing.damp(child.scale, 'y', 0.15 + y / 6, 0.15, delta)
-    })
+    if (ref.current) {
+      Array.from(ref.current.children).forEach((child, index) => {
+        const y = scroll.curve(index / urls.length - 1.5 / urls.length, 4 / urls.length)
+        easing.damp((child as any).scale, 'y', 0.15 + y / 6, 0.15, delta)
+      })
+    }
   })
   return (
     <group ref={ref}>
@@ -39,6 +48,7 @@ function Minimap() {
         <line
           color={'#000'}
           key={i}
+          // @ts-ignore
           geometry={geometry}
           material={material}
           position={[i * 0.06 - urls.length * 0.03, -height / 2 + 0.6, 0]}
@@ -49,7 +59,7 @@ function Minimap() {
 }
 
 function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
-  const ref = useRef()
+  const ref = useRef<Group>()
   const scroll = useScroll()
   const { clicked, urls } = useSnapshot(state)
   const [hovered, hover] = useState(false)
@@ -59,13 +69,17 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
   useFrame((state, delta) => {
     const y = scroll.curve(index / urls.length - 1.5 / urls.length, 4 / urls.length)
     easing.damp3(ref.current.scale, [clicked === index ? 4.7 : scale[0], clicked === index ? 5 : 4 + y, 1], 0.15, delta)
+    // @ts-ignore
     ref.current.material.scale[0] = ref.current.scale.x
+    // @ts-ignore
     ref.current.material.scale[1] = ref.current.scale.y
     if (clicked !== null && index < clicked) easing.damp(ref.current.position, 'x', position[0] - 2, 0.15, delta)
     if (clicked !== null && index > clicked) easing.damp(ref.current.position, 'x', position[0] + 2, 0.15, delta)
     if (clicked === null || clicked === index) easing.damp(ref.current.position, 'x', position[0], 0.15, delta)
+    // @ts-ignore
     easing.damp(ref.current.material, 'grayscale', hovered || clicked === index ? 0 : Math.max(0, 1 - y), 0.15, delta)
     easing.dampC(
+      // @ts-ignore
       ref.current.material.color,
       hovered || clicked === index ? 'white' : '#aaa',
       hovered ? 0.3 : 0.15,
@@ -74,6 +88,7 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
   })
   return (
     <Image
+      // @ts-ignore
       ref={ref}
       {...props}
       position={position}
@@ -81,6 +96,7 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
       onClick={click}
       onPointerOver={over}
       onPointerOut={out}
+      // @ts-ignore
       alt='gallery'
       layout='fill'
     />
@@ -94,8 +110,8 @@ function Items({ w = 0.7, gap = 0.15 }) {
 
   return (
     <ScrollControls horizontal damping={0.1} pages={(width - xW + urls.length * xW) / width}>
-      <Minimap />
-      <Text font={Jersey} fontSize={0.3} position={[0, -2.3, 0]} color={'#373737'}>
+      <Minimap material={material} geometry={geometry} easing={easing} />
+      <Text fontSize={0.3} position={[0, -2.3, 0]} color={'#373737'}>
         3D Modeling
       </Text>
       <Scroll>
@@ -113,7 +129,7 @@ const App = () => (
       gl={{ antialias: false }}
       dpr={[1, 1.5]}
       onPointerMissed={() => (state.clicked = null)}
-      className={css({ height: '90%' })}
+      className={css({ height: '80%' })}
     >
       <Suspense fallback={null}>
         <Items />
