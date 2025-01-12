@@ -42,17 +42,7 @@ export default function Page() {
       <div className={TextContentStyle}>
         <Info showKeyboard={showKeyboard} />
       </div>
-      <div ref={ref} className={containerStyles}>
-        <BackgroundText showKeyboard={showKeyboard} />
-        <Canvas
-          shadows
-          gl={{ logarithmicDepthBuffer: true, antialias: false }}
-          dpr={[1, 2]}
-          camera={{ position: [0, 10, 2], fov: 30 }}
-        >
-          <Keyboards showKeyboard={showKeyboard} />
-        </Canvas>
-      </div>
+      <div ref={ref} className={containerStyles}></div>
     </>
   )
 }

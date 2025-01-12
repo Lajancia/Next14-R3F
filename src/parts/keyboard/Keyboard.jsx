@@ -6,7 +6,9 @@ import { css } from '../../../styled-system/css'
 import { useSpring, animated } from '@react-spring/three'
 import { Keyboard } from '../../components/canvas/Examples'
 import { Canvas } from '@react-three/fiber'
+
 const AnimatedKeyboard = animated(Keyboard)
+
 export default function Keyboards({ showKeyboard }) {
   const shadowRef = useRef()
   const animatedKeyboardRef = useRef()

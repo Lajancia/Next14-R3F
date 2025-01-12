@@ -7,6 +7,7 @@ import { useEffect, useState, useRef } from 'react'
 import BackgroundText from '../parts/keyboard/BackgroundText'
 import Keyboards from '../parts/keyboard/Keyboard'
 import Footer from '../components/footer'
+import { easing } from 'maath'
 
 export default function Page() {
   const ref = useRef()
@@ -46,6 +47,7 @@ const TextContentStyle = css({
   width: '50vw',
   height: '100vh',
   zIndex: 1,
+  pointerEvents: 'none',
 })
 const containerStyles = css({
   width: '100vw',
