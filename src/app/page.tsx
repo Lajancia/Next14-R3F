@@ -6,10 +6,7 @@ import { css } from '../../styled-system/css'
 import { useEffect, useState, useRef } from 'react'
 import BackgroundText from '../parts/keyboard/BackgroundText'
 import Keyboards from '../parts/keyboard/Keyboard'
-import { Canvas } from '@react-three/fiber'
-const FlexContainer = css({ display: 'flex', alignItems: 'center', height: '100vh', width: '100vw' })
-const HalfWidthContainer = css({ width: '50%', height: '100%' })
-const HalfWidthInfoContainer = css({ width: '50%', height: '70%' })
+import Footer from '../components/footer'
 
 export default function Page() {
   const ref = useRef()
@@ -35,6 +32,9 @@ export default function Page() {
         <BackgroundText showKeyboard={showKeyboard} />
         <Keyboards showKeyboard={showKeyboard} />
       </div>
+      <div className={StyledFooter}>
+        <Footer showFooter={showKeyboard} />
+      </div>
     </>
   )
 }
@@ -51,4 +51,17 @@ const containerStyles = css({
   width: '100vw',
   height: '100vh',
   zIndex: 0,
+})
+
+const StyledFooter = css({
+  overflow: 'hidden',
+  zIndex: 1,
+  position: 'absolute',
+  bottom: 0,
+  height: '10vh',
+  display: 'flex',
+  justifyContent: 'center',
+
+  alignItems: 'center',
+  width: '100%',
 })
