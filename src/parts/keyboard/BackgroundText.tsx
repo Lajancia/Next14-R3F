@@ -4,8 +4,8 @@ import { motion } from 'framer-motion'
 const BackgroundText = ({ showKeyboard }) => {
   const parentVariant = {
     hidden: { x: 50, height: '100vh', opacity: 0 },
-    visible: { x: 0, height: '100vh', opacity: 1, transition: { duration: 1.2 } },
-    exit: { x: 50, height: '100vh', opacity: 0, transition: { duration: 1.2 } },
+    visible: { x: 0, height: '100vh', opacity: 1, transition: { duration: 0.8 } },
+    exit: { x: 50, height: '100vh', opacity: 0, transition: { duration: 0.8 } },
   }
   return (
     <div className={TextContainerStyles}>
@@ -31,11 +31,12 @@ const textStyles = css({
   textAlign: 'right',
   fontSize: '12rem',
   wordBreak: 'break-word',
-  width: '100%',
+
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   height: '100%',
+  width: '100%',
 })
 
 const TextContainerStyles = css({

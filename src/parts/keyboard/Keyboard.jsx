@@ -66,7 +66,7 @@ export default function Keyboards({ showKeyboard }) {
         <Lightformer intensity={2} rotation-x={Math.PI / 2} position={[0, 4, 6]} scale={[10, 1, 1]} />
         <Lightformer intensity={2} rotation-x={Math.PI / 2} position={[0, 4, 9]} scale={[10, 1, 1]} />
       </Environment>
-      {/* <OrbitControls enableZoom={false} /> */}
+      <OrbitControls enableZoom={false} />
     </Canvas>
   )
 }

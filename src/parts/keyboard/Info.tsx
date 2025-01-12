@@ -10,6 +10,11 @@ const Info = ({ showKeyboard }) => {
     visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
     exit: { x: 50, opacity: 0, transition: { duration: 0.8 } },
   }
+  const childVariantsButton = {
+    hidden: { x: 0, y: 50, opacity: 0 },
+    visible: { x: 0, y: 0, opacity: 1, transition: { duration: 0.8 } },
+    exit: { x: 50, opacity: 0, transition: { duration: 0.8 } },
+  }
 
   return (
     <PageTransition transition={showKeyboard}>
@@ -28,11 +33,11 @@ const Info = ({ showKeyboard }) => {
           Three.js.Recently, I got inspired by some of the modern industrial design objects and made this macro keyboard
           as a side project. Feel free to look around.
         </motion.article>
-        <motion.div variants={childVariants} className={StyledCircle}>
-          <div className={circleButton({ color: 'white' })} />
-          <button className={circleButton({ color: 'Orange' })} />
-          <button className={circleButton({ color: 'black' })} />
-        </motion.div>
+        <div className={StyledCircle}>
+          <motion.div variants={childVariantsButton} className={circleButton({ color: 'white' })} />
+          <motion.div variants={childVariantsButton} className={circleButton({ color: 'Orange' })} />
+          <motion.div variants={childVariantsButton} className={circleButton({ color: 'black' })} />
+        </div>
       </div>
     </PageTransition>
   )
