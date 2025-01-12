@@ -10,52 +10,34 @@ const Info = ({ showKeyboard }) => {
     visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
     exit: { x: 50, opacity: 0, transition: { duration: 0.8 } },
   }
+  const childVariantsButton = {
+    hidden: { x: 0, y: 50, opacity: 0 },
+    visible: { x: 0, y: 0, opacity: 1, transition: { duration: 0.8 } },
+    exit: { x: 50, opacity: 0, transition: { duration: 0.8 } },
+  }
 
   return (
     <PageTransition transition={showKeyboard}>
       <div className={StyledInfoWrapper}>
+        <motion.div variants={childVariants} className={styledNumber}>
+          01
+        </motion.div>
         <motion.div variants={childVariants} className={StyledCategory}>
           Modern Art
         </motion.div>
         <motion.h1 variants={childVariants} className={StyledTitle}>
           MACRO KEYBOARD
         </motion.h1>
-        <motion.div variants={childVariants} className={StyledCircle}>
-          <div className={circleButton({ color: 'white' })} />
-          <button className={circleButton({ color: 'Orange' })} />
-          <button className={circleButton({ color: 'black' })} />
-        </motion.div>
-        <motion.p variants={childVariants} className={StyledDate}>
-          2024-10-19
-        </motion.p>
         <motion.article variants={childVariants} className={StyledText}>
           This 3D object can be controlled by the mouse. It is created with Blender software and displayed with
           Three.js.Recently, I got inspired by some of the modern industrial design objects and made this macro keyboard
           as a side project. Feel free to look around.
         </motion.article>
-        <motion.div variants={childVariants} className={StyledImages}>
-          <Image
-            src='/img/keyboard/keyboard-1.png'
-            alt='Example Image'
-            width={1000}
-            height={1000}
-            className={StyledImage}
-          />
-          <Image
-            src='/img/keyboard/keyboard-2.png'
-            alt='Example Image'
-            width={1000}
-            height={1000}
-            className={StyledImage}
-          />
-          <Image
-            src='/img/keyboard/keyboard-3.png'
-            alt='Example Image'
-            width={1000}
-            height={1000}
-            className={StyledImage}
-          />
-        </motion.div>
+        <div className={StyledCircle}>
+          <motion.div variants={childVariantsButton} className={circleButton({ color: 'white' })} />
+          <motion.div variants={childVariantsButton} className={circleButton({ color: 'Orange' })} />
+          <motion.div variants={childVariantsButton} className={circleButton({ color: 'black' })} />
+        </div>
       </div>
     </PageTransition>
   )
@@ -63,8 +45,9 @@ const Info = ({ showKeyboard }) => {
 export default Info
 
 const StyledInfoWrapper = css({
+  position: 'absolute',
   display: 'flex',
-  width: '90%',
+  width: '100%',
   flexDirection: 'column',
   justifyContent: 'center',
   padding: '5rem',
@@ -74,8 +57,14 @@ const StyledInfoWrapper = css({
   gap: '1rem',
 })
 
+const styledNumber = css({
+  fontSize: '20rem',
+  lineHeight: '16rem',
+  color: 'MainText',
+})
+
 const StyledCategory = css({
-  fontSize: '2rem',
+  fontSize: '1.5rem',
   lineHeight: '0.1rem',
   color: 'MainText',
 })
@@ -97,7 +86,7 @@ const StyledDate = css({
 })
 
 const StyledText = css({
-  fontSize: '1.5rem',
+  fontSize: '1rem',
   color: 'MainText',
 })
 
@@ -113,15 +102,3 @@ const circleButton = (props) =>
     fontSize: '1.5rem',
     cursor: 'pointer',
   })
-
-const StyledImages = css({
-  display: 'flex',
-  justifyContent: 'space-between',
-  gap: '1rem',
-})
-
-const StyledImage = css({
-  width: '25%',
-  height: '16rem',
-  objectFit: 'cover',
-})

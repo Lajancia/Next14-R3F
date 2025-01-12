@@ -5,7 +5,7 @@ import * as THREE from 'three'
 import { useMemo, useRef, useState } from 'react'
 import { Line, useCursor, MeshDistortMaterial } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
-import { CameraControls, Lightformer, Environment, MeshTransmissionMaterial, Text } from '@react-three/drei'
+import { easing } from 'maath'
 
 export const Blob = ({ route = '/', ...props }) => {
   const router = useRouter()
@@ -57,11 +57,43 @@ export const Logo = ({ route = '/blob', ...props }) => {
 
 export function Keyboard(props) {
   const Keyboard = useRef()
-  const { scene } = useGLTF('/keyboard_website.glb')
+
+  const { scene, nodes, materials } = useGLTF('/keyboard_website.glb')
+  const [color, setColor] = useState('orange')
+  const handlePointerOver = (e) => {
+    console.log('objectname', e.object.name)
+    // nodes.Keycap_O.material.color.set('white') // Change color to black on hover
+    setColor('white')
+  }
+  const handlePointerOut = (e) => {
+    // nodes.Keycap_O.material.color.set('orange') // Change color back to white
+    setColor('orange')
+  }
+  useFrame((state, delta) => easing.dampC(nodes.Keycap_O.material.color, color, 0.25, delta))
+  useMemo(() => {
+    nodes.Transparent_Pannel.material = new THREE.MeshPhysicalMaterial({
+      roughness: 0.2, // Slightly smoother
+      metalness: 0, // Non-metallic
+      color: '#ffffff', // White color
+      envMapIntensity: 1, // Stronger reflection
+      clearcoat: 1, // High clear coat for that glossy look
+      clearcoatRoughness: 0.1,
+    })
+  }, [nodes, materials])
 
   return (
     <>
-      <primitive ref={Keyboard} object={scene} {...props} />
+      <primitive
+        object={scene}
+        castShadow
+        {...props} // Apply the event handlers to the Keycap_O object
+        onPointerOver={(e) => {
+          handlePointerOver(e)
+        }}
+        onPointerOut={(e) => {
+          handlePointerOut(e)
+        }}
+      />
     </>
   )
 }

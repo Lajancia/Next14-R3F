@@ -4,7 +4,7 @@ import '../../index.css'
 // import '@/parts/keyboard/Underlay'
 import Underlay from '../parts/keyboard/Underlay'
 import { Jersey_25 } from 'next/font/google'
-
+import './styles.css'
 // import { ThemeName, getTheme } from 'styled-system/themes'
 const jersey25 = Jersey_25({
   subsets: ['latin'],
@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className={jersey25.className}>
+      <body style={{ overflow: 'hidden' }} className={jersey25.className}>
         {/* To avoid FOUT with styled-components wrap Layout with StyledComponentsRegistry https://beta.nextjs.org/docs/styling/css-in-js#styled-components */}
         <Underlay />
         <Layout>{children}</Layout>
