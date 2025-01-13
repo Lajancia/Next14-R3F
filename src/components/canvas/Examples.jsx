@@ -97,3 +97,25 @@ export function Keyboard(props) {
     </>
   )
 }
+
+export function Cube(props) {
+  const Cube = useRef()
+  const { scene, nodes, materials } = useGLTF('/work.glb')
+
+  const glassMaterial = new THREE.MeshPhysicalMaterial({
+    transparent: true,
+    opacity: 0.5,
+    color: 'black',
+    roughness: 0,
+    side: THREE.FrontSide,
+    blending: THREE.AdditiveBlending,
+    polygonOffset: true,
+    polygonOffsetFactor: 1,
+    envMapIntensity: 21,
+  })
+
+  useFrame(() => {
+    Cube.current.rotation.y += 0.01
+  })
+  return <primitive ref={Cube} {...props} material={glassMaterial} object={nodes.Cube} />
+}
