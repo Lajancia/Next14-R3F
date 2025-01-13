@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
 
-const Section03 = ({ showSection03 }) => {
+const Section04 = ({ showSection04 }) => {
   const childVariants = {
     hidden: { x: 50, opacity: 0 },
     visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
@@ -16,13 +16,13 @@ const Section03 = ({ showSection03 }) => {
   }
 
   return (
-    <PageTransition transition={showSection03}>
+    <PageTransition transition={showSection04}>
       <div className={StyledInfoWrapper}>
         <motion.div variants={childVariants} className={StyledCategory}>
-          SKILLS
+          PROJECTS
         </motion.div>
         <motion.h1 variants={childVariants} className={StyledTitle}>
-          {`SKILLS`}
+          {`PROJECTS`}
         </motion.h1>
         <motion.article variants={childVariants} className={StyledText}>
           {
@@ -33,7 +33,7 @@ const Section03 = ({ showSection03 }) => {
     </PageTransition>
   )
 }
-export default Section03
+export default Section04
 
 const StyledInfoWrapper = css({
   position: 'absolute',

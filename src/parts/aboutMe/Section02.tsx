@@ -26,16 +26,34 @@ const Section01 = ({ showSection02 }) => {
         </motion.h1>
         <motion.div className={StyledWorkLineContainer} variants={childVariantsButton}>
           <div className={StyledLeft}>
+            <motion.div className={StyledWorkDate}>2023.06.02 ~ Present</motion.div>
+            <motion.div className={StyledWork}>
+              <div className={StyledPosition}>Associate Research Engineer</div>
+              <div className={StyledCompany}>YURA R&D Center</div>
+
+              <ol className={StyledOL}>
+                <li
+                  className={StyledLI}
+                >{`Developed and maintained a smart monitoring web application for efficient production management at the manufacturing plant in Serbia.`}</li>
+
+                <li className={StyledLI}>Responsible for Java Spring Boot API migration and additional development.</li>
+              </ol>
+            </motion.div>
+            <motion.div className={StyledWorkDate}>2021.11 ~ 2022.05</motion.div>
+          </div>
+
+          <div className={StyledLine} />
+          <div className={StyledRight}>
             <motion.div className={StyledWork}>
               <div className={StyledPosition}>Frontend Developer</div>
               <div className={StyledCompany}>Illmuminarean</div>
-              <ol>
-                <li>Developed, managed, and improved the company's website.</li>
-                <li>
+              <ol className={StyledOL}>
+                <li className={StyledLI}>Developed, managed, and improved the company's website.</li>
+                <li className={StyledLI}>
                   Contributed to optimizing deployment time by collaborating with DevOps, reducing deployment time from
                   15 minutes to 3 minutes.
                 </li>
-                <li>Conducted in-house training and implementation of Docker and MSW mocking.</li>
+                <li className={StyledLI}>Conducted in-house training and implementation of Docker and MSW mocking.</li>
               </ol>
             </motion.div>
             <motion.div className={StyledWork}>2022.10 ~ 2023.05</motion.div>
@@ -43,34 +61,14 @@ const Section01 = ({ showSection02 }) => {
               <div className={StyledPosition}>Web Developer</div>
               <div className={StyledCompany}>CommON SRL</div>
 
-              <ol>
-                <li>Developed, managed, and improved the company's internal website.</li>
-                <li>
-                  Contributed to optimizing deployment time by collaborating with DevOps, reducing deployment time from
-                  15 minutes to 3 minutes.
+              <ol className={StyledOL}>
+                <li className={StyledLI}>
+                  Developed the company website frontend, managed DNS and web publishing, and handled SNS insights
+                  management.
                 </li>
-                <li>Conducted in-house training and implementation of Docker and MSW mocking.</li>
+                <li className={StyledLI}> Responsible for frontend maintenance and support.</li>
               </ol>
             </motion.div>
-          </div>
-
-          <div className={StyledLine} />
-          <div className={StyledRight}>
-            <motion.div className={StyledWork}>2023.06.02 ~ Present</motion.div>
-            <motion.div className={StyledWork}>
-              <div className={StyledPosition}>Associate Research Engineer</div>
-              <div className={StyledCompany}>YURA R&D Center</div>
-
-              <ol>
-                <li>{`Developed, managed, and improved the company's internal website.`}</li>
-                <li>
-                  Contributed to optimizing deployment time by collaborating with DevOps, reducing deployment time from
-                  15 minutes to 3 minutes.
-                </li>
-                <li>Conducted in-house training and implementation of Docker and MSW mocking.</li>
-              </ol>
-            </motion.div>
-            <motion.div className={StyledWork}>2021.11 ~ 2022.05</motion.div>
           </div>
         </motion.div>
       </div>
@@ -78,6 +76,20 @@ const Section01 = ({ showSection02 }) => {
   )
 }
 export default Section01
+
+const StyledOL = css({
+  listStyleType: 'decimal',
+})
+
+const StyledLI = css({
+  listStylePosition: 'inside',
+})
+
+const StyledWorkDate = css({
+  textAlign: 'right',
+  marginTop: '1rem',
+  height: '100%',
+})
 
 const StyledInfoWrapper = css({
   position: 'absolute',
@@ -92,6 +104,7 @@ const StyledInfoWrapper = css({
 const StyledPosition = css({
   fontSize: '1rem',
 })
+
 const StyledCompany = css({
   fontSize: '2.5rem',
   lineHeight: '1.5rem',
@@ -103,8 +116,8 @@ const StyledLeft = css({
   flexDirection: 'column',
   justifyContent: 'center',
   marginRight: '1rem',
-  marginTop: ' 5rem',
-  width: '45%',
+  marginTop: ' 3rem',
+  width: '35%',
   color: 'MainText',
   textAlign: 'right',
 })
@@ -114,14 +127,17 @@ const StyledRight = css({
   flexDirection: 'column',
   justifyContent: 'center',
   marginLeft: '1rem',
-  marginTop: ' 5rem',
-  width: '45%',
+  marginTop: ' 3rem',
+  width: '35%',
   color: 'MainText',
   textAlign: 'left',
 })
 
 const StyledWork = css({
   height: '30%',
+  marginBottom: '1rem',
+  textAlign: 'left',
+  padding: '1rem',
 })
 
 const StyledCategory = css({

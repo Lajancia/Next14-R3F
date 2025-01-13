@@ -60,7 +60,12 @@ const Header = ({ handleClose }) => {
           Soominlab
         </button>
         <div className={StyledOption}>
-          <button onClick={() => handleAboutMe()}>About Me</button>
+          <button
+            className={StyledLink({ currentPath: currentPath === '/aboutMe' ? true : false })}
+            onClick={() => handleAboutMe()}
+          >
+            About Me
+          </button>
         </div>
       </div>
       <div className={StyledRightSetting}>

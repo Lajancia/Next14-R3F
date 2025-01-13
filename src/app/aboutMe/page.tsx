@@ -1,19 +1,12 @@
 'use client'
 
 import { Suspense, useRef, useState, useEffect } from 'react'
-import { useFrame } from '@react-three/fiber'
-import { Canvas, useThree } from '@react-three/fiber'
 import { css } from '../../../styled-system/css'
-import { useGLTF, Lightformer, Environment, Float, ContactShadows, Text, OrbitControls } from '@react-three/drei'
-import { Bloom, EffectComposer, N8AO, TiltShift2 } from '@react-three/postprocessing'
-import { Mesh } from 'three'
-import { useSpring, animated } from '@react-spring/three'
-// import { Keyboard } from '../../components/canvas/Examples'
-import ts from 'typescript'
 import Header from '../../components/header'
 import Section01 from '../../parts/aboutMe/Section01'
 import Section02 from '../../parts/aboutMe/Section02'
 import Section03 from '../../parts/aboutMe/Section03'
+import Section04 from '../../parts/aboutMe/Section04'
 import AboutMeCube from '../../parts/aboutMe/AboutMeCube'
 
 const HeaderContainer = css({ position: 'absolute', zIndex: 10, width: '100%', height: '20vh' })
@@ -44,6 +37,7 @@ export default function Page() {
         <Section01 showSection01={showCube} />
         <Section02 showSection02={showCube} />
         <Section03 showSection03={showCube} />
+        <Section04 showSection04={showCube} />
       </div>
       <div ref={ref} className={containerStyles}>
         <AboutMeCube showCube={showCube} />

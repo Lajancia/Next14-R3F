@@ -2,7 +2,7 @@
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState, useEffect } from 'react'
 import { Line, useCursor, MeshDistortMaterial } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
 import { easing } from 'maath'
@@ -99,13 +99,36 @@ export function Keyboard(props) {
 }
 
 export function Cube(props) {
+  const [theme, setTheme] = useState('white')
+  useEffect(() => {
+    const targetNode = document.documentElement
+    const callback = function (mutationsList) {
+      for (let mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-color-mode') {
+          const newTheme = targetNode.getAttribute('data-color-mode')
+          console.log(`Theme changed to: ${newTheme}`)
+          if (newTheme === 'dark') {
+            setTheme('white')
+          } else {
+            setTheme('black')
+          }
+        }
+      }
+    }
+    const observer = new MutationObserver(callback) // Start observing the target node for attribute changes
+    observer.observe(targetNode, { attributes: true }) // Clean up the observer on component unmount
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
   const Cube = useRef()
-  const { scene, nodes, materials } = useGLTF('/work.glb')
+  const { nodes } = useGLTF('/work.glb')
 
   const glassMaterial = new THREE.MeshPhysicalMaterial({
     transparent: true,
     opacity: 0.5,
-    color: 'black',
+    color: theme,
     roughness: 0,
     side: THREE.FrontSide,
     blending: THREE.AdditiveBlending,
