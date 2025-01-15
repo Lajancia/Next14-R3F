@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  app:
+    image: nextjs-r3f-app
+    build:
+      context: ./
+      target: production
+      dockerfile: dockerfile
+    ports:
+      - '3005:3000'

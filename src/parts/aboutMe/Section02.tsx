@@ -48,7 +48,7 @@ const Section01 = ({ showSection02 }) => {
               <div className={StyledPosition}>Frontend Developer</div>
               <div className={StyledCompany}>Illmuminarean</div>
               <ol className={StyledOL}>
-                <li className={StyledLI}>Developed, managed, and improved the company's website.</li>
+                <li className={StyledLI}>{`Developed, managed, and improved the company's website.`}</li>
                 <li className={StyledLI}>
                   Contributed to optimizing deployment time by collaborating with DevOps, reducing deployment time from
                   15 minutes to 3 minutes.
