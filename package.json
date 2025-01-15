@@ -15,6 +15,7 @@
     "build": "next build",
     "analyze": "ANALYZE=true next build",
     "start": "next start",
+    "serve": "node server.js",
     "panda": "npx panda",
     "panda:dev": "npx panda --watch"
   },

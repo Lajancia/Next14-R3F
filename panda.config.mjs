@@ -17,6 +17,12 @@ export default defineConfig({
   // Useful for theme customization
   theme: {
     extend: {
+      keyframes: {
+        drawLine: {
+          '0%': { height: '0' },
+          '100%': { height: '80%' },
+        },
+      },
       semanticTokens: {
         colors: {
           background: { value: { base: '#E9E9E9', _dark: '#1e1e1e' } },
