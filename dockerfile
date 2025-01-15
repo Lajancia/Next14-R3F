@@ -6,6 +6,7 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install
 COPY . .
+RUN npm run panda
 RUN npm run build
 
 FROM builder as production
