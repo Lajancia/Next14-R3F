@@ -3,7 +3,7 @@
 import * as THREE from 'three'
 import { useRef, useState, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Image, ScrollControls, Scroll, useScroll, Text, View } from '@react-three/drei'
+import { Image, ScrollControls, Scroll, useScroll, Text, View, useProgress, Html } from '@react-three/drei'
 import { proxy, useSnapshot } from 'valtio'
 import { easing } from 'maath'
 import { css } from '../../../styled-system/css'
@@ -55,6 +55,15 @@ function Minimap({ geometry, material, easing }: MinimapProps) {
         />
       ))}
     </group>
+  )
+}
+
+function Loader() {
+  const { progress } = useProgress()
+  return (
+    <Html center>
+      <div className={StyledLoader}> {progress} % loaded</div>
+    </Html>
   )
 }
 
@@ -110,8 +119,7 @@ function Items({ w = 0.7, gap = 0.15 }) {
 
   return (
     <ScrollControls horizontal damping={0.1} pages={(width - xW + urls.length * xW) / width}>
-      <Minimap material={material} geometry={geometry} easing={easing} />
-      <Text fontSize={0.3} position={[0, -2.3, 0]} color={'#373737'}>
+      <Text fontSize={0.3} position={[0, -2.5, 0]} color={'#373737'}>
         3D Modeling
       </Text>
       <Scroll>
@@ -131,7 +139,7 @@ const App = () => (
       onPointerMissed={() => (state.clicked = null)}
       className={css({ height: '80%' })}
     >
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
         <Items />
       </Suspense>
     </Canvas>
@@ -139,3 +147,7 @@ const App = () => (
 )
 
 export default App
+
+const StyledLoader = css({
+  color: 'MainText',
+})

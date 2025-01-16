@@ -8,6 +8,7 @@ import Section02 from '../../parts/aboutMe/Section02'
 import Section03 from '../../parts/aboutMe/Section03'
 import Section04 from '../../parts/aboutMe/Section04'
 import AboutMeCube from '../../parts/aboutMe/AboutMeCube'
+import Section05 from '../../parts/aboutMe/Section05'
 
 const HeaderContainer = css({ position: 'absolute', zIndex: 10, width: '100%', height: '20vh' })
 
@@ -38,6 +39,7 @@ export default function Page() {
         <Section02 showSection02={showCube} />
         <Section03 showSection03={showCube} />
         <Section04 showSection04={showCube} />
+        <Section05 showSection05={showCube} />
       </div>
       <div ref={ref} className={containerStyles}>
         <AboutMeCube showCube={showCube} />

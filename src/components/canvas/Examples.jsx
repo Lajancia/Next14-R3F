@@ -6,6 +6,7 @@ import { useMemo, useRef, useState, useEffect } from 'react'
 import { Line, useCursor, MeshDistortMaterial } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
 import { easing } from 'maath'
+import Cookies from 'js-cookie'
 
 export const Blob = ({ route = '/', ...props }) => {
   const router = useRouter()
@@ -99,7 +100,7 @@ export function Keyboard(props) {
 }
 
 export function Cube(props) {
-  const [theme, setTheme] = useState('white')
+  const [theme, setTheme] = useState(Cookies.get('theme') === 'dark' ? 'white' : 'black')
   useEffect(() => {
     const targetNode = document.documentElement
     const callback = function (mutationsList) {
