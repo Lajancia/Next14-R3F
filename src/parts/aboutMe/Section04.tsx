@@ -19,7 +19,7 @@ const Section04 = ({ showSection04 }) => {
     <PageTransition transition={showSection04}>
       <div className={StyledInfoWrapper}>
         <motion.div variants={childVariants} className={StyledCategory}>
-          PROJECTS
+          Career Profile
         </motion.div>
         <motion.h1 variants={childVariants} className={StyledTitle}>
           {`PROJECTS`}
@@ -47,12 +47,6 @@ const StyledInfoWrapper = css({
   gap: '1rem',
 })
 
-const styledNumber = css({
-  fontSize: '20rem',
-  lineHeight: '16rem',
-  color: 'MainText',
-})
-
 const StyledCategory = css({
   fontSize: '1.5rem',
   lineHeight: '0.1rem',
@@ -65,30 +59,7 @@ const StyledTitle = css({
   color: 'MainText',
 })
 
-const StyledCircle = css({
-  display: 'flex',
-  gap: '1rem',
-})
-
-const StyledDate = css({
-  fontSize: '2.5rem',
-  color: 'MainText',
-})
-
 const StyledText = css({
   fontSize: '1.5rem',
   color: 'MainText',
 })
-
-const circleButton = (props) =>
-  css({
-    width: '3rem',
-    height: '3rem',
-    backgroundColor: props.color === 'white' ? 'white' : props.color === 'Orange' ? 'Orange' : 'Black',
-    border: 'none',
-    borderRadius: '50%',
-    textAlign: 'center',
-    lineHeight: '4.4rem',
-    fontSize: '1.5rem',
-    cursor: 'pointer',
-  })
