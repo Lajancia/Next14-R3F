@@ -4,6 +4,7 @@ import Header from '../../components/header'
 import { useState, useEffect } from 'react'
 import { css } from '../../../styled-system/css'
 import PageTransition from '../../templates/PageAnimation'
+import Footer from '../../components/footer'
 
 const HeaderContainer = css({ width: '100%', height: '20vh' })
 const FlexContainer = css({ width: '100vw', height: '80vh' })
@@ -29,6 +30,22 @@ export default function Page() {
           <Gallery />
         </PageTransition>
       </div>
+      <div className={StyledFooter}>
+        <Footer showFooter={showGallery} />
+      </div>
     </>
   )
 }
+
+const StyledFooter = css({
+  overflow: 'hidden',
+  zIndex: 1,
+  position: 'absolute',
+  bottom: 0,
+  height: '10vh',
+  display: 'flex',
+  justifyContent: 'center',
+
+  alignItems: 'center',
+  width: '100%',
+})
