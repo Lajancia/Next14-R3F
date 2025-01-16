@@ -1,11 +1,10 @@
 import { Layout } from '../components/dom/Layout'
 import { cookies } from 'next/headers'
 import '../../index.css'
-// import '@/parts/keyboard/Underlay'
 import Underlay from '../parts/keyboard/Underlay'
 import { Jersey_25 } from 'next/font/google'
 import './styles.css'
-// import { ThemeName, getTheme } from 'styled-system/themes'
+
 const jersey25 = Jersey_25({
   subsets: ['latin'],
   weight: ['400'],
@@ -18,7 +17,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   const store = cookies()
-  const themeName = store.get('theme')?.value || 'dark'
+  const themeName = store.get('theme') ? store.get('theme').value : (store.set('theme', 'dark'), 'dark')
   const theme = themeName
 
   return (
