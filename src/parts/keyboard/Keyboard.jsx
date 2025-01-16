@@ -1,13 +1,30 @@
 import dynamic from 'next/dynamic'
 import { Suspense, use, useEffect, useState, useRef } from 'react'
-import { Lightformer, Environment, Float, ContactShadows, Text, OrbitControls } from '@react-three/drei'
-import { Bloom, EffectComposer, N8AO, TiltShift2 } from '@react-three/postprocessing'
+import {
+  Lightformer,
+  Environment,
+  Float,
+  ContactShadows,
+  Text,
+  OrbitControls,
+  Html,
+  useProgress,
+} from '@react-three/drei'
 import { css } from '../../../styled-system/css'
 import { useSpring, animated } from '@react-spring/three'
 import { Keyboard } from '../../components/canvas/Examples'
 import { Canvas } from '@react-three/fiber'
 
 const AnimatedKeyboard = animated(Keyboard)
+
+function Loader() {
+  const { progress } = useProgress()
+  return (
+    <Html center color={'white'}>
+      {progress} % loaded
+    </Html>
+  )
+}
 
 export default function Keyboards({ showKeyboard }) {
   const shadowRef = useRef()
@@ -39,7 +56,7 @@ export default function Keyboards({ showKeyboard }) {
       camera={{ position: [0, 10, 2], fov: 30 }}
     >
       <ambientLight position={[10, 10, 10]} />
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
         <Float ref={animatedKeyboardRef} floatIntensity={2}>
           {/* @ts-ignore */}
           <AnimatedKeyboard castShadow scale={scale} position={[0, 0, 0]} rotation={[Math.PI / 1.2, 3.5, 3]} />

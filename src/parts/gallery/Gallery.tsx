@@ -3,7 +3,7 @@
 import * as THREE from 'three'
 import { useRef, useState, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Image, ScrollControls, Scroll, useScroll, Text, View } from '@react-three/drei'
+import { Image, ScrollControls, Scroll, useScroll, Text, View, useProgress, Html } from '@react-three/drei'
 import { proxy, useSnapshot } from 'valtio'
 import { easing } from 'maath'
 import { css } from '../../../styled-system/css'
@@ -55,6 +55,15 @@ function Minimap({ geometry, material, easing }: MinimapProps) {
         />
       ))}
     </group>
+  )
+}
+
+function Loader() {
+  const { progress } = useProgress()
+  return (
+    <Html center color={'white'}>
+      {progress} % loaded
+    </Html>
   )
 }
 
@@ -131,7 +140,7 @@ const App = () => (
       onPointerMissed={() => (state.clicked = null)}
       className={css({ height: '80%' })}
     >
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
         <Items />
       </Suspense>
     </Canvas>
