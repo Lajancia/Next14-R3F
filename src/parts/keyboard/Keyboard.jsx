@@ -20,8 +20,8 @@ const AnimatedKeyboard = animated(Keyboard)
 function Loader() {
   const { progress } = useProgress()
   return (
-    <Html center color={'white'}>
-      {progress} % loaded
+    <Html center>
+      <div className={StyledLoader}> {progress} % loaded</div>
     </Html>
   )
 }
@@ -89,3 +89,7 @@ export default function Keyboards({ showKeyboard }) {
     </Canvas>
   )
 }
+
+const StyledLoader = css({
+  color: 'MainText',
+})

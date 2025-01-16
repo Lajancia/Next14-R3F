@@ -14,8 +14,8 @@ const AnimatedKeyboard = animated(Cube)
 function Loader() {
   const { progress } = useProgress()
   return (
-    <Html center color={'white'}>
-      {progress} % loaded
+    <Html center>
+      <div className={StyledLoader}>{progress} % loaded</div>
     </Html>
   )
 }
@@ -39,3 +39,7 @@ const AboutMeCube = ({ showCube }) => {
 }
 
 export default AboutMeCube
+
+const StyledLoader = css({
+  color: 'MainText',
+})

@@ -61,8 +61,8 @@ function Minimap({ geometry, material, easing }: MinimapProps) {
 function Loader() {
   const { progress } = useProgress()
   return (
-    <Html center color={'white'}>
-      {progress} % loaded
+    <Html center>
+      <div className={StyledLoader}> {progress} % loaded</div>
     </Html>
   )
 }
@@ -148,3 +148,7 @@ const App = () => (
 )
 
 export default App
+
+const StyledLoader = css({
+  color: 'MainText',
+})
