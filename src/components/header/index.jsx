@@ -18,33 +18,40 @@ const toggleTheme = () => {
 const Header = ({ handleClose }) => {
   const router = useRouter()
   const pathname = usePathname()
+  const [buttonClick, setButtonClick] = useState(false)
 
   const [currentPath, setCurrentPath] = useState(pathname)
 
   const handleGalleryMove = () => {
     if (pathname === '/gallery') return
+    setButtonClick(true)
     setCurrentPath('/gallery')
     handleClose()
     setTimeout(() => {
       router.push('/gallery')
+      setButtonClick(false)
     }, 800)
   }
 
   const handleMain = () => {
     if (pathname === '/') return
+    setButtonClick(true)
     setCurrentPath('/')
     handleClose()
     setTimeout(() => {
       router.push('/')
+      setButtonClick(false)
     }, 800)
   }
 
   const handleAboutMe = () => {
     if (pathname === '/aboutMe') return
+    setButtonClick(true)
     setCurrentPath('/aboutMe')
     handleClose()
     setTimeout(() => {
       router.push('/aboutMe')
+      setButtonClick(false)
     }, 800)
   }
 
@@ -56,11 +63,16 @@ const Header = ({ handleClose }) => {
   return (
     <div className={StyledHeaderWrapper}>
       <div className={StyledHeaderMenu}>
-        <button className={StyledHomeLink({ currentPath: currentPath })} onClick={() => handleMain()}>
+        <button
+          disabled={buttonClick}
+          className={StyledHomeLink({ currentPath: currentPath })}
+          onClick={() => handleMain()}
+        >
           Soominlab
         </button>
         <div className={StyledOption}>
           <button
+            disabled={buttonClick}
             className={StyledLink({ currentPath: currentPath === '/aboutMe' ? true : false })}
             onClick={() => handleAboutMe()}
           >
@@ -70,6 +82,7 @@ const Header = ({ handleClose }) => {
       </div>
       <div className={StyledRightSetting}>
         <button
+          disabled={buttonClick}
           onClick={() => handleGalleryMove()}
           className={StyledLink({ currentPath: currentPath === '/gallery' ? true : false })}
         >
