@@ -1,18 +1,20 @@
 'use client'
 
 import { Suspense, useRef, useState, useEffect } from 'react'
-import { css } from '../../../styled-system/css'
-import Header from '../../components/header'
-import Section01 from '../../parts/aboutMe/Section01'
-import Section02 from '../../parts/aboutMe/Section02'
-import Section03 from '../../parts/aboutMe/Section03'
-import Section04 from '../../parts/aboutMe/Section04'
-import AboutMeCube from '../../parts/aboutMe/AboutMeCube'
-import Section05 from '../../parts/aboutMe/Section05'
+import { css } from '../../../../styled-system/css'
+import Header from '../../../components/header'
+import Section01 from '../../../parts/aboutMe/Section01'
+import Section02 from '../../../parts/aboutMe/Section02'
+import Section03 from '../../../parts/aboutMe/Section03'
+import Section04 from '../../../parts/aboutMe/Section04'
+import AboutMeCube from '../../../parts/aboutMe/AboutMeCube'
+import Section05 from '../../../parts/aboutMe/Section05'
+import { useTranslation } from '../../i18n/client'
 
 const HeaderContainer = css({ position: 'absolute', zIndex: 10, width: '100%', height: '20vh' })
 
-export default function Page() {
+export default function Page({ params: { lng } }) {
+  const { t } = useTranslation(lng, 'aboutMe')
   const ref = useRef()
   const [showCube, setShowCube] = useState(false)
   useEffect(() => {
@@ -32,10 +34,10 @@ export default function Page() {
   return (
     <>
       <div className={HeaderContainer}>
-        <Header handleClose={handleCloseKeyboard} />
+        <Header lng={lng} handleClose={handleCloseKeyboard} />
       </div>
       <div className={TextContentStyle}>
-        <Section01 showSection01={showCube} />
+        <Section01 t={t} showSection01={showCube} />
         <Section02 showSection02={showCube} />
         <Section03 showSection03={showCube} />
         <Section04 showSection04={showCube} />

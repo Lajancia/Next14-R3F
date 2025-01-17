@@ -1,9 +1,15 @@
-import { Layout } from '../components/dom/Layout'
+import { Layout } from '../../components/dom/Layout'
 import { cookies } from 'next/headers'
-import '../../index.css'
-import Underlay from '../parts/keyboard/Underlay'
+import '../../../index.css'
+import Underlay from '../../parts/keyboard/Underlay'
 import { Jersey_25 } from 'next/font/google'
 import './styles.css'
+import { languages } from '../i18n/settings'
+import { dir } from 'i18next'
+
+export async function generateStaticParams() {
+  return languages.map((lng) => ({ lng }))
+}
 
 const jersey25 = Jersey_25({
   subsets: ['latin'],
@@ -15,13 +21,13 @@ export const metadata = {
   description: 'A minimal starter for Nextjs + React-three-fiber and Threejs.',
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, params: { lng } }) {
   const store = cookies()
   const themeName = store.get('theme') ? store.get('theme').value : (store.set('theme', 'dark'), 'dark')
   const theme = themeName
 
   return (
-    <html lang='en' className='antialiased' data-color-mode={theme}>
+    <html className='antialiased' data-color-mode={theme} lang={lng} dir={dir(lng)}>
       {/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head

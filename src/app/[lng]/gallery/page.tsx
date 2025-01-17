@@ -1,15 +1,15 @@
 'use client'
-import Gallery from '../../parts/gallery/Gallery'
-import Header from '../../components/header'
+import Gallery from '../../../parts/gallery/Gallery'
+import Header from '../../../components/header'
 import { useState, useEffect } from 'react'
-import { css } from '../../../styled-system/css'
-import PageTransition from '../../templates/PageAnimation'
-import Footer from '../../components/footer'
+import { css } from '../../../../styled-system/css'
+import PageTransition from '../../../templates/PageAnimation'
+import Footer from '../../../components/footer'
 
 const HeaderContainer = css({ width: '100%', height: '20vh' })
 const FlexContainer = css({ width: '100vw', height: '80vh' })
 
-export default function Page() {
+export default function Page({ params: { lng } }) {
   const [showGallery, setShowGallery] = useState(false)
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function Page() {
   return (
     <>
       <div className={HeaderContainer}>
-        <Header handleClose={handleCloseGallery} />
+        <Header lng={lng} handleClose={handleCloseGallery} />
       </div>
       <div className={FlexContainer}>
         <PageTransition transition={showGallery}>

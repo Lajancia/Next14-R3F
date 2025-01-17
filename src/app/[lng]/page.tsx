@@ -1,15 +1,15 @@
 'use client'
-import KeyboardParts from '../parts/keyboard/Keyboard'
-import Header from '../components/header'
-import Info from '../parts/keyboard/Info'
-import { css } from '../../styled-system/css'
+import KeyboardParts from '../../parts/keyboard/Keyboard'
+import Header from '../../components/header'
+import Info from '../../parts/keyboard/Info'
+import { css } from '../../../styled-system/css'
 import { useEffect, useState, useRef } from 'react'
-import BackgroundText from '../parts/keyboard/BackgroundText'
-import Keyboards from '../parts/keyboard/Keyboard'
-import Footer from '../components/footer'
+import BackgroundText from '../../parts/keyboard/BackgroundText'
+import Keyboards from '../../parts/keyboard/Keyboard'
+import Footer from '../../components/footer'
 import { easing } from 'maath'
 
-export default function Page() {
+export default function Page({ params: { lng } }) {
   const ref = useRef()
   const [showKeyboard, setShowKeyboard] = useState(false)
 
@@ -24,7 +24,7 @@ export default function Page() {
   return (
     <>
       <div className={HeaderContainer}>
-        <Header handleClose={handleCloseKeyboard} />
+        <Header lng={lng} handleClose={handleCloseKeyboard} />
       </div>
       <div className={TextContentStyle}>
         <Info showKeyboard={showKeyboard} />
