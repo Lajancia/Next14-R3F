@@ -87,7 +87,7 @@ const StyledList = css({
 
 const StyledInfoWrapper = css({
   display: 'flex',
-  width: '80%',
+  width: '70%',
   flexDirection: 'column',
   padding: '5rem',
   color: 'MainText',

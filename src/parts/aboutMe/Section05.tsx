@@ -54,7 +54,7 @@ export default Section05
 
 const StyledContainer = css({
   display: 'flex',
-  width: '100vw',
+  width: '90vw',
   height: '100vh',
 })
 

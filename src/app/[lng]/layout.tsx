@@ -2,7 +2,7 @@ import { Layout } from '../../components/dom/Layout'
 import { cookies } from 'next/headers'
 import '../../../index.css'
 import Underlay from '../../parts/keyboard/Underlay'
-import { Jersey_25 } from 'next/font/google'
+import { Do_Hyeon } from 'next/font/google'
 import './styles.css'
 import { languages } from '../i18n/settings'
 import { dir } from 'i18next'
@@ -11,7 +11,7 @@ export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }))
 }
 
-const jersey25 = Jersey_25({
+const DoHyeon = Do_Hyeon({
   subsets: ['latin'],
   weight: ['400'],
 })
@@ -21,9 +21,9 @@ export const metadata = {
   description: 'A minimal starter for Nextjs + React-three-fiber and Threejs.',
 }
 
-export default function RootLayout({ children, params: { lng } }) {
+export default async function RootLayout({ children, params: { lng } }) {
   const store = cookies()
-  const themeName = store.get('theme') ? store.get('theme').value : (store.set('theme', 'dark'), 'dark')
+  const themeName = store.get('theme') ? store.get('theme').value : 'dark'
   const theme = themeName
 
   return (
@@ -33,7 +33,7 @@ export default function RootLayout({ children, params: { lng } }) {
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body style={{ overflow: 'hidden' }} className={jersey25.className}>
+      <body style={{ overflow: 'hidden' }} className={DoHyeon.className}>
         {/* To avoid FOUT with styled-components wrap Layout with StyledComponentsRegistry https://beta.nextjs.org/docs/styling/css-in-js#styled-components */}
         <Underlay />
         <Layout>{children}</Layout>

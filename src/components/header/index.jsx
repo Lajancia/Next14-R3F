@@ -1,13 +1,17 @@
 'use client'
-
+import Link from 'next/link'
 import { css } from '../../../styled-system/css'
 import '../../../styled-system/styles.css'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { useTranslation } from '../../app/i18n/client'
 import { Trans } from 'react-i18next/TransWithoutContext'
+import Cookies from 'js-cookie'
 
 const toggleTheme = () => {
+  if (!Cookies.get('theme')) {
+    Cookies.set('theme', 'dark')
+  }
   const currentTheme = document.cookie
     .split('; ')
     .find((row) => row.startsWith('theme='))
@@ -30,7 +34,7 @@ const Header = ({ lng, handleClose }) => {
     setCurrentPath('/gallery')
     handleClose()
     setTimeout(() => {
-      router.push('/gallery')
+      router.push(`/${lng}/gallery`)
       setButtonClick(false)
     }, 800)
   }
@@ -52,18 +56,18 @@ const Header = ({ lng, handleClose }) => {
     setCurrentPath('/aboutMe')
     handleClose()
     setTimeout(() => {
-      router.push('/aboutMe')
+      router.push(`/${lng}/aboutMe`)
       setButtonClick(false)
     }, 800)
   }
 
-  const handleKorean = () => {
-    if (lng === 'en') router.push(`/ko${pathname.replace('/en', '')}`)
-  }
+  // const handleKorean = () => {
+  //   if (lng === 'en') router.push()
+  // }
 
-  const handleEnglish = () => {
-    if (lng === 'ko') router.push(`/en${pathname.replace('/ko', '')}`)
-  }
+  // const handleEnglish = () => {
+  //   if (lng === 'ko') router.push(`/en${pathname.replace('/ko', '')}`)
+  // }
 
   useEffect(() => {
     console.log('pathname', pathname)
@@ -99,12 +103,18 @@ const Header = ({ lng, handleClose }) => {
           Gallery
         </button>
         <div className={StyledHeaderSetting}>
-          <button className={StyledLanguageButton({ currentPath: false })} onClick={handleKorean}>
+          <a
+            href={`/ko${pathname.replace('/en', '')}`}
+            className={StyledLanguageButton({ currentPath: pathname.includes('ko') })}
+          >
             KO
-          </button>
-          <button className={StyledLanguageButton({ currentPath: true })} onClick={handleEnglish}>
+          </a>
+          <a
+            href={`/en${pathname.replace('/ko', '')}`}
+            className={StyledLanguageButton({ currentPath: pathname.includes('en') })}
+          >
             EN
-          </button>
+          </a>
           <button className={StyledThemeButton} onClick={toggleTheme} />
         </div>
       </div>
