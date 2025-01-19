@@ -17,8 +17,8 @@ const Section03 = ({ showSection03 }) => {
   }
 
   return (
-    <PageTransition transition={showSection03}>
-      <div className={StyledContainer}>
+    <div className={StyledContainer}>
+      <PageTransition transition={showSection03}>
         <div className={StyledInfoWrapper}>
           <motion.div variants={childVariants} className={StyledCategory}>
             {`What I'm capable of`}
@@ -30,8 +30,8 @@ const Section03 = ({ showSection03 }) => {
         <div className={StyledBoxWrapper}>
           <BoxesCursor />
         </div>
-      </div>
-    </PageTransition>
+      </PageTransition>
+    </div>
   )
 }
 export default Section03
@@ -42,7 +42,6 @@ const StyledBoxWrapper = css({
 })
 
 const StyledContainer = css({
-  paddingTop: '5rem',
   height: '100%',
   width: '100%',
   marginTop: '10vh',

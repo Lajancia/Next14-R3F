@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
 
-const Info = ({ showKeyboard }) => {
+const Info = ({ t, showKeyboard }) => {
   const childVariants = {
     hidden: { x: 50, opacity: 0 },
     visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
@@ -29,9 +29,7 @@ const Info = ({ showKeyboard }) => {
           MACRO KEYBOARD
         </motion.h1>
         <motion.article variants={childVariants} className={StyledText}>
-          This 3D object can be controlled by the mouse. It is created with Blender software and displayed with
-          Three.js.Recently, I got inspired by some of the modern industrial design objects and made this macro keyboard
-          as a side project. Feel free to look around.
+          {t('mainExplanation')}
         </motion.article>
         <div className={StyledCircle}>
           <motion.div variants={childVariantsButton} className={circleButton({ color: 'white' })} />

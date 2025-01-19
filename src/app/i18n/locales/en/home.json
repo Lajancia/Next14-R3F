@@ -1,10 +1,3 @@
 {
-  "Section01explanation": "I am a front-end developer with 2 years of experience. I primarily use Next.js and React. I am also capable of developing interactive 3D web experiences using Blender and React-Three-Fiber.",
-  "Section02Work01Detail01": "Developed, managed, and improved the company's website.",
-  "Section02Work01Detail02": "Contributed to optimizing deployment time by collaborating with DevOps, reducing deployment time from 15 minutes to 3 minutes.",
-  "Section02Work01Detail03": "Conducted in-house training and implementation of Docker and MSW mocking.",
-  "Section02Work02Detail01": "Developed and maintained a smart monitoring web application for efficient production management at the manufacturing plant in Serbia.",
-  "Section02Work02Detail02": "Responsible for Java Spring Boot API migration and additional development.",
-  "Section03Work01Detail01": "Developed the company website frontend, managed DNS and web publishing, and handled SNS insights management.",
-  "Section03Work01Detail02": "Responsible for frontend maintenance and support."
+  "mainExplanation": "This 3D object can be controlled by the mouse. It is created with Blender software and displayed with Three.js.Recently, I got inspired by some of the modern industrial design objects and made this macro keyboard as a side project. Feel free to look around."
 }

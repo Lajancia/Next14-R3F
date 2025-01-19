@@ -8,9 +8,11 @@ import BackgroundText from '../../parts/keyboard/BackgroundText'
 import Keyboards from '../../parts/keyboard/Keyboard'
 import Footer from '../../components/footer'
 import { easing } from 'maath'
+import { useTranslation } from '../i18n/client'
 
 export default function Page({ params: { lng } }) {
   const ref = useRef()
+  const { t } = useTranslation(lng, 'home')
   const [showKeyboard, setShowKeyboard] = useState(false)
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export default function Page({ params: { lng } }) {
         <Header lng={lng} handleClose={handleCloseKeyboard} />
       </div>
       <div className={TextContentStyle}>
-        <Info showKeyboard={showKeyboard} />
+        <Info t={t} showKeyboard={showKeyboard} />
       </div>
       <div ref={ref} className={containerStyles}>
         <BackgroundText showKeyboard={showKeyboard} />

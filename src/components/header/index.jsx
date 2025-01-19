@@ -136,7 +136,7 @@ const StyledHeaderWrapper = css({
   display: 'flex',
   alignItems: ' flex-end',
   justifyContent: 'space-between',
-  margin: '2rem 0',
+  padding: '2rem 0',
   width: '100%',
   height: '10%',
 })

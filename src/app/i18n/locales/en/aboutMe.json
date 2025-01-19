@@ -6,5 +6,30 @@
   "Section02Work02Detail01": "Developed and maintained a smart monitoring web application for efficient production management at the manufacturing plant in Serbia.",
   "Section02Work02Detail02": "Responsible for Java Spring Boot API migration and additional development.",
   "Section03Work01Detail01": "Developed the company website frontend, managed DNS and web publishing, and handled SNS insights management.",
-  "Section03Work01Detail02": "Responsible for frontend maintenance and support."
+  "Section03Work01Detail02": "Responsible for frontend maintenance and support.",
+
+  "Section04Title01": "Development of Internal Recruitment Service and Admin Page at Solariant",
+  "Section04Sub01Detail01": "Developed application form for recruitment announcements using react-query and react-hook-form",
+  "Section04Sub01Detail02": "Migrated recruitment management service to SSG using Next14 and applied multilingual support and Dockerization",
+
+  "Section04Title02": "Frontend Dockerization and CI/CD Optimization",
+  "Section04Sub02Detail01": "Reduced deployment time from 12 minutes to 3 minutes by collaborating with the DevOps team to implement frontend CI Dockerization",
+  "Section04Sub02Detail02": "Enhanced image reusability by applying Docker environment variable URL method",
+  "Section04Sub02Detail03": "Conducted training on Docker adoption and application methods within the company",
+
+  "Section04Title03": "Development of Smart Factory Monitoring System in Serbia's Automotive Industry",
+  "Section04Sub03Detail01": "Participated in the development of the monitoring system's React frontend, using Figma for UI/UX design and React Apex Chart for developing the React monitoring web",
+  "Section04Sub03Detail02": "Developed backend APIs for production tracking using Java Spring Boot and MariaDB",
+  "Section04Sub03Detail03": "Collaborated with local workers in Serbia for system maintenance and improvements, reducing AOI defect rates by 20% and enhancing production efficiency",
+
+  "Section04Title04": "Development of Common SRL Website",
+  "Section04Sub04Detail01": "Developed a web application for viewing Common SRL's published magazines and design portfolio",
+  "Section04Sub04Detail02": "Managed the Common SRL domain and handled Hostinger web hosting",
+
+  "Section05Articles": "These are personal documents reflecting on various problems encountered during development and the processes to solve them.",
+  "Section05Article01": "External Injection of Docker Environment Variables (With Next14)",
+  "Section05Article02": "About AWS",
+  "Section05Article03": "Next14 Rendering Method and SSG Migration",
+  "Section05Article04": "Docker + Jenkins + Github + Grafana + Next14",
+  "Section05Article05": "Experience Using React-Three-Fiber + WebXR"
 }

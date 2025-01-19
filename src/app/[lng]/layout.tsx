@@ -1,4 +1,3 @@
-import { Layout } from '../../components/dom/Layout'
 import { cookies } from 'next/headers'
 import '../../../index.css'
 import Underlay from '../../parts/keyboard/Underlay'
@@ -36,7 +35,9 @@ export default async function RootLayout({ children, params: { lng } }) {
       <body style={{ overflow: 'hidden' }} className={DoHyeon.className}>
         {/* To avoid FOUT with styled-components wrap Layout with StyledComponentsRegistry https://beta.nextjs.org/docs/styling/css-in-js#styled-components */}
         <Underlay />
-        <Layout>{children}</Layout>
+        <div style={{ position: 'relative', width: ' 100%', height: '100%', overflow: 'auto', touchAction: 'auto' }}>
+          {children}
+        </div>
       </body>
     </html>
   )
