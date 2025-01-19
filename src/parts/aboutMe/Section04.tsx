@@ -71,7 +71,6 @@ const Section04 = ({ t, showSection04 }) => {
             <ul>
               <li className={StyledList}>{t('Section04Sub04Detail01')}</li>
               <li className={StyledList}>{t('Section04Sub04Detail02')}</li>
-              <li className={StyledList}>{t('Section04Sub04Detail03')}</li>
             </ul>
           </motion.div>
         </article>
