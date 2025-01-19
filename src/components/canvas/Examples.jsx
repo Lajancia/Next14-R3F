@@ -100,7 +100,7 @@ export function Keyboard(props) {
 }
 
 export function Cube(props) {
-  const [theme, setTheme] = useState(Cookies.get('theme') === 'dark' ? 'white' : 'black')
+  const [theme, setTheme] = useState(Cookies.get('theme') === 'white' ? 'black' : 'white')
   useEffect(() => {
     const targetNode = document.documentElement
     const callback = function (mutationsList) {
