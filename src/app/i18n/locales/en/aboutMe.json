@@ -22,6 +22,10 @@
   "Section04Sub03Detail02": "Developed backend APIs for production tracking using Java Spring Boot and MariaDB",
   "Section04Sub03Detail03": "Collaborated with local workers in Serbia for system maintenance and improvements, reducing AOI defect rates by 20% and enhancing production efficiency",
 
+  "Section04Title04": "Development of Common SRL Website",
+  "Section04Sub04Detail01": "Developed a web application for viewing Common SRL's published magazines and design portfolio",
+  "Section04Sub04Detail02": "Managed the Common SRL domain and handled Hostinger web hosting",
+
   "Section05Articles": "These are personal documents reflecting on various problems encountered during development and the processes to solve them.",
   "Section05Article01": "External Injection of Docker Environment Variables (With Next14)",
   "Section05Article02": "About AWS",

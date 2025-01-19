@@ -62,6 +62,18 @@ const Section04 = ({ t, showSection04 }) => {
               <li className={StyledList}>{t('Section04Sub03Detail03')}</li>
             </ul>
           </motion.div>
+
+          <motion.div className={StyledLine} variants={childVariantsLine} />
+          <motion.div variants={childVariantsContents}>
+            <h3 className={StyledDate}>2021.11 ~ 2022.05</h3>
+            <h2 className={StyledProjectTitle}>{t('Section04Title04')}</h2>
+            <p className={StyledCompany}> Common SRL</p>
+            <ul>
+              <li className={StyledList}>{t('Section04Sub04Detail01')}</li>
+              <li className={StyledList}>{t('Section04Sub04Detail02')}</li>
+              <li className={StyledList}>{t('Section04Sub04Detail03')}</li>
+            </ul>
+          </motion.div>
         </article>
       </PageTransition>
     </div>
