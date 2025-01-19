@@ -1,15 +1,15 @@
 'use client'
 import KeyboardParts from '../../parts/keyboard/Keyboard'
-import Header from '../../components/header'
+import Header from '../../components/Header'
 import Info from '../../parts/keyboard/Info'
 import { css } from '../../../styled-system/css'
 import { useEffect, useState, useRef } from 'react'
 import BackgroundText from '../../parts/keyboard/BackgroundText'
 import Keyboards from '../../parts/keyboard/Keyboard'
-import Footer from '../../components/footer'
+import Footer from '../../components/Footer'
 import { easing } from 'maath'
 import { useTranslation } from '../i18n/client'
-
+import Modal from 'src/components/Dialog'
 export default function Page({ params: { lng } }) {
   const ref = useRef()
   const { t } = useTranslation(lng, 'home')
@@ -33,7 +33,9 @@ export default function Page({ params: { lng } }) {
       </div>
       <div ref={ref} className={containerStyles}>
         <BackgroundText showKeyboard={showKeyboard} />
-        <Keyboards showKeyboard={showKeyboard} />
+        <div className={StyledKeyboard}>
+          <Keyboards showKeyboard={showKeyboard} scaleSet={0.35} />
+        </div>
       </div>
       <div className={StyledFooter}>
         <Footer showFooter={showKeyboard} />
@@ -46,10 +48,12 @@ const HeaderContainer = css({ position: 'absolute', zIndex: 10, width: '100%', h
 
 const TextContentStyle = css({
   position: 'absolute',
-  width: '50vw',
+  width: '100vw',
   height: '100vh',
   zIndex: 1,
   pointerEvents: 'none',
+  lg: { width: '100vw' },
+  xl: { width: '50vw' },
 })
 const containerStyles = css({
   width: '100vw',
@@ -63,9 +67,18 @@ const StyledFooter = css({
   position: 'absolute',
   bottom: 0,
   height: '10vh',
-  display: 'flex',
-  justifyContent: 'center',
 
+  justifyContent: 'center',
+  display: 'flex',
   alignItems: 'center',
   width: '100%',
+
+  lg: { display: 'flex' },
+})
+
+const StyledKeyboard = css({
+  width: '100%',
+  height: '70%',
+  lg: { width: '100%', height: '80%' },
+  xl: { width: '100%', height: '100%' },
 })

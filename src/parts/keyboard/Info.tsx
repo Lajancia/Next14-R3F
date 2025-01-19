@@ -48,17 +48,33 @@ const StyledInfoWrapper = css({
   width: '100%',
   flexDirection: 'column',
   justifyContent: 'center',
-  padding: '5rem',
-  marginTop: '15%',
-  height: '75%',
+  padding: '2rem',
+  marginBottom: '5vh',
+  height: '65%',
   color: 'white',
   gap: '1rem',
+  bottom: 0,
+  lg: {
+    marginTop: '25%',
+    height: '75%',
+    padding: '5rem',
+    bottom: '0',
+    marginBottom: 'auto',
+  },
+  xl: {
+    marginTop: '15%',
+    height: '75%',
+    bottom: 'auto',
+    marginBottom: 'auto',
+  },
 })
 
 const styledNumber = css({
-  fontSize: '20rem',
-  lineHeight: '16rem',
+  fontSize: '10rem',
+  lineHeight: '8rem',
   color: 'MainText',
+  lg: { fontSize: '15rem', lineHeight: '10rem' },
+  xl: { fontSize: '20rem', lineHeight: '16rem' },
 })
 
 const StyledCategory = css({
@@ -68,9 +84,11 @@ const StyledCategory = css({
 })
 
 const StyledTitle = css({
-  fontSize: '5rem',
+  fontSize: '3rem',
   lineHeight: '100%',
   color: 'MainText',
+  lg: { fontSize: '5rem' },
+  xl: { fontSize: '5rem' },
 })
 
 const StyledCircle = css({
@@ -78,14 +96,11 @@ const StyledCircle = css({
   gap: '1rem',
 })
 
-const StyledDate = css({
-  fontSize: '2.5rem',
-  color: 'MainText',
-})
-
 const StyledText = css({
-  fontSize: '1rem',
+  fontSize: '0.8rem',
   color: 'MainText',
+  lg: { fontSize: '1rem' },
+  xl: { fontSize: '1rem' },
 })
 
 const circleButton = (props) =>
