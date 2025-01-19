@@ -73,6 +73,7 @@ const Section04 = ({ t, showSection04 }) => {
               <li className={StyledList}>{t('Section04Sub04Detail02')}</li>
             </ul>
           </motion.div>
+          <motion.div className={StyledLine} variants={childVariantsLine} />
         </article>
       </PageTransition>
     </div>
