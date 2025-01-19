@@ -1,6 +1,6 @@
 import { css } from '../../../styled-system/css'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
 
 const Section01 = ({ t, showSection02 }) => {
@@ -17,53 +17,55 @@ const Section01 = ({ t, showSection02 }) => {
 
   return (
     <div className={StyledInfoWrapper}>
-      <PageTransition transition={showSection02}>
-        {' '}
-        <motion.div variants={childVariants} className={StyledCategory}>
-          My Journey as a Developer
-        </motion.div>
-        <motion.h1 variants={childVariants} className={StyledTitle}>
-          WORK EXPERIENCE
-        </motion.h1>
-        <motion.div className={StyledWorkLineContainer} variants={childVariantsButton}>
-          <div className={StyledLeft}>
-            <motion.div className={StyledWorkDate}>2024.06 ~ 2025.01</motion.div>
-            <motion.div className={StyledWork}>
-              <div className={StyledPosition}>Associate Research Engineer</div>
-              <div className={StyledCompany}>YURA R&D Center</div>
-              <ul className={StyledUL}>
-                <li className={StyledLI}>{t('Section02Work02Detail01')}</li>
-                <li className={StyledLI}>{t('Section02Work02Detail02')}</li>
-              </ul>
-            </motion.div>
-            <motion.div className={StyledWorkDate}>2021.11 ~ 2022.05</motion.div>
-          </div>
+      <AnimatePresence>
+        <PageTransition transition={showSection02}>
+          {' '}
+          <motion.div variants={childVariants} className={StyledCategory}>
+            My Journey as a Developer
+          </motion.div>
+          <motion.h1 variants={childVariants} className={StyledTitle}>
+            WORK EXPERIENCE
+          </motion.h1>
+          <motion.div className={StyledWorkLineContainer} variants={childVariantsButton}>
+            <div className={StyledLeft}>
+              <motion.div className={StyledWorkDate}>2024.06 ~ 2025.01</motion.div>
+              <motion.div className={StyledWork}>
+                <div className={StyledPosition}>Associate Research Engineer</div>
+                <div className={StyledCompany}>YURA R&D Center</div>
+                <ul className={StyledUL}>
+                  <li className={StyledLI}>{t('Section02Work02Detail01')}</li>
+                  <li className={StyledLI}>{t('Section02Work02Detail02')}</li>
+                </ul>
+              </motion.div>
+              <motion.div className={StyledWorkDate}>2021.11 ~ 2022.05</motion.div>
+            </div>
 
-          <div className={StyledLine} />
-          <div className={StyledRight}>
-            <motion.div className={StyledWork}>
-              <div className={StyledPosition}>Frontend Developer</div>
-              <div className={StyledCompany}>Illmuminarean</div>
-              <ul className={StyledUL}>
-                <li className={StyledLI}>{t('Section02Work01Detail01')}</li>
-                <li className={StyledLI}>{t('Section02Work01Detail02')}</li>
-                <li className={StyledLI}>{t('Section02Work01Detail03')}</li>
-              </ul>
-            </motion.div>
-            <motion.div className={StyledWork}>2022.10 ~ 2024.05</motion.div>
-            <motion.div className={StyledWork}>
-              <div className={StyledPosition}>Web Developer</div>
-              <div className={StyledCompany}>CommON SRL</div>
+            <div className={StyledLine} />
+            <div className={StyledRight}>
+              <motion.div className={StyledWork}>
+                <div className={StyledPosition}>Frontend Developer</div>
+                <div className={StyledCompany}>Illmuminarean</div>
+                <ul className={StyledUL}>
+                  <li className={StyledLI}>{t('Section02Work01Detail01')}</li>
+                  <li className={StyledLI}>{t('Section02Work01Detail02')}</li>
+                  <li className={StyledLI}>{t('Section02Work01Detail03')}</li>
+                </ul>
+              </motion.div>
+              <motion.div className={StyledWork}>2022.10 ~ 2024.05</motion.div>
+              <motion.div className={StyledWork}>
+                <div className={StyledPosition}>Web Developer</div>
+                <div className={StyledCompany}>CommON SRL</div>
 
-              <ul className={StyledUL}>
-                <li className={StyledLI}>{t('Section03Work01Detail01')}</li>
-                <li className={StyledLI}> {t('Section03Work01Detail02')}</li>
-                <li className={StyledLI}> {t('Section03Work01Detail03')}</li>
-              </ul>
-            </motion.div>
-          </div>
-        </motion.div>
-      </PageTransition>
+                <ul className={StyledUL}>
+                  <li className={StyledLI}>{t('Section03Work01Detail01')}</li>
+                  <li className={StyledLI}> {t('Section03Work01Detail02')}</li>
+                  <li className={StyledLI}> {t('Section03Work01Detail03')}</li>
+                </ul>
+              </motion.div>
+            </div>
+          </motion.div>
+        </PageTransition>
+      </AnimatePresence>
     </div>
   )
 }
@@ -133,7 +135,7 @@ const StyledWork = css({
 
 const StyledCategory = css({
   fontSize: '1.2rem',
-  lineHeight: '0.1rem',
+  lineHeight: '1rem',
   color: 'MainText',
 })
 

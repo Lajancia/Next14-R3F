@@ -1,6 +1,6 @@
 import { css } from '../../../styled-system/css'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
 
 const Section01 = ({ t, showSection01 }) => {
@@ -16,46 +16,44 @@ const Section01 = ({ t, showSection01 }) => {
   }
 
   return (
-    <PageTransition transition={showSection01}>
-      <div className={StyledInfoWrapper}>
-        <motion.div variants={childVariants} className={StyledCategory}>
-          INTRODUCTION
-        </motion.div>
-        <motion.h1 variants={childVariants} className={StyledTitle}>
-          {`Welcome!`}
-          <br />
-          {`I'm Soomin Hwang`}
-        </motion.h1>
-        <motion.article variants={childVariants} className={StyledText}>
-          {t('Section01explanation')}
-        </motion.article>
+    <div className={StyledInfoWrapper}>
+      <div>
+        <AnimatePresence>
+          <PageTransition transition={showSection01}>
+            <motion.div variants={childVariants} className={StyledCategory}>
+              INTRODUCTION
+            </motion.div>
+            <motion.h1 variants={childVariants} className={StyledTitle}>
+              {`Welcome!`}
+              <br />
+              {`I'm Soomin Hwang`}
+            </motion.h1>
+            <motion.article variants={childVariants} className={StyledText}>
+              {t('Section01explanation')}
+            </motion.article>
+          </PageTransition>
+        </AnimatePresence>
       </div>
-    </PageTransition>
+    </div>
   )
 }
 export default Section01
 
 const StyledInfoWrapper = css({
-  position: 'absolute',
   display: 'flex',
   width: '60%',
-  flexDirection: 'column',
   justifyContent: 'center',
+  alignItems: 'center',
   padding: '5rem',
-  height: '100%',
+  // marginTop: '20vh',
+  height: '100vh',
   color: 'white',
   gap: '1rem',
 })
 
-const styledNumber = css({
-  fontSize: '20rem',
-  lineHeight: '16rem',
-  color: 'MainText',
-})
-
 const StyledCategory = css({
   fontSize: '1.5rem',
-  lineHeight: '0.1rem',
+  lineHeight: '1rem',
   color: 'MainText',
 })
 
@@ -65,30 +63,7 @@ const StyledTitle = css({
   color: 'MainText',
 })
 
-const StyledCircle = css({
-  display: 'flex',
-  gap: '1rem',
-})
-
-const StyledDate = css({
-  fontSize: '2.5rem',
-  color: 'MainText',
-})
-
 const StyledText = css({
-  fontSize: '1.5rem',
+  fontSize: '1.1rem',
   color: 'MainText',
 })
-
-const circleButton = (props) =>
-  css({
-    width: '3rem',
-    height: '3rem',
-    backgroundColor: props.color === 'white' ? 'white' : props.color === 'Orange' ? 'Orange' : 'Black',
-    border: 'none',
-    borderRadius: '50%',
-    textAlign: 'center',
-    lineHeight: '4.4rem',
-    fontSize: '1.5rem',
-    cursor: 'pointer',
-  })

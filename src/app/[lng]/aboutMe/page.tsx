@@ -11,8 +11,6 @@ import AboutMeCube from '../../../parts/aboutMe/AboutMeCube'
 import Section05 from '../../../parts/aboutMe/Section05'
 import { useTranslation } from '../../i18n/client'
 
-const HeaderContainer = css({ position: 'absolute', zIndex: 10, width: '100%', height: '20vh' })
-
 export default function Page({ params: { lng } }) {
   const { t } = useTranslation(lng, 'aboutMe')
   const ref = useRef()
@@ -60,3 +58,5 @@ const containerStyles = css({
   width: '100%',
   height: '100%',
 })
+
+const HeaderContainer = css({ position: 'absolute', zIndex: 10, width: '100%', height: '20vh', overflow: 'auto' })

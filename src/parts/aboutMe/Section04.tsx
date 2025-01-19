@@ -85,7 +85,7 @@ const StyledInfoWrapper = css({
 
 const StyledCategory = css({
   fontSize: '1.5rem',
-  lineHeight: '0.1rem',
+  lineHeight: '1rem',
   color: 'MainText',
 })
 
