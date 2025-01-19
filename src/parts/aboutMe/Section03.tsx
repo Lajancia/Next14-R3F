@@ -37,14 +37,14 @@ const Section03 = ({ showSection03 }) => {
 export default Section03
 
 const StyledBoxWrapper = css({
-  width: '100vw',
+  width: '100%',
   height: '100%',
 })
 
 const StyledContainer = css({
   paddingTop: '5rem',
   height: '100%',
-  width: '100vw',
+  width: '100%',
   marginTop: '10vh',
 })
 const StyledInfoWrapper = css({

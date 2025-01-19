@@ -4,8 +4,14 @@ import { css } from '../../../styled-system/css'
 import '../../../styled-system/styles.css'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import { useTranslation } from '../../app/i18n/client'
+import { Trans } from 'react-i18next/TransWithoutContext'
+import Cookies from 'js-cookie'
 
 const toggleTheme = () => {
+  if (!Cookies.get('theme')) {
+    Cookies.set('theme', 'dark')
+  }
   const currentTheme = document.cookie
     .split('; ')
     .find((row) => row.startsWith('theme='))
@@ -15,7 +21,7 @@ const toggleTheme = () => {
   window.document.documentElement.setAttribute('data-color-mode', newTheme)
 }
 
-const Header = ({ handleClose }) => {
+const Header = ({ lng, handleClose }) => {
   const router = useRouter()
   const pathname = usePathname()
   const [buttonClick, setButtonClick] = useState(false)
@@ -23,18 +29,18 @@ const Header = ({ handleClose }) => {
   const [currentPath, setCurrentPath] = useState(pathname)
 
   const handleGalleryMove = () => {
-    if (pathname === '/gallery') return
+    if (pathname.includes('/gallery')) return
     setButtonClick(true)
     setCurrentPath('/gallery')
     handleClose()
     setTimeout(() => {
-      router.push('/gallery')
+      router.push(`/${lng}/gallery`)
       setButtonClick(false)
     }, 800)
   }
 
   const handleMain = () => {
-    if (pathname === '/') return
+    if (pathname === '/en' || pathname === 'ko') return
     setButtonClick(true)
     setCurrentPath('/')
     handleClose()
@@ -45,15 +51,23 @@ const Header = ({ handleClose }) => {
   }
 
   const handleAboutMe = () => {
-    if (pathname === '/aboutMe') return
+    if (pathname.includes('/aboutMe')) return
     setButtonClick(true)
     setCurrentPath('/aboutMe')
     handleClose()
     setTimeout(() => {
-      router.push('/aboutMe')
+      router.push(`/${lng}/aboutMe`)
       setButtonClick(false)
     }, 800)
   }
+
+  // const handleKorean = () => {
+  //   if (lng === 'en') router.push()
+  // }
+
+  // const handleEnglish = () => {
+  //   if (lng === 'ko') router.push(`/en${pathname.replace('/ko', '')}`)
+  // }
 
   useEffect(() => {
     console.log('pathname', pathname)
@@ -73,7 +87,7 @@ const Header = ({ handleClose }) => {
         <div className={StyledOption}>
           <button
             disabled={buttonClick}
-            className={StyledLink({ currentPath: currentPath === '/aboutMe' ? true : false })}
+            className={StyledLink({ currentPath: currentPath.includes('/aboutMe') ? true : false })}
             onClick={() => handleAboutMe()}
           >
             About Me
@@ -84,13 +98,23 @@ const Header = ({ handleClose }) => {
         <button
           disabled={buttonClick}
           onClick={() => handleGalleryMove()}
-          className={StyledLink({ currentPath: currentPath === '/gallery' ? true : false })}
+          className={StyledLink({ currentPath: currentPath.includes('/gallery') ? true : false })}
         >
           Gallery
         </button>
         <div className={StyledHeaderSetting}>
-          {/* <button className={StyledLanguageButton({ currentPath: false })}>KO</button>
-          <button className={StyledLanguageButton({ currentPath: true })}>EN</button> */}
+          <a
+            href={`/ko${pathname.replace('/en', '')}`}
+            className={StyledLanguageButton({ currentPath: pathname.includes('ko') })}
+          >
+            KO
+          </a>
+          <a
+            href={`/en${pathname.replace('/ko', '')}`}
+            className={StyledLanguageButton({ currentPath: pathname.includes('en') })}
+          >
+            EN
+          </a>
           <button className={StyledThemeButton} onClick={toggleTheme} />
         </div>
       </div>
@@ -119,7 +143,7 @@ const StyledHeaderWrapper = css({
 
 const StyledHomeLink = (props) =>
   css({
-    color: props.currentPath === '/' ? 'orange' : 'MainText',
+    color: props.currentPath === '/en' || props.currentPath === '/ko' ? 'orange' : 'MainText',
     fontSize: '3rem',
     transition: 'color 0.3s',
     '&:hover': { color: 'orange' },

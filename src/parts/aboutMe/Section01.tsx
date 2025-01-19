@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
 
-const Section01 = ({ showSection01 }) => {
+const Section01 = ({ t, showSection01 }) => {
   const childVariants = {
     hidden: { x: 50, opacity: 0 },
     visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
@@ -27,9 +27,7 @@ const Section01 = ({ showSection01 }) => {
           {`I'm Soomin Hwang`}
         </motion.h1>
         <motion.article variants={childVariants} className={StyledText}>
-          {
-            'I am a front-end developer with 2 years of experience. I primarily use Next.js and React. I am also capable of developing interactive 3D web experiences using Blender and React-Three-Fiber.'
-          }
+          {t('Section01explanation')}
         </motion.article>
       </div>
     </PageTransition>

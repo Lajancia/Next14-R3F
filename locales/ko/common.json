@@ -1,0 +1,10 @@
+{
+  "Section01explanation": "안녕하세요! 저는 프론트엔드 개발자로 2년의 경력을 가지고 있습니다. 주로 Next.js와 React를 사용합니다. 또한, Blender와 React-Three-Fiber를 활용하여 인터랙티브 3D 웹 경험을 개발할 수 있습니다.",
+  "Section02Work01Detail01": "Developed, managed, and improved the company's website.",
+  "Section02Work01Detail02": "Contributed to optimizing deployment time by collaborating with DevOps, reducing deployment time from 15 minutes to 3 minutes.",
+  "Section02Work01Detail03": "Conducted in-house training and implementation of Docker and MSW mocking.",
+  "Section02Work02Detail01": "Developed and maintained a smart monitoring web application for efficient production management at the manufacturing plant in Serbia.",
+  "Section02Work02Detail02": "Responsible for Java Spring Boot API migration and additional development.",
+  "Section03Work01Detail01": "Developed the company website frontend, managed DNS and web publishing, and handled SNS insights management.",
+  "Section03Work01Detail02": "Responsible for frontend maintenance and support."
+}
