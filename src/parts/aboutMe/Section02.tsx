@@ -6,30 +6,36 @@ import PageTransition from '../../templates/PageAnimation'
 const Section01 = ({ t, showSection02 }) => {
   const childVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.8 } },
+    visible: { opacity: 1, transition: { duration: 0.8, staggerChildren: 2 } },
     exit: { opacity: 0, transition: { duration: 0.8 } },
   }
-  const childVariantsButton = {
+  const childVariantsLine = {
     hidden: { height: 0, opacity: 0 },
-    visible: { height: '100%', y: 0, opacity: 1, transition: { duration: 2 } },
+    visible: { height: '100%', y: 0, opacity: 1, transition: { duration: 1, delay: 1 } },
     exit: { height: 0, opacity: 0, transition: { duration: 0.8 } },
   }
 
+  const childInfo = {
+    hidden: { x: -50, y: 0, opacity: 0, height: '100%' },
+    visible: { x: 0, y: 0, opacity: 1, height: '100%', transition: { duration: 0.8 } },
+    exit: { x: -50, y: 0, opacity: 0, transition: { duration: 0.8 } },
+  }
   return (
     <div className={StyledInfoWrapper}>
       <AnimatePresence>
         <PageTransition transition={showSection02}>
-          {' '}
           <motion.div variants={childVariants} className={StyledCategory}>
             My Journey as a Developer
           </motion.div>
           <motion.h1 variants={childVariants} className={StyledTitle}>
             WORK EXPERIENCE
           </motion.h1>
-          <motion.div className={StyledWorkLineContainer} variants={childVariantsButton}>
+          <div className={StyledWorkLineContainer}>
             <div className={StyledLeft}>
-              <motion.div className={StyledWorkDate}>2024.06 ~ 2025.01</motion.div>
-              <motion.div className={StyledWork}>
+              <motion.div className={StyledWorkDate} variants={childInfo}>
+                2024.06 ~ 2025.01
+              </motion.div>
+              <motion.div className={StyledWork} variants={childInfo}>
                 <div className={StyledPosition}>Associate Research Engineer</div>
                 <div className={StyledCompany}>YURA R&D Center</div>
                 <ul className={StyledUL}>
@@ -37,12 +43,14 @@ const Section01 = ({ t, showSection02 }) => {
                   <li className={StyledLI}>{t('Section02Work02Detail02')}</li>
                 </ul>
               </motion.div>
-              <motion.div className={StyledWorkDate}>2021.11 ~ 2022.05</motion.div>
+              <motion.div className={StyledWorkDate} variants={childInfo}>
+                2021.11 ~ 2022.05
+              </motion.div>
             </div>
 
-            <div className={StyledLine} />
+            <motion.div className={StyledLine} variants={childVariantsLine} />
             <div className={StyledRight}>
-              <motion.div className={StyledWork}>
+              <motion.div className={StyledWork} variants={childInfo}>
                 <div className={StyledPosition}>Frontend Developer</div>
                 <div className={StyledCompany}>Illmuminarean</div>
                 <ul className={StyledUL}>
@@ -51,8 +59,10 @@ const Section01 = ({ t, showSection02 }) => {
                   <li className={StyledLI}>{t('Section02Work01Detail03')}</li>
                 </ul>
               </motion.div>
-              <motion.div className={StyledWork}>2022.10 ~ 2024.05</motion.div>
-              <motion.div className={StyledWork}>
+              <motion.div className={StyledWork} variants={childInfo}>
+                2022.10 ~ 2024.05
+              </motion.div>
+              <motion.div className={StyledWork} variants={childInfo}>
                 <div className={StyledPosition}>Web Developer</div>
                 <div className={StyledCompany}>CommON SRL</div>
 
@@ -63,7 +73,7 @@ const Section01 = ({ t, showSection02 }) => {
                 </ul>
               </motion.div>
             </div>
-          </motion.div>
+          </div>
         </PageTransition>
       </AnimatePresence>
     </div>
@@ -149,6 +159,7 @@ const StyledWorkLineContainer = css({
   margin: 0,
   display: 'flex',
   justifyContent: 'center',
+  height: '100%',
 })
 
 const StyledLine = css({

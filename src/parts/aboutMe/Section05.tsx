@@ -16,46 +16,57 @@ const Section05 = ({ t, showSection05 }) => {
   }
 
   return (
-    <PageTransition transition={showSection05}>
-      <div className={StyledContainer}>
-        <div className={StyledLink}>
-          <a href='https://soomins.tistory.com/52' target='_blank'>
-            {t('Section05Article01')}
-          </a>
-          <a href='https://soomins.tistory.com/35' target='_blank'>
-            {t('Section05Article02')}
-          </a>
-          <a href='https://soomins.tistory.com/40' target='_blank'>
-            {t('Section05Article03')}
-          </a>
-          <a href='https://soomins.tistory.com/37' target='_blank'>
-            {t('Section05Article04')}
-          </a>
-          <a href='https://soomins.tistory.com/33' target='_blank'>
-            {t('Section05Article05')}
-          </a>
+    <div className={StyledContainer}>
+      <PageTransition transition={showSection05}>
+        <div className={StyledContents}>
+          <div className={StyledLink}>
+            <a href='https://soomins.tistory.com/52' target='_blank'>
+              {t('Section05Article01')}
+            </a>
+            <a href='https://soomins.tistory.com/35' target='_blank'>
+              {t('Section05Article02')}
+            </a>
+            <a href='https://soomins.tistory.com/40' target='_blank'>
+              {t('Section05Article03')}
+            </a>
+            <a href='https://soomins.tistory.com/37' target='_blank'>
+              {t('Section05Article04')}
+            </a>
+            <a href='https://soomins.tistory.com/33' target='_blank'>
+              {t('Section05Article05')}
+            </a>
+          </div>
+          <div className={StyledInfoWrapper}>
+            <motion.div variants={childVariants} className={StyledCategory}>
+              ARTICLES
+            </motion.div>
+            <motion.h1 variants={childVariants} className={StyledTitle}>
+              {`ARTICLES`}
+            </motion.h1>
+            <motion.article variants={childVariants} className={StyledText}>
+              {t('Section05Articles')}
+            </motion.article>
+          </div>
         </div>
-        <div className={StyledInfoWrapper}>
-          <motion.div variants={childVariants} className={StyledCategory}>
-            ARTICLES
-          </motion.div>
-          <motion.h1 variants={childVariants} className={StyledTitle}>
-            {`ARTICLES`}
-          </motion.h1>
-          <motion.article variants={childVariants} className={StyledText}>
-            {t('Section05Articles')}
-          </motion.article>
-        </div>
-      </div>
-    </PageTransition>
+      </PageTransition>
+    </div>
   )
 }
 export default Section05
 
 const StyledContainer = css({
   display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   width: '90vw',
   height: '100vh',
+})
+
+const StyledContents = css({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100%',
 })
 
 const StyledLink = css({
