@@ -1,10 +1,32 @@
 {
-  "Section01explanation": "안녕하세요! 저는 프론트엔드 개발자로 2년의 경력을 가지고 있습니다. 주로 Next.js와 React를 사용합니다. 또한, Blender와 React-Three-Fiber를 활용하여 인터랙티브 3D 웹 경험을 개발할 수 있습니다.",
-  "Section02Work01Detail01": "Developed, managed, and improved the company's website.",
-  "Section02Work01Detail02": "Contributed to optimizing deployment time by collaborating with DevOps, reducing deployment time from 15 minutes to 3 minutes.",
-  "Section02Work01Detail03": "Conducted in-house training and implementation of Docker and MSW mocking.",
-  "Section02Work02Detail01": "Developed and maintained a smart monitoring web application for efficient production management at the manufacturing plant in Serbia.",
-  "Section02Work02Detail02": "Responsible for Java Spring Boot API migration and additional development.",
-  "Section03Work01Detail01": "Developed the company website frontend, managed DNS and web publishing, and handled SNS insights management.",
-  "Section03Work01Detail02": "Responsible for frontend maintenance and support."
+  "Section01explanation": "안녕하세요! 저는 2년 경력의 프론트엔드 개발자 황수민 입니다. \n\n Next14와 React 프레임워크를 사용하며, 이외에도 Git, Linux, Docker, Jenkins, Grafana, Figma, Blender, React-Three-Fiber 등 다양한 기술을 사용하고 있습니다. 함께 일하고 싶은 개발자가 되는 것을 목표로 ",
+  "Section02Work01Detail01": "일루미나리안 공식 홈페이지 개발 및 개선, 유지/보수",
+  "Section02Work01Detail02": "DevOps와의 협업을 통한 빌드/배포 시간 최적화 및 CI 인프라 개선.",
+  "Section02Work01Detail03": "사내 채용 관리자 페이지 개발 및 Dockerization. MSW mocking 도입",
+  "Section02Work02Detail01": "세르비아에 생산 공장의 효율적인 생산 관리를 위한 직행률 스마트 팩토리 모니터링 React.js 개발 및 유지보수",
+  "Section02Work02Detail02": "Java Spring Boot API 마이그레이션 및 현지 작업자들과의 협업을 통한 추가 공정 직행률 개발 담당.",
+  "Section03Work01Detail01": "웹사이트 frontend 개발, 서버 호스팅 및 DNS 관리",
+  "Section03Work01Detail02": "Hostinger 웹 퍼블리싱",
+  "Section03Work01Detail03": "SNS 인사이트 관리",
+
+  "Section04Title01": "Solariant 사내 채용 모집 공고 지원 서비스 및 관리자 페이지 개발",
+  "Section04Sub01Detail01": "react-query 및 react-hook-form을 사용한 모집 공고 지원 신청 폼 개발",
+  "Section04Sub01Detail02": "Next14 채용 관리 서비스 SSG 마이그레이션 및 다국어 지원 적용, Dockerization",
+
+  "Section04Title02": "프론트엔드 도커라이제이션 및 CI/CD 최적화",
+  "Section04Sub02Detail01": "DevOps팀과의 협업을 통한 프론트엔드 CI Dockerization 진행을 통해 배포 소요 시간을 12분에서 3분으로 단축",
+  "Section04Sub02Detail02": "Docker 환경변수 URL 방식 적용 이미지 재사용성 향상",
+  "Section04Sub02Detail03": "사내 Docker 도입 및 적용 방법 교육 진행",
+
+  "Section04Title03": "세르비아 전장 스마트팩토리 모니터링 시스템 개발",
+  "Section04Sub03Detail01": "React 프론트엔드의 모니터링 시스템 개발에 참여하여 UI/UX 디자인에 Figma를 사용 및 React Apex Chart를 활용한 React 모니터링 웹 개발",
+  "Section04Sub03Detail02": "생산 추적을 위해 Java Spring Boot와 MariaDB를 사용하여 백엔드 API를 개발 참여",
+  "Section04Sub03Detail03": "시스템 유지보수 및 개선을 위해 세르비아 현지 근로자들과 협력하여 AOI 결함률을 20% 감소시키고 생산 효율성을 향상",
+
+  "Section05Articles": "개발을 하면서 겪었던 여러 문제들의 고찰과 이를 해결했던 과정을 작성한 개인 문서들입니다.",
+  "Section05Article01": "도커 환경변수 외부 주입 (With Next14)",
+  "Section05Article02": "AWS에 대하여",
+  "Section05Article03": "Next14 랜더링 방식 및 SSG 마이그레이션",
+  "Section05Article04": "Docker + Jenkins + Github + Grafana + Next14",
+  "Section05Article05": "React-Three-Fiber + WebXR 사용기"
 }

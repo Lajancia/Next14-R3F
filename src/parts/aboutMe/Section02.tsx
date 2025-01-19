@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
 
-const Section01 = ({ showSection02 }) => {
+const Section01 = ({ t, showSection02 }) => {
   const childVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.8 } },
@@ -16,8 +16,9 @@ const Section01 = ({ showSection02 }) => {
   }
 
   return (
-    <PageTransition transition={showSection02}>
-      <div className={StyledInfoWrapper}>
+    <div className={StyledInfoWrapper}>
+      <PageTransition transition={showSection02}>
+        {' '}
         <motion.div variants={childVariants} className={StyledCategory}>
           My Journey as a Developer
         </motion.div>
@@ -26,18 +27,14 @@ const Section01 = ({ showSection02 }) => {
         </motion.h1>
         <motion.div className={StyledWorkLineContainer} variants={childVariantsButton}>
           <div className={StyledLeft}>
-            <motion.div className={StyledWorkDate}>2023.06.02 ~ Present</motion.div>
+            <motion.div className={StyledWorkDate}>2024.06 ~ 2025.01</motion.div>
             <motion.div className={StyledWork}>
               <div className={StyledPosition}>Associate Research Engineer</div>
               <div className={StyledCompany}>YURA R&D Center</div>
-
-              <ol className={StyledOL}>
-                <li
-                  className={StyledLI}
-                >{`Developed and maintained a smart monitoring web application for efficient production management at the manufacturing plant in Serbia.`}</li>
-
-                <li className={StyledLI}>Responsible for Java Spring Boot API migration and additional development.</li>
-              </ol>
+              <ul className={StyledUL}>
+                <li className={StyledLI}>{t('Section02Work02Detail01')}</li>
+                <li className={StyledLI}>{t('Section02Work02Detail02')}</li>
+              </ul>
             </motion.div>
             <motion.div className={StyledWorkDate}>2021.11 ~ 2022.05</motion.div>
           </div>
@@ -47,37 +44,32 @@ const Section01 = ({ showSection02 }) => {
             <motion.div className={StyledWork}>
               <div className={StyledPosition}>Frontend Developer</div>
               <div className={StyledCompany}>Illmuminarean</div>
-              <ol className={StyledOL}>
-                <li className={StyledLI}>{`Developed, managed, and improved the company's website.`}</li>
-                <li className={StyledLI}>
-                  Contributed to optimizing deployment time by collaborating with DevOps, reducing deployment time from
-                  15 minutes to 3 minutes.
-                </li>
-                <li className={StyledLI}>Conducted in-house training and implementation of Docker and MSW mocking.</li>
-              </ol>
+              <ul className={StyledUL}>
+                <li className={StyledLI}>{t('Section02Work01Detail01')}</li>
+                <li className={StyledLI}>{t('Section02Work01Detail02')}</li>
+                <li className={StyledLI}>{t('Section02Work01Detail03')}</li>
+              </ul>
             </motion.div>
-            <motion.div className={StyledWork}>2022.10 ~ 2023.05</motion.div>
+            <motion.div className={StyledWork}>2022.10 ~ 2024.05</motion.div>
             <motion.div className={StyledWork}>
               <div className={StyledPosition}>Web Developer</div>
               <div className={StyledCompany}>CommON SRL</div>
 
-              <ol className={StyledOL}>
-                <li className={StyledLI}>
-                  Developed the company website frontend, managed DNS and web publishing, and handled SNS insights
-                  management.
-                </li>
-                <li className={StyledLI}> Responsible for frontend maintenance and support.</li>
-              </ol>
+              <ul className={StyledUL}>
+                <li className={StyledLI}>{t('Section03Work01Detail01')}</li>
+                <li className={StyledLI}> {t('Section03Work01Detail02')}</li>
+                <li className={StyledLI}> {t('Section03Work01Detail03')}</li>
+              </ul>
             </motion.div>
           </div>
         </motion.div>
-      </div>
-    </PageTransition>
+      </PageTransition>
+    </div>
   )
 }
 export default Section01
 
-const StyledOL = css({
+const StyledUL = css({
   listStyleType: 'decimal',
 })
 
@@ -92,11 +84,10 @@ const StyledWorkDate = css({
 })
 
 const StyledInfoWrapper = css({
-  position: 'absolute',
   textAlign: 'center',
   width: '100%',
   padding: '5rem',
-  height: '90vh',
+  height: '60rem',
   color: 'white',
   gap: '1rem',
   marginTop: '10vh',
@@ -117,7 +108,7 @@ const StyledLeft = css({
   justifyContent: 'center',
   marginRight: '1rem',
   marginTop: ' 3rem',
-  width: '35%',
+  width: '35rem',
   color: 'MainText',
   textAlign: 'right',
 })
@@ -128,7 +119,7 @@ const StyledRight = css({
   justifyContent: 'center',
   marginLeft: '1rem',
   marginTop: ' 3rem',
-  width: '35%',
+  width: '35rem',
   color: 'MainText',
   textAlign: 'left',
 })
@@ -151,34 +142,6 @@ const StyledTitle = css({
   lineHeight: '100%',
   color: 'MainText',
 })
-
-const StyledCircle = css({
-  display: 'flex',
-  gap: '1rem',
-})
-
-const StyledDate = css({
-  fontSize: '2.5rem',
-  color: 'MainText',
-})
-
-const StyledText = css({
-  fontSize: '1.5rem',
-  color: 'MainText',
-})
-
-const circleButton = (props) =>
-  css({
-    width: '3rem',
-    height: '3rem',
-    backgroundColor: props.color === 'white' ? 'white' : props.color === 'Orange' ? 'Orange' : 'Black',
-    border: 'none',
-    borderRadius: '50%',
-    textAlign: 'center',
-    lineHeight: '4.4rem',
-    fontSize: '1.5rem',
-    cursor: 'pointer',
-  })
 
 const StyledWorkLineContainer = css({
   margin: 0,

@@ -38,10 +38,10 @@ export default function Page({ params: { lng } }) {
       </div>
       <div className={TextContentStyle}>
         <Section01 t={t} showSection01={showCube} />
-        <Section02 showSection02={showCube} />
+        <Section02 t={t} showSection02={showCube} />
         <Section03 showSection03={showCube} />
-        <Section04 showSection04={showCube} />
-        <Section05 showSection05={showCube} />
+        <Section04 t={t} showSection04={showCube} />
+        <Section05 t={t} showSection05={showCube} />
       </div>
       <div ref={ref} className={containerStyles}>
         <AboutMeCube showCube={showCube} />

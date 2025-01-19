@@ -42,7 +42,6 @@ const StyledBoxWrapper = css({
 })
 
 const StyledContainer = css({
-  paddingTop: '5rem',
   height: '100%',
   width: '100%',
   marginTop: '10vh',
