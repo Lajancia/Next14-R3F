@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import Modal from 'src/components/Dialog'
 import { css } from '../../../../../styled-system/css'
 import Link from 'next/link'
-import Footer from 'src/components/footer'
+import Footer from 'src/components/Footer'
 
 export default function Login() {
   const router = useRouter()
