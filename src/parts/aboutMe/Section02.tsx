@@ -53,7 +53,7 @@ const Section01 = ({ t, showSection02 }) => {
               <motion.div className={StyledWork} variants={childInfo}>
                 <div className={StyledMobile}>2024.06 ~ 2025.01</div>
                 <div className={StyledPosition}>Frontend Developer</div>
-                <div className={StyledCompany}>Illmuminarean</div>
+                <div className={StyledCompany}>Illuminarean</div>
                 <ul className={StyledUL}>
                   <li className={StyledLI}>{t('Section02Work01Detail01')}</li>
                   <li className={StyledLI}>{t('Section02Work01Detail02')}</li>
