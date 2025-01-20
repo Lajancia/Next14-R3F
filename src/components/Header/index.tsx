@@ -103,13 +103,13 @@ const Header = ({ lng, handleClose }) => {
           </button>
           <div className={StyledHeaderSetting}>
             <a
-              href={`/ko${pathname.replace('/en', '')}`}
+              href={`/ko${pathname.replace(/\/(en|ko)/, '')}`}
               className={StyledLanguageButton({ currentPath: pathname.includes('ko') })}
             >
               KO
             </a>
             <a
-              href={`/en${pathname.replace('/ko', '')}`}
+              href={`/en${pathname.replace(/\/(en|ko)/, '')}`}
               className={StyledLanguageButton({ currentPath: pathname.includes('en') })}
             >
               EN
