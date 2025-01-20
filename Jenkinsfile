@@ -14,7 +14,7 @@ pipeline {
             steps {
                 echo 'Docker building..'
                 script {
-                    sh 'docker build -t next14-r3f .'
+                    sh 'docker build --no-cache -t next14-r3f .'
                 }
             }
         
