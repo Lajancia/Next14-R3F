@@ -41,11 +41,10 @@ export default Section01
 
 const StyledInfoWrapper = css({
   display: 'flex',
-  width: '60%',
+  width: '100%',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '5rem',
-  // marginTop: '20vh',
+  padding: '2.5rem',
   height: '100vh',
   color: 'white',
   gap: '1rem',
@@ -55,13 +54,14 @@ const StyledInfoWrapper = css({
 })
 
 const StyledCategory = css({
-  fontSize: '1.5rem',
+  fontSize: '1rem',
   lineHeight: '1rem',
   color: 'MainText',
+  lg: { fontSize: '1.5rem' },
 })
 
 const StyledTitle = css({
-  fontSize: '3rem',
+  fontSize: '2rem',
   lineHeight: '100%',
   color: 'MainText',
   lg: { fontSize: '4rem' },
@@ -69,6 +69,7 @@ const StyledTitle = css({
 })
 
 const StyledText = css({
-  fontSize: '1.1rem',
+  fontSize: '1rem',
   color: 'MainText',
+  lg: { fontSize: '1.1rem' },
 })

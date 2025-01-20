@@ -51,6 +51,7 @@ const Section01 = ({ t, showSection02 }) => {
             <motion.div className={StyledLine} variants={childVariantsLine} />
             <div className={StyledRight}>
               <motion.div className={StyledWork} variants={childInfo}>
+                <div className={StyledMobile}>2024.06 ~ 2025.01</div>
                 <div className={StyledPosition}>Frontend Developer</div>
                 <div className={StyledCompany}>Illmuminarean</div>
                 <ul className={StyledUL}>
@@ -61,8 +62,17 @@ const Section01 = ({ t, showSection02 }) => {
               </motion.div>
               <motion.div className={StyledWork} variants={childInfo}>
                 2022.10 ~ 2024.05
+                <motion.div className={StyledMobile} variants={childInfo}>
+                  <div className={StyledPosition}>Associate Research Engineer</div>
+                  <div className={StyledCompany}>YURA R&D Center</div>
+                  <ul className={StyledUL}>
+                    <li className={StyledLI}>{t('Section02Work02Detail01')}</li>
+                    <li className={StyledLI}>{t('Section02Work02Detail02')}</li>
+                  </ul>
+                </motion.div>
               </motion.div>
               <motion.div className={StyledWork} variants={childInfo}>
+                <div className={StyledMobile}>2021.11 ~ 2022.05</div>
                 <div className={StyledPosition}>Web Developer</div>
                 <div className={StyledCompany}>CommON SRL</div>
 
@@ -81,6 +91,11 @@ const Section01 = ({ t, showSection02 }) => {
 }
 export default Section01
 
+const StyledMobile = css({
+  display: 'block',
+
+  lg: { display: 'none' },
+})
 const StyledUL = css({
   listStyleType: 'decimal',
 })
@@ -90,19 +105,22 @@ const StyledLI = css({
 })
 
 const StyledWorkDate = css({
+  display: 'none',
   textAlign: 'right',
   marginTop: '1rem',
   height: '100%',
+  lg: { display: 'block' },
 })
 
 const StyledInfoWrapper = css({
   textAlign: 'center',
   width: '100%',
-  padding: '5rem',
+  padding: '2rem',
   height: '60rem',
   color: 'white',
   gap: '1rem',
   marginTop: '10vh',
+  lg: { padding: '5rem' },
 })
 const StyledPosition = css({
   fontSize: '1rem',
@@ -115,7 +133,7 @@ const StyledCompany = css({
 })
 
 const StyledLeft = css({
-  display: 'flex',
+  display: 'none',
   flexDirection: 'column',
   justifyContent: 'center',
   marginRight: '1rem',
@@ -123,6 +141,8 @@ const StyledLeft = css({
   width: '35rem',
   color: 'MainText',
   textAlign: 'right',
+
+  lg: { display: 'flex' },
 })
 
 const StyledRight = css({
@@ -130,29 +150,36 @@ const StyledRight = css({
   flexDirection: 'column',
   justifyContent: 'center',
   marginLeft: '1rem',
-  marginTop: ' 3rem',
+  marginTop: ' 1rem',
   width: '35rem',
   color: 'MainText',
   textAlign: 'left',
+  lg: { marginTop: ' 3rem' },
 })
 
 const StyledWork = css({
-  height: '30%',
+  height: 'auto',
   marginBottom: '1rem',
   textAlign: 'left',
   padding: '1rem',
+
+  lg: { height: '30%' },
 })
 
 const StyledCategory = css({
-  fontSize: '1.2rem',
+  fontSize: '1rem',
   lineHeight: '1rem',
   color: 'MainText',
+  lg: { fontSize: '1.2rem' },
 })
 
 const StyledTitle = css({
-  fontSize: '5rem',
+  fontSize: '3rem',
   lineHeight: '100%',
   color: 'MainText',
+  paddingBottom: '2rem',
+
+  lg: { fontSize: '5rem', paddingBottom: '0' },
 })
 
 const StyledWorkLineContainer = css({

@@ -58,7 +58,7 @@ const StyledContainer = css({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  width: '90vw',
+  width: '100vw',
   height: '100vh',
 
   lg: { width: '100vw' },
@@ -67,7 +67,7 @@ const StyledContainer = css({
 
 const StyledContents = css({
   display: 'flex',
-  flexDirection: 'row-reverse',
+  flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   height: '100%',
@@ -77,15 +77,15 @@ const StyledContents = css({
 })
 
 const StyledLink = css({
-  textAlign: 'right',
+  textAlign: 'left',
   display: 'flex',
-  width: '60%',
+  width: '100%',
   flexDirection: 'column',
-  justifyContent: 'center',
-  padding: '5rem',
+  justifyContent: 'felxt-start',
+  padding: '2rem',
   height: '100%',
   color: 'MainText',
-  fontSize: '2rem',
+  fontSize: '1rem',
   gap: '1rem',
 
   '& a': {
@@ -95,16 +95,16 @@ const StyledLink = css({
     color: 'Orange',
   },
 
-  lg: { width: '100%', padding: '1rem' },
-  xl: { width: '60%', padding: '5rem' },
+  lg: { width: '100%', padding: '1rem', fontSize: '2rem', textAlign: 'right', justifyContent: 'center' },
+  xl: { width: '60%', padding: '5rem', fontSize: '2rem' },
 })
 const StyledInfoWrapper = css({
   textAlign: 'left',
   display: 'flex',
-  width: '40%',
+  width: '100%',
   flexDirection: 'column',
-  justifyContent: 'center',
-  padding: '5rem',
+  justifyContent: 'flex-end',
+  padding: '2rem',
   height: '100%',
   color: 'MainText',
   gap: '1rem',
@@ -120,12 +120,14 @@ const StyledCategory = css({
 })
 
 const StyledTitle = css({
-  fontSize: '5rem',
+  fontSize: '3rem',
   lineHeight: '100%',
   color: 'MainText',
+  lg: { fontSize: '5rem' },
 })
 
 const StyledText = css({
-  fontSize: '1.5rem',
+  fontSize: '1rem',
   color: 'MainText',
+  lg: { fontSize: '1.5rem' },
 })

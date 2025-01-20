@@ -90,31 +90,34 @@ const StyledLine = css({
 const StyledList = css({
   listStyleType: 'disc',
   marginLeft: '1.5rem',
-  fontSize: '1.3rem',
+  fontSize: '1rem',
+  lg: { fontSize: '1.3rem' },
 })
 
 const StyledInfoWrapper = css({
   display: 'flex',
   width: '100%',
   flexDirection: 'column',
-  padding: '5rem',
+  padding: '2rem',
   color: 'MainText',
   gap: '1rem',
-  lg: { width: '100%' },
+  lg: { width: '100%', padding: '5rem' },
   xl: { width: '70%' },
 })
 
 const StyledCategory = css({
-  fontSize: '1.5rem',
+  fontSize: '1rem',
   lineHeight: '1rem',
   color: 'MainText',
+  lg: { fontSize: '1.5rem' },
 })
 
 const StyledTitle = css({
-  fontSize: '5rem',
+  fontSize: '3rem',
   lineHeight: '100%',
   color: 'MainText',
   marginBottom: '2rem',
+  lg: { fontSize: '5rem' },
 })
 
 const StyledText = css({
@@ -127,9 +130,10 @@ const StyledDate = css({
 })
 
 const StyledProjectTitle = css({
-  fontSize: '2.5rem',
+  fontSize: '1.5rem',
   lineHeight: '2.5rem',
   fontWeight: 'bold',
+  lg: { fontSize: '2.5rem' },
 })
 
 const StyledCompany = css({
