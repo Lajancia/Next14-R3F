@@ -1,7 +1,14 @@
 import { css } from '../../../styled-system/css'
 import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
+import CustomToggle from 'src/components/CustomToggle'
 
+const ProjectSkills = {
+  project01: ['Next14', 'react-query', 'react-hook-form', 'Typescript', 'Github', 'Figma'],
+  project02: ['Next14', 'Docker', 'Jenkins', 'Typescript', 'Github', 'AWS'],
+  project03: ['React', 'Python', 'Apext Chart', 'Github', 'Java Spring Boot', 'Linux'],
+  project04: ['Vue.js', 'Vuetify', 'Github', 'Shared Host'],
+}
 const Section04 = ({ t, showSection04 }) => {
   const parentVariants = {
     hidden: { x: 50, opacity: 0 },
@@ -33,6 +40,9 @@ const Section04 = ({ t, showSection04 }) => {
           <motion.div variants={childVariantsContents}>
             <h3 className={StyledDate}>2024.11 ~ 2024.01</h3>
             <h2 className={StyledProjectTitle}>{t('Section04Title01')}</h2>
+            {ProjectSkills.project01.map((skill, index) => {
+              return <CustomToggle toggleName={skill} />
+            })}
             <p className={StyledCompany}>Illuminarean</p>
             <ul>
               <li className={StyledList}>{t('Section04Sub01Detail01')}</li>
@@ -43,6 +53,9 @@ const Section04 = ({ t, showSection04 }) => {
           <motion.div variants={childVariantsContents}>
             <h3 className={StyledDate}>2024.07 ~ 2024.12</h3>
             <h2 className={StyledProjectTitle}>{t('Section04Title02')}</h2>
+            {ProjectSkills.project02.map((skill, index) => {
+              return <CustomToggle toggleName={skill} />
+            })}
             <p className={StyledCompany}>Illuminarean</p>
             <ul>
               <li className={StyledList}>{t('Section04Sub02Detail01')}</li>
@@ -55,6 +68,9 @@ const Section04 = ({ t, showSection04 }) => {
           <motion.div variants={childVariantsContents}>
             <h3 className={StyledDate}>2023.01 ~ 2023.11</h3>
             <h2 className={StyledProjectTitle}>{t('Section04Title03')}</h2>
+            {ProjectSkills.project03.map((skill, index) => {
+              return <CustomToggle toggleName={skill} />
+            })}
             <p className={StyledCompany}> YURA R&D Center</p>
             <ul>
               <li className={StyledList}>{t('Section04Sub03Detail01')}</li>
@@ -67,6 +83,9 @@ const Section04 = ({ t, showSection04 }) => {
           <motion.div variants={childVariantsContents}>
             <h3 className={StyledDate}>2021.11 ~ 2022.05</h3>
             <h2 className={StyledProjectTitle}>{t('Section04Title04')}</h2>
+            {ProjectSkills.project04.map((skill, index) => {
+              return <CustomToggle toggleName={skill} />
+            })}
             <p className={StyledCompany}> Common SRL</p>
             <ul>
               <li className={StyledList}>{t('Section04Sub04Detail01')}</li>

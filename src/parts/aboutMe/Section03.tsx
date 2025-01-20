@@ -3,15 +3,22 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
 import BoxesCursor from '../../components/canvas/Boxes'
+import CustomToggle from 'src/components/CustomToggle'
 
-const SkillList = ['Next14', 'Typescript', 'Github', 'Linux', 'Blender', 'React', 'Jenkins', 'Docker']
-const CustomToggle = ({ toggleName }) => {
-  return (
-    <button disabled={true} className={StyledToggle}>
-      {toggleName}
-    </button>
-  )
-}
+const SkillList = [
+  'Next14',
+  'Typescript',
+  'Github',
+  'Linux',
+  'Blender',
+  'React',
+  'Jenkins',
+  'Docker',
+  'Python',
+  'react-query',
+  'react-hook-form',
+]
+
 const Section03 = ({ showSection03 }) => {
   const childVariants = {
     hidden: { x: 50, opacity: 0 },
