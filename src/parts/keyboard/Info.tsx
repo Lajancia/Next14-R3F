@@ -53,7 +53,7 @@ const StyledInfoWrapper = css({
   height: '65%',
   color: 'white',
   gap: '1rem',
-  bottom: 0,
+  bottom: 10,
   lg: {
     marginTop: '25%',
     height: '75%',
@@ -92,8 +92,9 @@ const StyledTitle = css({
 })
 
 const StyledCircle = css({
-  display: 'flex',
+  display: 'none',
   gap: '1rem',
+  lg: { display: 'block' },
 })
 
 const StyledText = css({
