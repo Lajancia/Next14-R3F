@@ -1,8 +1,8 @@
 import { css } from '../../../styled-system/css'
 
-const CustomToggle = ({ toggleName }) => {
+const CustomToggle = ({ toggleName, key }) => {
   return (
-    <button disabled={true} className={StyledToggle}>
+    <button key={key} disabled={true} className={StyledToggle}>
       {toggleName}
     </button>
   )

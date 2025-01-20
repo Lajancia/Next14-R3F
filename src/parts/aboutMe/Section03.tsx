@@ -43,7 +43,7 @@ const Section03 = ({ showSection03 }) => {
           </motion.h1>
           <motion.div variants={childVariants} className={StyledSkills}>
             {SkillList.map((skill, index) => {
-              return <CustomToggle toggleName={skill} />
+              return <CustomToggle toggleName={skill} key={index} />
             })}
           </motion.div>
         </div>
