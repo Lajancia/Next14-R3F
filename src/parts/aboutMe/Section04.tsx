@@ -41,7 +41,7 @@ const Section04 = ({ t, showSection04 }) => {
             <h3 className={StyledDate}>2024.11 ~ 2024.01</h3>
             <h2 className={StyledProjectTitle}>{t('Section04Title01')}</h2>
             {ProjectSkills.project01.map((skill, index) => {
-              return <CustomToggle toggleName={skill} />
+              return <CustomToggle key={index} toggleName={skill} />
             })}
             <p className={StyledCompany}>Illuminarean</p>
             <ul>
@@ -54,7 +54,7 @@ const Section04 = ({ t, showSection04 }) => {
             <h3 className={StyledDate}>2024.07 ~ 2024.12</h3>
             <h2 className={StyledProjectTitle}>{t('Section04Title02')}</h2>
             {ProjectSkills.project02.map((skill, index) => {
-              return <CustomToggle toggleName={skill} />
+              return <CustomToggle key={index} toggleName={skill} />
             })}
             <p className={StyledCompany}>Illuminarean</p>
             <ul>
@@ -69,7 +69,7 @@ const Section04 = ({ t, showSection04 }) => {
             <h3 className={StyledDate}>2023.01 ~ 2023.11</h3>
             <h2 className={StyledProjectTitle}>{t('Section04Title03')}</h2>
             {ProjectSkills.project03.map((skill, index) => {
-              return <CustomToggle toggleName={skill} />
+              return <CustomToggle key={index} toggleName={skill} />
             })}
             <p className={StyledCompany}> YURA R&D Center</p>
             <ul>
@@ -84,7 +84,7 @@ const Section04 = ({ t, showSection04 }) => {
             <h3 className={StyledDate}>2021.11 ~ 2022.05</h3>
             <h2 className={StyledProjectTitle}>{t('Section04Title04')}</h2>
             {ProjectSkills.project04.map((skill, index) => {
-              return <CustomToggle toggleName={skill} />
+              return <CustomToggle key={index} toggleName={skill} />
             })}
             <p className={StyledCompany}> Common SRL</p>
             <ul>
