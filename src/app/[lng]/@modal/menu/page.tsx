@@ -10,27 +10,29 @@ export default function Login() {
   return (
     <Modal>
       <div className={StyledBackground}>
-        <button onClick={() => router.back()} className={StyledButton}>
-          CLOSE
-        </button>
         <div className={StyledWrapper}>
           <a href={'/'}>Home</a>
           <Link href={'/aboutMe'}>About Me</Link>
           <Link href={'/gallery'}>Gallery</Link>
+          <button onClick={() => router.back()} className={StyledButton}>
+            CLOSE
+          </button>
         </div>
-        <Footer showFooter={true} />
       </div>
     </Modal>
   )
 }
 
 const StyledButton = css({
-  position: 'absolute',
-  top: 0,
-  right: 0,
-  padding: '1.5rem',
+  padding: '0.5rem 0.8rem',
   textAlign: 'right',
-  color: 'MainText',
+  fontSize: '1rem',
+  color: 'background',
+  borderColor: 'MainText',
+  border: '2px solid',
+  background: 'MainText',
+
+  borderRadius: '0.5rem',
 })
 
 const StyledBackground = css({
