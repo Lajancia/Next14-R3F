@@ -1,10 +1,10 @@
 'use client'
 import Gallery from '../../../parts/gallery/Gallery'
-import Header from '../../../components/Header'
+import Header from '../../../components/header'
 import { useState, useEffect } from 'react'
 import { css } from '../../../../styled-system/css'
 import PageTransition from '../../../templates/PageAnimation'
-import Footer from '../../../components/Footer'
+import Footer from '../../../components/footer'
 
 const HeaderContainer = css({ width: '100%', height: '20vh' })
 const FlexContainer = css({ width: '100vw', height: '80vh' })

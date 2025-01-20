@@ -2,7 +2,7 @@
 
 import { Suspense, useRef, useState, useEffect } from 'react'
 import { css } from '../../../../styled-system/css'
-import Header from '../../../components/Header'
+import Header from '../../../components/header'
 import Section01 from '../../../parts/aboutMe/Section01'
 import Section02 from '../../../parts/aboutMe/Section02'
 import Section03 from '../../../parts/aboutMe/Section03'
