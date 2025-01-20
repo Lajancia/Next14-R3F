@@ -95,11 +95,13 @@ const StyledList = css({
 
 const StyledInfoWrapper = css({
   display: 'flex',
-  width: '70%',
+  width: '100%',
   flexDirection: 'column',
   padding: '5rem',
   color: 'MainText',
   gap: '1rem',
+  lg: { width: '100%' },
+  xl: { width: '70%' },
 })
 
 const StyledCategory = css({

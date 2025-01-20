@@ -154,7 +154,7 @@ const StyledHeaderWrapper = css({
   padding: '2rem 0',
   width: '100%',
   height: '10%',
-  lg: { height: '10vh', padding: '2rem 0' },
+  lg: { height: '10vh', padding: '3rem 2rem' },
   xl: { height: '20vh', padding: '2rem 2rem' },
 })
 
@@ -228,6 +228,10 @@ const StyledRightSetting = css({
   color: 'MainText',
   lg: {
     justifyContent: 'space-between',
+    padding: '0 2rem 0 2.5rem',
+    width: '50%',
+  },
+  xl: {
     padding: '0 5rem 0 2.5rem',
     width: '50%',
   },

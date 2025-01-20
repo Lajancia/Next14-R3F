@@ -19,6 +19,17 @@ const Section05 = ({ t, showSection05 }) => {
     <div className={StyledContainer}>
       <PageTransition transition={showSection05}>
         <div className={StyledContents}>
+          <div className={StyledInfoWrapper}>
+            <motion.div variants={childVariants} className={StyledCategory}>
+              ARTICLES
+            </motion.div>
+            <motion.h1 variants={childVariants} className={StyledTitle}>
+              {`ARTICLES`}
+            </motion.h1>
+            <motion.article variants={childVariants} className={StyledText}>
+              {t('Section05Articles')}
+            </motion.article>
+          </div>
           <div className={StyledLink}>
             <a href='https://soomins.tistory.com/52' target='_blank'>
               {t('Section05Article01')}
@@ -36,17 +47,6 @@ const Section05 = ({ t, showSection05 }) => {
               {t('Section05Article05')}
             </a>
           </div>
-          <div className={StyledInfoWrapper}>
-            <motion.div variants={childVariants} className={StyledCategory}>
-              ARTICLES
-            </motion.div>
-            <motion.h1 variants={childVariants} className={StyledTitle}>
-              {`ARTICLES`}
-            </motion.h1>
-            <motion.article variants={childVariants} className={StyledText}>
-              {t('Section05Articles')}
-            </motion.article>
-          </div>
         </div>
       </PageTransition>
     </div>
@@ -60,13 +60,20 @@ const StyledContainer = css({
   alignItems: 'center',
   width: '90vw',
   height: '100vh',
+
+  lg: { width: '100vw' },
+  xl: { width: '90vw' },
 })
 
 const StyledContents = css({
   display: 'flex',
+  flexDirection: 'row-reverse',
   justifyContent: 'center',
   alignItems: 'center',
   height: '100%',
+
+  lg: { flexDirection: 'column' },
+  xl: { flexDirection: 'row-reverse' },
 })
 
 const StyledLink = css({
@@ -87,6 +94,9 @@ const StyledLink = css({
   '& a:hover': {
     color: 'Orange',
   },
+
+  lg: { width: '100%', padding: '1rem' },
+  xl: { width: '60%', padding: '5rem' },
 })
 const StyledInfoWrapper = css({
   textAlign: 'left',
@@ -98,6 +108,8 @@ const StyledInfoWrapper = css({
   height: '100%',
   color: 'MainText',
   gap: '1rem',
+  lg: { width: '100%', textAlign: 'right', padding: '2rem 1rem', height: '100%', justifyContent: 'flex-end' },
+  xl: { width: '40%', textAlign: 'left', padding: '5rem', height: '100%', justifyContent: 'center' },
 })
 
 const StyledCategory = css({

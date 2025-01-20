@@ -49,6 +49,9 @@ const StyledInfoWrapper = css({
   height: '100vh',
   color: 'white',
   gap: '1rem',
+
+  lg: { width: '60%', padding: '5rem 5rem' },
+  xl: { width: '60%', padding: '5rem' },
 })
 
 const StyledCategory = css({
@@ -58,9 +61,11 @@ const StyledCategory = css({
 })
 
 const StyledTitle = css({
-  fontSize: '5rem',
+  fontSize: '3rem',
   lineHeight: '100%',
   color: 'MainText',
+  lg: { fontSize: '4rem' },
+  xl: { fontSize: '5rem' },
 })
 
 const StyledText = css({
