@@ -71,7 +71,9 @@ const Header = ({ lng, handleClose }) => {
   return (
     <>
       <div className={StyledHeaderWrapper}>
-        <button onClick={() => handleOpen()}>MENU</button>
+        <button onClick={() => handleOpen()} className={StyledMobileMenu}>
+          MENU
+        </button>
         <div className={StyledHeaderMenu}>
           <button
             disabled={buttonClick}
@@ -80,9 +82,7 @@ const Header = ({ lng, handleClose }) => {
           >
             Soominlab
           </button>
-          <nav>
-            <Link href='/menu'>모달 열기</Link>
-          </nav>
+
           <div className={StyledOption}>
             <button
               disabled={buttonClick}
@@ -124,6 +124,18 @@ const Header = ({ lng, handleClose }) => {
 
 export default Header
 
+const StyledMobileMenu = css({
+  display: 'flex',
+  width: '50%',
+  height: '100%',
+  padding: '0 1rem 0 1.5rem',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  borderBottomColor: 'MainText',
+  fontSize: '1.5rem',
+  color: 'MainText',
+  lg: { display: 'none' },
+})
 const StyledLink = (props) =>
   css({
     display: 'none',
@@ -142,8 +154,8 @@ const StyledHeaderWrapper = css({
   padding: '2rem 0',
   width: '100%',
   height: '10%',
-  lg: { height: '10vh' },
-  xl: { height: '20vh' },
+  lg: { height: '10vh', padding: '2rem 0' },
+  xl: { height: '20vh', padding: '2rem 2rem' },
 })
 
 const StyledHomeLink = (props) =>
@@ -208,7 +220,7 @@ const StyledRightSetting = css({
   display: 'flex',
   justifyContent: 'right',
   alignItems: 'center',
-  padding: '0 2.5rem 0 1rem',
+  padding: '0 1.5rem 0 1rem',
   width: '100%',
   height: '100%',
   fontSize: '1.5rem',
