@@ -181,7 +181,7 @@ const StyledHeaderMenu = css({
   alignItems: 'center',
   justifyContent: 'space-between',
   borderBottomColor: 'MainText',
-  lg: { padding: '0 2.5rem 0 5rem' },
+  lg: { display: 'flex', padding: '0 2.5rem 0 5rem' },
   xl: { display: 'flex' },
 })
 
