@@ -1,3 +1,7 @@
 export default function Default() {
-  return null
+  return (
+    <div>
+      <h1>Default</h1>
+    </div>
+  )
 }
