@@ -100,7 +100,7 @@ export function Keyboard(props) {
 }
 
 export function Cube(props) {
-  const [theme, setTheme] = useState(Cookies.get('theme') === 'dark' ? 'white' : 'black')
+  const [theme, setTheme] = useState(Cookies.get('theme') === 'light' ? 'black' : 'white')
   useEffect(() => {
     const targetNode = document.documentElement
     const callback = function (mutationsList) {
@@ -118,6 +118,8 @@ export function Cube(props) {
     }
     const observer = new MutationObserver(callback) // Start observing the target node for attribute changes
     observer.observe(targetNode, { attributes: true }) // Clean up the observer on component unmount
+
+    setTheme(Cookies.get('theme') === 'light' ? 'black' : 'white')
     return () => {
       observer.disconnect()
     }

@@ -40,9 +40,14 @@ export default Footer
 const StyledContainer = css({
   display: 'flex',
   flexDirection: 'row',
-  gap: '7rem',
-  fontSize: '2rem',
+  justifyContent: 'center',
+  alignItems: 'space-between',
+  gap: '2rem',
+  fontSize: '1rem',
   color: 'MainText',
   height: '100%',
   width: '100%',
+
+  lg: { gap: '7rem', fontSize: '2rem' },
+  xl: { gap: '7rem', fontSize: '2rem' },
 })

@@ -26,7 +26,7 @@ function Loader() {
   )
 }
 
-export default function Keyboards({ showKeyboard }) {
+export default function Keyboards({ showKeyboard, scaleSet }) {
   const shadowRef = useRef()
   const animatedKeyboardRef = useRef()
 
@@ -46,7 +46,7 @@ export default function Keyboards({ showKeyboard }) {
     }
   }, [])
 
-  const { scale } = useSpring({ scale: showKeyboard ? 0.35 : 0, config: { duration: 200 } })
+  const { scale } = useSpring({ scale: showKeyboard ? scaleSet : 0, config: { duration: 200 } })
 
   return (
     <Canvas

@@ -41,29 +41,35 @@ export default Section01
 
 const StyledInfoWrapper = css({
   display: 'flex',
-  width: '60%',
+  width: '100%',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '5rem',
-  // marginTop: '20vh',
+  padding: '2.5rem',
   height: '100vh',
   color: 'white',
   gap: '1rem',
+
+  lg: { width: '60%', padding: '5rem 5rem' },
+  xl: { width: '60%', padding: '5rem' },
 })
 
 const StyledCategory = css({
-  fontSize: '1.5rem',
+  fontSize: '1rem',
   lineHeight: '1rem',
   color: 'MainText',
+  lg: { fontSize: '1.5rem' },
 })
 
 const StyledTitle = css({
-  fontSize: '5rem',
+  fontSize: '2rem',
   lineHeight: '100%',
   color: 'MainText',
+  lg: { fontSize: '4rem' },
+  xl: { fontSize: '5rem' },
 })
 
 const StyledText = css({
-  fontSize: '1.1rem',
+  fontSize: '1rem',
   color: 'MainText',
+  lg: { fontSize: '1.1rem' },
 })
