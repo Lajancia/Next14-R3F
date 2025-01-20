@@ -94,7 +94,7 @@ const StyledTitle = css({
 const StyledCircle = css({
   display: 'none',
   gap: '1rem',
-  lg: { display: 'block' },
+  lg: { display: 'flex' },
 })
 
 const StyledText = css({
