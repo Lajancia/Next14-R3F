@@ -2,8 +2,9 @@ import { css } from '../../../styled-system/css'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
+import { SectionProps } from '../types/aboutMe'
 
-const Section05 = ({ t, showSection05 }) => {
+const Section05 = ({ t, showSection }: SectionProps) => {
   const childVariants = {
     hidden: { x: 50, opacity: 0 },
     visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
@@ -17,7 +18,7 @@ const Section05 = ({ t, showSection05 }) => {
 
   return (
     <div className={StyledContainer}>
-      <PageTransition transition={showSection05}>
+      <PageTransition transition={showSection}>
         <div className={StyledContents}>
           <div className={StyledInfoWrapper}>
             <motion.div variants={childVariants} className={StyledCategory}>

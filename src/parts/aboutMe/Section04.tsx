@@ -2,6 +2,7 @@ import { css } from '../../../styled-system/css'
 import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
 import CustomToggle from 'src/components/CustomToggle'
+import { SectionProps } from '../types/aboutMe'
 
 const ProjectSkills = {
   project01: ['Next14', 'react-query', 'react-hook-form', 'Typescript', 'Github', 'Figma'],
@@ -9,7 +10,7 @@ const ProjectSkills = {
   project03: ['React', 'Python', 'Apext Chart', 'Github', 'Java Spring Boot', 'Linux'],
   project04: ['Vue.js', 'Vuetify', 'Github', 'Shared Host'],
 }
-const Section04 = ({ t, showSection04 }) => {
+const Section04 = ({ t, showSection }: SectionProps) => {
   const parentVariants = {
     hidden: { x: 50, opacity: 0 },
     visible: { x: 0, opacity: 1, transition: { duration: 0.8, staggerChildren: 0.8 } },
@@ -29,7 +30,7 @@ const Section04 = ({ t, showSection04 }) => {
 
   return (
     <div className={StyledInfoWrapper}>
-      <PageTransition transition={showSection04} parentVariant={parentVariants}>
+      <PageTransition transition={showSection} parentVariant={parentVariants}>
         <motion.div variants={childVariantsContents} className={StyledCategory}>
           Career Profile 2Y 10M
         </motion.div>

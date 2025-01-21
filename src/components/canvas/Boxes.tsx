@@ -6,7 +6,7 @@ import { Stats } from '@react-three/drei'
 import { Vector3 } from 'three'
 import Cookies from 'js-cookie'
 
-function Box({ text, ...props }) {
+function Box({ text, ...props }: any) {
   const ref = useRef()
   // const black = useMemo(() => new Color('transparent'), [])
   const orange = useMemo(() => new Color('orange'), [])
@@ -15,7 +15,7 @@ function Box({ text, ...props }) {
 
   useEffect(() => {
     const targetNode = document.documentElement
-    const callback = function (mutationsList) {
+    const callback = function (mutationsList: any) {
       for (let mutation of mutationsList) {
         if (mutation.type === 'attributes' && mutation.attributeName === 'data-color-mode') {
           const newTheme = targetNode.getAttribute('data-color-mode')

@@ -67,6 +67,7 @@ function Loader() {
   )
 }
 
+// @ts-ignore
 function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
   const ref = useRef<Group>()
   const scroll = useScroll()
@@ -77,13 +78,17 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
   const out = () => hover(false)
   useFrame((state, delta) => {
     const y = scroll.curve(index / urls.length - 1.5 / urls.length, 4 / urls.length)
+    // @ts-ignore
     easing.damp3(ref.current.scale, [clicked === index ? 4.7 : scale[0], clicked === index ? 5 : 4 + y, 1], 0.15, delta)
     // @ts-ignore
     ref.current.material.scale[0] = ref.current.scale.x
     // @ts-ignore
     ref.current.material.scale[1] = ref.current.scale.y
+    // @ts-ignore
     if (clicked !== null && index < clicked) easing.damp(ref.current.position, 'x', position[0] - 2, 0.15, delta)
+    // @ts-ignore
     if (clicked !== null && index > clicked) easing.damp(ref.current.position, 'x', position[0] + 2, 0.15, delta)
+    // @ts-ignore
     if (clicked === null || clicked === index) easing.damp(ref.current.position, 'x', position[0], 0.15, delta)
     // @ts-ignore
     easing.damp(ref.current.material, 'grayscale', hovered || clicked === index ? 0 : Math.max(0, 1 - y), 0.15, delta)

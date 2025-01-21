@@ -11,9 +11,15 @@ import AboutMeCube from '../../../parts/aboutMe/AboutMeCube'
 import Section05 from '../../../parts/aboutMe/Section05'
 import { useTranslation } from '../../i18n/client'
 
-export default function Page({ params: { lng } }) {
+type PageProps = {
+  params: {
+    lng: string
+  }
+}
+
+export default function Page({ params: { lng } }: PageProps) {
   const { t } = useTranslation(lng, 'aboutMe')
-  const ref = useRef()
+  const ref = useRef<HTMLDivElement>(null)
   const sectionRefs = {
     section01: useRef(null),
     section02: useRef(null),
@@ -75,19 +81,19 @@ export default function Page({ params: { lng } }) {
       </div>
       <div className={TextContentStyle}>
         <section ref={sectionRefs.section01} data-section='section01'>
-          <Section01 t={t} showSection01={visibleSections.section01 && showCube} />
+          <Section01 t={t} showSection={visibleSections.section01 && showCube} />
         </section>
         <section ref={sectionRefs.section02} data-section='section02'>
-          <Section02 t={t} showSection02={visibleSections.section02 && showCube} />
+          <Section02 t={t} showSection={visibleSections.section02 && showCube} />
         </section>
 
-        <Section03 showSection03={showCube} />
+        <Section03 t={t} showSection={showCube} />
 
         <section ref={sectionRefs.section04} data-section='section04'>
-          <Section04 t={t} showSection04={visibleSections.section04 && showCube} />
+          <Section04 t={t} showSection={visibleSections.section04 && showCube} />
         </section>
         <section ref={sectionRefs.section05} data-section='section05'>
-          <Section05 t={t} showSection05={visibleSections.section05 && showCube} />
+          <Section05 t={t} showSection={visibleSections.section05 && showCube} />
         </section>
       </div>
       <div ref={ref} className={containerStyles}>

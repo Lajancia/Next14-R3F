@@ -9,6 +9,9 @@ import { Canvas } from '@react-three/fiber'
 import { Cube } from '../../components/canvas/Examples'
 import { useProgress, Html, useGLTF } from '@react-three/drei'
 
+type showCubeProps = {
+  showCube: boolean
+}
 const AnimatedKeyboard = animated(Cube)
 
 function Loader() {
@@ -20,7 +23,7 @@ function Loader() {
   )
 }
 
-const AboutMeCube = ({ showCube }) => {
+const AboutMeCube = ({ showCube }: showCubeProps) => {
   const { scale } = useSpring({ scale: showCube ? 3 : 0, config: { duration: 200 } })
 
   return (
