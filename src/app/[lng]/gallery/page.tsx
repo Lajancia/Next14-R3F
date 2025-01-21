@@ -6,10 +6,13 @@ import { css } from '../../../../styled-system/css'
 import PageTransition from '../../../templates/PageAnimation'
 import Footer from '../../../components/Footer'
 
-const HeaderContainer = css({ width: '100%', height: '20vh' })
-const FlexContainer = css({ width: '100vw', height: '80vh' })
+type PageProps = {
+  params: {
+    lng: string
+  }
+}
 
-export default function Page({ params: { lng } }) {
+export default function Page({ params: { lng } }: PageProps) {
   const [showGallery, setShowGallery] = useState(false)
 
   useEffect(() => {
@@ -36,6 +39,9 @@ export default function Page({ params: { lng } }) {
     </>
   )
 }
+
+const HeaderContainer = css({ width: '100%', height: '20vh' })
+const FlexContainer = css({ width: '100vw', height: '80vh' })
 
 const StyledFooter = css({
   overflow: 'hidden',

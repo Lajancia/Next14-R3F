@@ -2,7 +2,11 @@ import { css } from '../../../styled-system/css'
 import PageTransition from '../../templates/PageAnimation'
 import { motion } from 'framer-motion'
 
-const Footer = ({ showFooter }) => {
+type FooterProps = {
+  showFooter: boolean
+}
+
+const Footer = ({ showFooter }: FooterProps) => {
   const parentVariant = {
     hidden: { y: 50, opacity: 0 },
     visible: { y: 0, opacity: 1, transition: { duration: 0.8, staggerChildren: 0.3 } },

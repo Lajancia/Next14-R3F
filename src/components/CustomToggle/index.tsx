@@ -1,6 +1,10 @@
 import { css } from '../../../styled-system/css'
 
-const CustomToggle = ({ toggleName, key }) => {
+type CustomToggleProps = {
+  toggleName: string
+  key: number
+}
+const CustomToggle = ({ toggleName, key }: CustomToggleProps) => {
   return (
     <button key={key} disabled={true} className={StyledToggle}>
       {toggleName}

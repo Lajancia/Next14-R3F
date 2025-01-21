@@ -4,8 +4,7 @@ import '../../../styled-system/styles.css'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
-import Link from 'next/link'
-import Modal from '../Dialog'
+
 const toggleTheme = () => {
   if (!Cookies.get('theme')) {
     Cookies.set('theme', 'dark')
@@ -19,7 +18,16 @@ const toggleTheme = () => {
   window.document.documentElement.setAttribute('data-color-mode', newTheme)
 }
 
-const Header = ({ lng, handleClose }) => {
+type HeaderProps = {
+  lng: string
+  handleClose: () => void
+}
+
+type StyledProps = {
+  currentPath: boolean | string
+}
+
+const Header = ({ lng, handleClose }: HeaderProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const [buttonClick, setButtonClick] = useState(false)
@@ -136,7 +144,8 @@ const StyledMobileMenu = css({
   color: 'MainText',
   lg: { display: 'none' },
 })
-const StyledLink = (props) =>
+
+const StyledLink = (props: StyledProps) =>
   css({
     display: 'none',
     color: props.currentPath ? 'orange' : 'MainText',
@@ -158,7 +167,7 @@ const StyledHeaderWrapper = css({
   xl: { height: '20vh', padding: '2rem 2rem' },
 })
 
-const StyledHomeLink = (props) =>
+const StyledHomeLink = (props: StyledProps) =>
   css({
     color: props.currentPath === '/en' || props.currentPath === '/ko' ? 'orange' : 'MainText',
     fontSize: '2rem',
@@ -205,7 +214,8 @@ const StyledHeaderSetting = css({
   xl: { gap: '1rem' },
 })
 
-const StyledLanguageButton = (props) => css({ fontSize: '1.5rem', color: props.currentPath ? 'orange' : 'MainText' })
+const StyledLanguageButton = (props: StyledProps) =>
+  css({ fontSize: '1.5rem', color: props.currentPath ? 'orange' : 'MainText' })
 
 const StyledThemeButton = css({
   color: 'MainText',

@@ -7,11 +7,16 @@ import { useEffect, useState, useRef } from 'react'
 import BackgroundText from '../../parts/keyboard/BackgroundText'
 import Keyboards from '../../parts/keyboard/Keyboard'
 import Footer from '../../components/Footer'
-import { easing } from 'maath'
 import { useTranslation } from '../i18n/client'
-import Modal from 'src/components/Dialog'
-export default function Page({ params: { lng } }) {
-  const ref = useRef()
+
+type PageProps = {
+  params: {
+    lng: string
+  }
+}
+
+export default function Page({ params: { lng } }: PageProps) {
+  const ref = useRef<HTMLDivElement>(null)
   const { t } = useTranslation(lng, 'home')
   const [showKeyboard, setShowKeyboard] = useState(false)
 

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
 import BoxesCursor from '../../components/canvas/Boxes'
 import CustomToggle from 'src/components/CustomToggle'
+import { SectionProps } from '../types/aboutMe'
 
 const SkillList = [
   'Next14',
@@ -19,7 +20,7 @@ const SkillList = [
   'react-hook-form',
 ]
 
-const Section03 = ({ showSection03 }) => {
+const Section03 = ({ showSection }: SectionProps) => {
   const childVariants = {
     hidden: { x: 50, opacity: 0 },
     visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
@@ -33,7 +34,7 @@ const Section03 = ({ showSection03 }) => {
 
   return (
     <div className={StyledContainer}>
-      <PageTransition transition={showSection03}>
+      <PageTransition transition={showSection}>
         <div className={StyledInfoWrapper}>
           <motion.div variants={childVariants} className={StyledCategory}>
             {`What I'm capable of`}
@@ -110,31 +111,3 @@ const StyledTitle = css({
   lineHeight: '100%',
   color: 'MainText',
 })
-
-const StyledCircle = css({
-  display: 'flex',
-  gap: '1rem',
-})
-
-const StyledDate = css({
-  fontSize: '2.5rem',
-  color: 'MainText',
-})
-
-const StyledText = css({
-  fontSize: '1.5rem',
-  color: 'MainText',
-})
-
-const circleButton = (props) =>
-  css({
-    width: '3rem',
-    height: '3rem',
-    backgroundColor: props.color === 'white' ? 'white' : props.color === 'Orange' ? 'Orange' : 'Black',
-    border: 'none',
-    borderRadius: '50%',
-    textAlign: 'center',
-    lineHeight: '4.4rem',
-    fontSize: '1.5rem',
-    cursor: 'pointer',
-  })

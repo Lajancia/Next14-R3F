@@ -1,10 +1,11 @@
 'use client'
 import { css } from '../../../styled-system/css'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
+import { InfoProps } from '../types/keyboard'
+import { CircleButtonProps } from '../types/keyboard'
 
-const Info = ({ t, showKeyboard }) => {
+const Info = ({ t, showKeyboard }: InfoProps) => {
   const childVariants = {
     hidden: { x: 50, opacity: 0 },
     visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
@@ -104,7 +105,7 @@ const StyledText = css({
   xl: { fontSize: '1rem' },
 })
 
-const circleButton = (props) =>
+const circleButton = (props: CircleButtonProps) =>
   css({
     width: '3rem',
     height: '3rem',

@@ -5,7 +5,16 @@ import { Do_Hyeon } from 'next/font/google'
 import './styles.css'
 import { languages } from '../i18n/settings'
 import { dir } from 'i18next'
-import Link from 'next/link'
+import { ReactNode } from 'react'
+
+interface RootLayoutProps {
+  children: ReactNode
+  modal: ReactNode
+  params: {
+    lng: string
+  }
+}
+
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }))
 }
@@ -20,8 +29,9 @@ export const metadata = {
   description: 'A minimal starter for Nextjs + React-three-fiber and Threejs.',
 }
 
-export default async function RootLayout({ children, modal, params: { lng } }) {
+export default async function RootLayout({ children, modal, params: { lng } }: RootLayoutProps) {
   const store = cookies()
+  // @ts-ignore
   const themeName = store.get('theme') ? store.get('theme').value : 'dark'
   const theme = themeName
 

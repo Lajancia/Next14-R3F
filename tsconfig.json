@@ -4,7 +4,7 @@
     "typeRoots": ["./types", "./node_modules/@types"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "noEmit": true,
     "incremental": true,
     "module": "esnext",

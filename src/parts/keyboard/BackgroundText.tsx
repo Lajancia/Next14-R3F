@@ -1,7 +1,12 @@
 import { css } from '../../../styled-system/css'
 import PageTransition from '../../templates/PageAnimation'
 import { motion } from 'framer-motion'
-const BackgroundText = ({ showKeyboard }) => {
+
+type BackgroundTextProps = {
+  showKeyboard: boolean
+}
+
+const BackgroundText = ({ showKeyboard }: BackgroundTextProps) => {
   const parentVariant = {
     hidden: { x: 100, height: '100vh', opacity: 0 },
     visible: { x: 0, height: '100vh', opacity: 1, transition: { duration: 0.8 } },
