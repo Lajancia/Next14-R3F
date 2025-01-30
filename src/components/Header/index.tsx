@@ -4,6 +4,8 @@ import '../../../styled-system/styles.css'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
+import MobileMenu from '../../parts/menu/MobileMenu'
+import useOpenModalStore from '../../utils/state/menuState'
 
 const toggleTheme = () => {
   if (!Cookies.get('theme')) {
@@ -31,7 +33,7 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const [buttonClick, setButtonClick] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
+  const { openModal } = useOpenModalStore()
   const [currentPath, setCurrentPath] = useState(pathname)
 
   const handleGalleryMove = () => {
@@ -68,7 +70,7 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
   }
 
   const handleOpen = () => {
-    router.push('/menu')
+    openModal()
   }
 
   useEffect(() => {
@@ -78,6 +80,7 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
 
   return (
     <>
+      <MobileMenu />
       <div className={StyledHeaderWrapper}>
         <button onClick={() => handleOpen()} className={StyledMobileMenu}>
           MENU

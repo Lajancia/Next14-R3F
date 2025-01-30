@@ -1,20 +1,35 @@
 'use client'
+
 import { useRouter } from 'next/navigation'
 import Modal from 'src/components/Dialog'
-import { css } from '../../../../../styled-system/css'
+import { css } from '../../../styled-system/css'
 import Link from 'next/link'
-import Footer from 'src/components/Footer'
+import useOpenModalStore from '../../utils/state/menuState'
+import { useEffect } from 'react'
 
-export default function Login() {
-  const router = useRouter()
+export default function MobileMenu() {
+  const { modalState, closeModal } = useOpenModalStore()
+  const handleClose = () => {
+    setTimeout(() => {
+      closeModal()
+    }, 800)
+  }
+  useEffect(() => {
+    console.log('state', modalState)
+  }, [modalState])
   return (
-    <Modal>
+    <Modal isOpen={modalState}>
       <div className={StyledBackground}>
-        <div className={StyledWrapper}>
-          <a href={'/'}>Home</a>
+        <div className={StyledWrapper} onClick={handleClose}>
+          <Link href={'/'}>Home</Link>
           <Link href={'/aboutMe'}>About Me</Link>
           <Link href={'/gallery'}>Gallery</Link>
-          <button onClick={() => router.back()} className={StyledButton}>
+          <button
+            onClick={() => {
+              closeModal()
+            }}
+            className={StyledButton}
+          >
             CLOSE
           </button>
         </div>

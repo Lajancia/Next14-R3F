@@ -5,24 +5,14 @@ Dialog.setAppElement('body')
 
 type CommonModalProps = {
   children: ReactNode
-  isOpen?: boolean
+  isOpen: boolean
   onRequestClose?: () => void
 }
 
 const Modal: React.FC<CommonModalProps> = ({ children, isOpen, onRequestClose }) => {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isOpen])
   return (
     <Dialog
-      isOpen={true}
+      isOpen={isOpen}
       onRequestClose={onRequestClose}
       style={{
         overlay: {
