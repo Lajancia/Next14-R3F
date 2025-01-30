@@ -10,7 +10,7 @@ function Box({ text, ...props }: any) {
   const ref = useRef()
   // const black = useMemo(() => new Color('transparent'), [])
   const orange = useMemo(() => new Color('orange'), [])
-  const [theme, setTheme] = useState(Cookies.get('theme') === 'dark' ? 'white' : 'black')
+  const [theme, setTheme] = useState(Cookies.get('theme') === 'light' ? 'black' : 'white')
   const [hovered, setHovered] = useState(false)
 
   useEffect(() => {
@@ -20,10 +20,10 @@ function Box({ text, ...props }: any) {
         if (mutation.type === 'attributes' && mutation.attributeName === 'data-color-mode') {
           const newTheme = targetNode.getAttribute('data-color-mode')
           console.log(`Theme changed to: ${newTheme}`)
-          if (newTheme === 'dark') {
-            setTheme('white')
-          } else {
+          if (newTheme === 'light') {
             setTheme('black')
+          } else {
+            setTheme('white')
           }
         }
       }
