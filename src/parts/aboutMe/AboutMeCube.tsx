@@ -12,7 +12,7 @@ import { useProgress, Html, useGLTF } from '@react-three/drei'
 type showCubeProps = {
   showCube: boolean
 }
-const AnimatedKeyboard = animated(Cube)
+const AnimatedCube = animated(Cube)
 
 function Loader() {
   const { progress } = useProgress()
@@ -34,7 +34,7 @@ const AboutMeCube = ({ showCube }: showCubeProps) => {
 
       <Suspense fallback={<Loader />}>
         {/* @ts-ignore */}
-        <AnimatedKeyboard scale={scale} position={[13, 0, 0]} />
+        <AnimatedCube scale={scale} position={[13, 0, 0]} />
         {/* <Environment preset="city" resolution={256} background blur={0.8}/> */}
       </Suspense>
     </Canvas>

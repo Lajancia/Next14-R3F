@@ -20,10 +20,10 @@ function Box({ text, ...props }: any) {
         if (mutation.type === 'attributes' && mutation.attributeName === 'data-color-mode') {
           const newTheme = targetNode.getAttribute('data-color-mode')
           console.log(`Theme changed to: ${newTheme}`)
-          if (newTheme === 'dark') {
-            setTheme('white')
-          } else {
+          if (newTheme === 'light') {
             setTheme('black')
+          } else {
+            setTheme('white')
           }
         }
       }
