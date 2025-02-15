@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Header from '../../../components/Header'
 import Section01 from '../../../parts/aboutMe/Section01'
 import Section02 from '../../../parts/aboutMe/Section02'
@@ -9,7 +9,7 @@ import Section04 from '../../../parts/aboutMe/Section04'
 import AboutMeCube from '../../../parts/aboutMe/AboutMeCube'
 import Section05 from '../../../parts/aboutMe/Section05'
 import { useTranslation } from '../../i18n/client'
-import { StyledTextContent, StyledContainer, StyledHeaderContainer } from './styles'
+import { StyledTextContent, StyledContainer, StyledHeaderContainer, StyledSection01 } from './styles'
 
 type PageProps = {
   params: {
@@ -81,10 +81,15 @@ export default function Page({ params: { lng } }: PageProps) {
       <div className={StyledHeaderContainer}>
         <Header lng={lng} handleClose={handleCloseKeyboard} />
       </div>
+
       <div className={StyledTextContent}>
-        <section ref={sectionRefs.section01} data-section='section01'>
-          <Section01 t={t} showSection={visibleSections.section01 && showCube} />
-        </section>
+        <div ref={ref} className={StyledContainer}>
+          <section className={StyledSection01} ref={sectionRefs.section01} data-section='section01'>
+            <Section01 t={t} showSection={visibleSections.section01 && showCube} />
+          </section>
+          <AboutMeCube showCube={showCube} />
+        </div>
+
         <section ref={sectionRefs.section02} data-section='section02'>
           <Section02 t={t} showSection={visibleSections.section02 && showCube} />
         </section>
@@ -97,9 +102,6 @@ export default function Page({ params: { lng } }: PageProps) {
         <section ref={sectionRefs.section05} data-section='section05'>
           <Section05 t={t} showSection={visibleSections.section05 && showCube} />
         </section>
-      </div>
-      <div ref={ref} className={StyledContainer}>
-        <AboutMeCube showCube={showCube} />
       </div>
     </>
   )

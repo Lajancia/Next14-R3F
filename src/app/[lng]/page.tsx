@@ -1,5 +1,5 @@
 'use client'
-import KeyboardParts from '../../parts/keyboard/Keyboard'
+
 import Header from '../../components/Header'
 import Info from '../../parts/keyboard/Info'
 import { css } from '../../../styled-system/css'

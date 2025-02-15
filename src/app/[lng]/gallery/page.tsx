@@ -1,4 +1,5 @@
 'use client'
+
 import Gallery from '../../../parts/gallery/Gallery'
 import Header from '../../../components/Header'
 import { useState, useEffect } from 'react'
