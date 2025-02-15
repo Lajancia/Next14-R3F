@@ -2,9 +2,9 @@
 import Gallery from '../../../parts/gallery/Gallery'
 import Header from '../../../components/Header'
 import { useState, useEffect } from 'react'
-import { css } from '../../../../styled-system/css'
 import PageTransition from '../../../templates/PageAnimation'
 import Footer from '../../../components/Footer'
+import { StyledHeaderContainer, StyledFlexContainer, StyledFooter } from './styles'
 
 type PageProps = {
   params: {
@@ -25,10 +25,10 @@ export default function Page({ params: { lng } }: PageProps) {
 
   return (
     <>
-      <div className={HeaderContainer}>
+      <div className={StyledHeaderContainer}>
         <Header lng={lng} handleClose={handleCloseGallery} />
       </div>
-      <div className={FlexContainer}>
+      <div className={StyledFlexContainer}>
         <PageTransition transition={showGallery}>
           <Gallery />
         </PageTransition>
@@ -39,19 +39,3 @@ export default function Page({ params: { lng } }: PageProps) {
     </>
   )
 }
-
-const HeaderContainer = css({ width: '100%', height: '20vh' })
-const FlexContainer = css({ width: '100vw', height: '80vh' })
-
-const StyledFooter = css({
-  overflow: 'hidden',
-  zIndex: 1,
-  position: 'absolute',
-  bottom: 0,
-  height: '10vh',
-  display: 'flex',
-  justifyContent: 'center',
-
-  alignItems: 'center',
-  width: '100%',
-})
