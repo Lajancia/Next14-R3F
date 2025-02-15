@@ -13,6 +13,11 @@ export const StyledContainer = css({
   height: '100%',
 })
 
+export const StyledSection01 = css({
+  position: 'absolute',
+  zIndex: 1,
+})
+
 export const StyledHeaderContainer = css({
   position: 'absolute',
   zIndex: 10,
