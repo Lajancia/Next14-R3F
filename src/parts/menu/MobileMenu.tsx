@@ -52,7 +52,7 @@ const StyledButton = css({
 
 const StyledBackground = css({
   width: '100vw',
-  height: '100vh',
+  height: '100dvh',
   backgroundColor: 'orange',
 })
 

@@ -54,7 +54,7 @@ const HeaderContainer = css({ position: 'absolute', zIndex: 10, width: '100%', h
 const TextContentStyle = css({
   position: 'absolute',
   width: '100vw',
-  height: '100vh',
+  height: '100dvh',
   zIndex: 1,
   pointerEvents: 'none',
   lg: { width: '100vw' },
@@ -62,7 +62,7 @@ const TextContentStyle = css({
 })
 const containerStyles = css({
   width: '100vw',
-  height: '100vh',
+  height: '100dvh',
   zIndex: 0,
 })
 

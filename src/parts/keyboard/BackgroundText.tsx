@@ -8,9 +8,9 @@ type BackgroundTextProps = {
 
 const BackgroundText = ({ showKeyboard }: BackgroundTextProps) => {
   const parentVariant = {
-    hidden: { x: 100, height: '100vh', opacity: 0 },
-    visible: { x: 0, height: '100vh', opacity: 1, transition: { duration: 0.8 } },
-    exit: { x: 100, height: '100vh', opacity: 0, transition: { duration: 0.8 } },
+    hidden: { x: 100, height: '100dvh', opacity: 0 },
+    visible: { x: 0, height: '100dvh', opacity: 1, transition: { duration: 0.8 } },
+    exit: { x: 100, height: '100dvh', opacity: 0, transition: { duration: 0.8 } },
   }
   return (
     <div className={TextContainerStyles}>

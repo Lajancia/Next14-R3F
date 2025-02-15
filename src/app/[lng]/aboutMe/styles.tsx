@@ -3,7 +3,7 @@ import { css } from '../../../../styled-system/css'
 export const StyledTextContent = css({
   position: 'absolute',
   width: '100%',
-  height: '100vh',
+  height: '100dvh',
   zIndex: 1,
 })
 
