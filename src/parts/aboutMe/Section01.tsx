@@ -46,7 +46,7 @@ const StyledInfoWrapper = css({
   justifyContent: 'center',
   alignItems: 'center',
   padding: '2.5rem',
-  height: '100vh',
+  height: '100dvh',
   color: 'white',
   gap: '1rem',
 

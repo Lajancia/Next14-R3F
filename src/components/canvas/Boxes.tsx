@@ -2,13 +2,11 @@ import { useRef, useState, useMemo, useEffect } from 'react'
 import { Color } from 'three'
 import { Text } from '@react-three/drei'
 import { Canvas, useThree, useFrame } from '@react-three/fiber'
-import { Stats } from '@react-three/drei'
 import { Vector3 } from 'three'
 import Cookies from 'js-cookie'
 
 function Box({ text, ...props }: any) {
   const ref = useRef()
-  // const black = useMemo(() => new Color('transparent'), [])
   const orange = useMemo(() => new Color('orange'), [])
   const [theme, setTheme] = useState(Cookies.get('theme') === 'light' ? 'black' : 'white')
   const [hovered, setHovered] = useState(false)
