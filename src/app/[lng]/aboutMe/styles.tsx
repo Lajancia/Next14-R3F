@@ -1,19 +1,19 @@
 import { css } from '../../../../styled-system/css'
 
-export const TextContentStyle = css({
+export const StyledTextContent = css({
   position: 'absolute',
   width: '100%',
   height: '100vh',
   zIndex: 1,
 })
 
-export const ContainerStyle = css({
+export const StyledContainer = css({
   position: 'relative',
   width: '100%',
   height: '100%',
 })
 
-export const HeaderContainerStyle = css({
+export const StyledHeaderContainer = css({
   position: 'absolute',
   zIndex: 10,
   width: '100%',

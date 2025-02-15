@@ -9,7 +9,7 @@ import Section04 from '../../../parts/aboutMe/Section04'
 import AboutMeCube from '../../../parts/aboutMe/AboutMeCube'
 import Section05 from '../../../parts/aboutMe/Section05'
 import { useTranslation } from '../../i18n/client'
-import { TextContentStyle, ContainerStyle, HeaderContainerStyle } from './styles'
+import { StyledTextContent, StyledContainer, StyledHeaderContainer } from './styles'
 
 type PageProps = {
   params: {
@@ -76,10 +76,10 @@ export default function Page({ params: { lng } }: PageProps) {
 
   return (
     <>
-      <div className={HeaderContainerStyle}>
+      <div className={StyledHeaderContainer}>
         <Header lng={lng} handleClose={handleCloseKeyboard} />
       </div>
-      <div className={TextContentStyle}>
+      <div className={StyledTextContent}>
         <section ref={sectionRefs.section01} data-section='section01'>
           <Section01 t={t} showSection={visibleSections.section01 && showCube} />
         </section>
@@ -96,7 +96,7 @@ export default function Page({ params: { lng } }: PageProps) {
           <Section05 t={t} showSection={visibleSections.section05 && showCube} />
         </section>
       </div>
-      <div ref={ref} className={ContainerStyle}>
+      <div ref={ref} className={StyledContainer}>
         <AboutMeCube showCube={showCube} />
       </div>
     </>
