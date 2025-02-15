@@ -1,7 +1,6 @@
 'use client'
 
 import { Suspense, useRef, useState, useEffect } from 'react'
-import { css } from '../../../../styled-system/css'
 import Header from '../../../components/Header'
 import Section01 from '../../../parts/aboutMe/Section01'
 import Section02 from '../../../parts/aboutMe/Section02'
@@ -10,6 +9,7 @@ import Section04 from '../../../parts/aboutMe/Section04'
 import AboutMeCube from '../../../parts/aboutMe/AboutMeCube'
 import Section05 from '../../../parts/aboutMe/Section05'
 import { useTranslation } from '../../i18n/client'
+import { TextContentStyle, ContainerStyle, HeaderContainerStyle } from './styles'
 
 type PageProps = {
   params: {
@@ -76,7 +76,7 @@ export default function Page({ params: { lng } }: PageProps) {
 
   return (
     <>
-      <div className={HeaderContainer}>
+      <div className={HeaderContainerStyle}>
         <Header lng={lng} handleClose={handleCloseKeyboard} />
       </div>
       <div className={TextContentStyle}>
@@ -96,22 +96,9 @@ export default function Page({ params: { lng } }: PageProps) {
           <Section05 t={t} showSection={visibleSections.section05 && showCube} />
         </section>
       </div>
-      <div ref={ref} className={containerStyles}>
+      <div ref={ref} className={ContainerStyle}>
         <AboutMeCube showCube={showCube} />
       </div>
     </>
   )
 }
-const TextContentStyle = css({
-  position: 'absolute',
-  width: '100%',
-  height: '100vh',
-  zIndex: 1,
-})
-const containerStyles = css({
-  position: 'relative',
-  width: '100%',
-  height: '100%',
-})
-
-const HeaderContainer = css({ position: 'absolute', zIndex: 10, width: '100%', height: '20vh', overflow: 'auto' })
