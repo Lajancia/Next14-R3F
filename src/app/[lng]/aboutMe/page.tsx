@@ -59,7 +59,9 @@ export default function Page({ params: { lng } }: PageProps) {
       })
     }
   }, [])
+
   const [showCube, setShowCube] = useState(false)
+
   useEffect(() => {
     setTimeout(() => {
       setShowCube(true)
