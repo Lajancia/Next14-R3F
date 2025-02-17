@@ -32,7 +32,7 @@ const Section04 = ({ t, showSection }: SectionProps) => {
     <div className={StyledInfoWrapper}>
       <PageTransition transition={showSection} parentVariant={parentVariants}>
         <motion.div variants={childVariantsContents} className={StyledCategory}>
-          Career Profile 2Y 10M
+          Career Profile 2Y 11M
         </motion.div>
         <motion.h1 variants={childVariantsContents} className={StyledTitle}>
           {`PROJECTS`}
