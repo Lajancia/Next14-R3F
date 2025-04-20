@@ -21,7 +21,7 @@ const material = new THREE.LineBasicMaterial({ color: 'white' })
 const geometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, -0.5, 0), new THREE.Vector3(0, 0.5, 0)])
 const imagePaths = []
 
-for (let i = 1; i <= 17; i++) {
+for (let i = 1; i <= 24; i++) {
   imagePaths.push(`/img/gallery/${i}.jpeg`)
 }
 const state = proxy({
