@@ -11,7 +11,7 @@ function Rig() {
 }
 
 export default function App() {
-  const [animationSetting, setAnimationSetting] = useState('standSit')
+  const [animationSetting, setAnimationSetting] = useState('walk')
   return (
     <>
       <div className={StyledButtonWrapper}>
@@ -63,15 +63,15 @@ const StyledButton = css({
 
 const ControlModel = ({ animationSet }: { animationSet: string }) => {
   return (
-    <Canvas shadows camera={{ position: [1, 1.5, 2.5], fov: 50 }}>
+    <Canvas shadows camera={{ position: [0, 0.5, 15], fov: 50 }}>
       <ambientLight />
       <directionalLight position={[-5, 5, 5]} castShadow shadow-mapSize={1024} />
-      <group position={[0, -1, 0]}>
+      <group position={[5, 0, -3]}>
         <Suspense fallback={null}>
           <Model animationSet={animationSet} />
         </Suspense>
       </group>
-      <mesh rotation={[-0.5 * Math.PI, 0, 0]} position={[0, -1, 0]} receiveShadow>
+      <mesh rotation={[-0.5 * Math.PI, 0, 0]} position={[0, 0, -5]} receiveShadow>
         <planeGeometry args={[10, 10, 1, 1]} />
         <shadowMaterial transparent opacity={0.2} />
       </mesh>
@@ -82,30 +82,46 @@ const ControlModel = ({ animationSet }: { animationSet: string }) => {
 
 // @ts-expect-error type ignore
 function Model(props) {
-  const halo = useRef()
-  const { scene, nodes, animations, materials } = useGLTF('/astronaut_animation.glb')
-  scene.castShadow = true
-  scene.receiveShadow = true
-
+  const { nodes, animations, materials } = useGLTF('/astronaut_animation.glb')
   const { ref, actions, names } = useAnimations(animations)
+  const speed = 10 / 900
+  useFrame(() => {
+    if (ref.current && ref.current.position.x > -2.5) {
+      ref.current.position.x -= speed
+    } else {
+      if (ref.current && ref.current.rotation.y < 0.7) ref.current.rotation.y += 0.01
+    }
+  })
 
-  const [index, setIndex] = useState(0)
-
-  // Change animation when the index changes
   // @ts-expect-error type ignore
   useEffect(() => {
-    console.log('name', names, index, props.animationSet)
-    console.log(materials, materials.CLAY)
-
+    // walk 애니메이션 실행
     // @ts-expect-error type ignore
-    actions[props.animationSet].reset().fadeIn(0.5).play()
+    actions['walk'].reset().fadeIn(0.5).play()
+    const walkDuration = 4000 // walk 애니메이션 지속 시간
+
+    setTimeout(() => {
+      // @ts-expect-error type ignore
+      actions['walk'].fadeOut(0.5)
+      // @ts-expect-error type ignore
+      actions['standSit'].reset().fadeIn(0.5).play()
+
+      const standSitDuration = 1500 // standSit 애니메이션 지속 시간
+
+      setTimeout(() => {
+        // @ts-expect-error type ignore
+        actions['standSit'].fadeOut(0.5)
+        // @ts-expect-error type ignore
+        actions['sitting'].reset().fadeIn(0.5).play()
+      }, standSitDuration)
+    }, walkDuration)
     // @ts-expect-error type ignore
     return () => actions[props.animationSet].fadeOut(0.5)
-  }, [index, actions, names, props.animationSet])
+  }, [actions, names, props.animationSet])
 
   return (
     <group ref={ref} {...props} dispose={null}>
-      <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+      <group rotation={[Math.PI / 2, 0, 1.5]} scale={0.015}>
         <primitive object={nodes.mixamorigHips} />
         <skinnedMesh
           castShadow
@@ -129,16 +145,6 @@ function Model(props) {
           skeleton={nodes.astronaut_3.skeleton}
         />
       </group>
-
-      <mesh
-        //  @ts-expect-error type ignore
-        ref={halo}
-        receiveShadow
-        position={[0, 1, -1]}
-      >
-        <circleGeometry args={[1, 64]} />
-        <meshStandardMaterial />
-      </mesh>
     </group>
   )
 }
