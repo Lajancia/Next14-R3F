@@ -9,7 +9,7 @@ import Section04 from '../../../parts/aboutMe/Section04'
 import AboutMeCube from '../../../parts/aboutMe/AboutMeCube'
 import Section05 from '../../../parts/aboutMe/Section05'
 import { useTranslation } from '../../i18n/client'
-import { StyledTextContent, StyledContainer, StyledHeaderContainer, StyledSection01 } from './styles'
+import { StyledTextContent, StyledContainer, StyledHeaderContainer, StyledSection01, StyledAstronaut } from './styles'
 
 type PageProps = {
   params: {
@@ -87,7 +87,9 @@ export default function Page({ params: { lng } }: PageProps) {
           <section className={StyledSection01} ref={sectionRefs.section01} data-section='section01'>
             <Section01 t={t} showSection={visibleSections.section01 && showCube} />
           </section>
-          <AboutMeCube showCube={showCube} />
+          <div className={StyledAstronaut}>
+            <AboutMeCube showCube={showCube} />
+          </div>
         </div>
 
         <section ref={sectionRefs.section02} data-section='section02'>

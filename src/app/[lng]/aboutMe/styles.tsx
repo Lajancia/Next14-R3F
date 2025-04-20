@@ -25,3 +25,10 @@ export const StyledHeaderContainer = css({
   height: '20vh',
   overflow: 'auto',
 })
+
+export const StyledAstronaut = css({
+  display: 'none',
+  width: '100%',
+  height: '100%',
+  lg: { display: 'block' },
+})
