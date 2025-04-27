@@ -33,7 +33,6 @@ npm run dev
 - [ ] Improve work history
 - [ ] http to https
 - [ ] grafana
-- [ ] 
 
 ## Development process
 [1. Docker + Jenkins + Github + Grafana + Next14](https://soomins.tistory.com/37)
