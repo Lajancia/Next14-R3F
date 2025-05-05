@@ -26,13 +26,15 @@ npm run dev
 * initial page loading
 
 ## To be added
+- [ ] npm to yarn
+- [ ] webpack to vite
 - [ ] Astronaut animation
 - [ ] mobile gallery vertical scroll
 - [ ] % loading to bar
 - [ ] main home page new object
 - [ ] Improve work history
-- [ ] http to https
-- [ ] grafana
+- [x] http to https
+- [x] grafana
 
 ## Development process
 [1. Docker + Jenkins + Github + Grafana + Next14](https://soomins.tistory.com/37)
