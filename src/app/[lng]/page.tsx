@@ -19,10 +19,29 @@ export default function Page({ params: { lng } }: PageProps) {
   const ref = useRef<HTMLDivElement>(null)
   const { t } = useTranslation(lng, 'home')
   const [showKeyboard, setShowKeyboard] = useState(false)
+  const [showSecondInfo, setShowSecondInfo] = useState(false)
 
   useEffect(() => {
     setShowKeyboard(true)
   }, [])
+
+  useEffect(() => {
+    const handleWheel = (event: WheelEvent) => {
+      // 스크롤 다운 시 키보드 뷰에서 두 번째 정보 뷰로 전환
+      if (event.deltaY > 0 && showKeyboard) {
+        setShowKeyboard(false)
+        setShowSecondInfo(true)
+      }
+      // 스크롤 업 시 두 번째 정보 뷰에서 키보드 뷰로 전환
+      if (event.deltaY < 0 && showSecondInfo) {
+        setShowKeyboard(true)
+        setShowSecondInfo(false)
+      }
+    }
+
+    window.addEventListener('wheel', handleWheel)
+    return () => window.removeEventListener('wheel', handleWheel)
+  }, [showKeyboard, showSecondInfo])
 
   const handleCloseKeyboard = () => {
     setShowKeyboard(!showKeyboard)
@@ -34,16 +53,35 @@ export default function Page({ params: { lng } }: PageProps) {
         <Header lng={lng} handleClose={handleCloseKeyboard} />
       </div>
       <div className={TextContentStyle}>
-        <Info t={t} showKeyboard={showKeyboard} />
+        <Info
+          showKeyboard={showKeyboard}
+          number='01'
+          category='Modern Art'
+          title='MACRO KEYBOARD'
+          description={t('mainExplanation')}
+        />
+        {/* 스크롤 시 나타나는 두 번째 Info 컴포넌트 */}
+        {showSecondInfo && (
+          <Info
+            showKeyboard={showSecondInfo}
+            number='02'
+            category='Mechanical Art'
+            title='MOTORCYCLE'
+            description={t('mainExplanation')}
+          />
+        )}
       </div>
+
       <div ref={ref} className={containerStyles}>
-        <BackgroundText showKeyboard={showKeyboard} />
+        <BackgroundText showKeyboard={showKeyboard || showSecondInfo} />
         <div className={StyledKeyboard}>
+          {/* Keyboards 컴포넌트는 showKeyboard가 false가 되면 사라집니다. */}
           <Keyboards showKeyboard={showKeyboard} scaleSet={0.35} />
         </div>
       </div>
+
       <div className={StyledFooter}>
-        <Footer showFooter={showKeyboard} />
+        <Footer showFooter={showKeyboard || showSecondInfo} />
       </div>
     </>
   )

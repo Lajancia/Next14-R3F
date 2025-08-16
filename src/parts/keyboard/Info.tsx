@@ -2,10 +2,17 @@
 import { css } from '../../../styled-system/css'
 import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
-import { InfoProps } from '../types/keyboard'
 import { CircleButtonProps } from '../types/keyboard'
 
-const Info = ({ t, showKeyboard }: InfoProps) => {
+export interface InfoProps {
+  showKeyboard: boolean
+  number: string
+  category: string
+  title: string
+  description: string
+}
+
+const Info = ({ showKeyboard, number, category, title, description }: InfoProps) => {
   const childVariants = {
     hidden: { x: 50, opacity: 0 },
     visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
@@ -21,16 +28,16 @@ const Info = ({ t, showKeyboard }: InfoProps) => {
     <PageTransition transition={showKeyboard}>
       <div className={StyledInfoWrapper}>
         <motion.div variants={childVariants} className={styledNumber}>
-          01
+          {number}
         </motion.div>
         <motion.div variants={childVariants} className={StyledCategory}>
-          Modern Art
+          {category}
         </motion.div>
         <motion.h1 variants={childVariants} className={StyledTitle}>
-          MACRO KEYBOARD
+          {title}
         </motion.h1>
         <motion.article variants={childVariants} className={StyledText}>
-          {t('mainExplanation')}
+          {description}
         </motion.article>
         <div className={StyledCircle}>
           <motion.div variants={childVariantsButton} className={circleButton({ color: 'white' })} />
