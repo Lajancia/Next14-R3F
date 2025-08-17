@@ -57,8 +57,6 @@ export const Logo = ({ route = '/blob', ...props }) => {
 }
 
 export function Keyboard(props) {
-  const Keyboard = useRef()
-
   const { scene, nodes, materials } = useGLTF('/keyboard_website.glb')
   const [color, setColor] = useState('orange')
   const handlePointerOver = (e) => {
@@ -97,6 +95,22 @@ export function Keyboard(props) {
       />
     </>
   )
+}
+
+export function Bike(props) {
+  const { nodes } = useGLTF('/bike.glb')
+  const bikeMaterial = new THREE.MeshPhysicalMaterial({
+    transparent: true,
+    opacity: 0.5,
+    color: 'black',
+    roughness: 0,
+    side: THREE.FrontSide,
+    blending: THREE.AdditiveBlending,
+    polygonOffset: true,
+    polygonOffsetFactor: 1,
+    envMapIntensity: 21,
+  })
+  return <primitive {...props} material={bikeMaterial} object={nodes.bike} />
 }
 
 export function Cube(props) {

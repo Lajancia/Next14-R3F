@@ -10,9 +10,10 @@ export interface InfoProps {
   category: string
   title: string
   description: string
+  colors?: string[]
 }
 
-const Info = ({ showKeyboard, number, category, title, description }: InfoProps) => {
+const Info = ({ showKeyboard, number, category, title, description, colors = [] }: InfoProps) => {
   const childVariants = {
     hidden: { x: 50, opacity: 0 },
     visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
@@ -40,9 +41,9 @@ const Info = ({ showKeyboard, number, category, title, description }: InfoProps)
           {description}
         </motion.article>
         <div className={StyledCircle}>
-          <motion.div variants={childVariantsButton} className={circleButton({ color: 'white' })} />
-          <motion.div variants={childVariantsButton} className={circleButton({ color: 'Orange' })} />
-          <motion.div variants={childVariantsButton} className={circleButton({ color: 'black' })} />
+          {colors.map((color, index) => (
+            <motion.div key={index} variants={childVariantsButton} className={circleButton({ color: color })} />
+          ))}
         </div>
       </div>
     </PageTransition>
@@ -116,7 +117,7 @@ const circleButton = (props: CircleButtonProps) =>
   css({
     width: '3rem',
     height: '3rem',
-    backgroundColor: props.color === 'white' ? 'white' : props.color === 'Orange' ? 'Orange' : 'Black',
+    backgroundColor: props.color,
     border: 'none',
     borderRadius: '50%',
     textAlign: 'center',
