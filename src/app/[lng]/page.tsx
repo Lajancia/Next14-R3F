@@ -114,7 +114,7 @@ export default function Page({ params: { lng } }: PageProps) {
           category='Modern Art'
           title='MACRO KEYBOARD'
           description={t('mainExplanation')}
-          colors={['white', 'orange', 'Black']}
+          colors={['#ffffff', 'orange', '#000000']}
         />
         {/* 스크롤 시 나타나는 두 번째 Info 컴포넌트 */}
         {renderBike && (
@@ -124,7 +124,7 @@ export default function Page({ params: { lng } }: PageProps) {
             category='Mechanical Art'
             title='MOTORCYCLE'
             description={t('SecondExplanation')}
-            colors={['white', '#F54927', 'Black']}
+            colors={['#ffffff', '#F54927', '#000000']}
           />
         )}
       </div>
