@@ -2,10 +2,18 @@
 import { css } from '../../../styled-system/css'
 import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
-import { InfoProps } from '../types/keyboard'
 import { CircleButtonProps } from '../types/keyboard'
 
-const Info = ({ t, showKeyboard }: InfoProps) => {
+export interface InfoProps {
+  showKeyboard: boolean
+  number: string
+  category: string
+  title: string
+  description: string
+  colors?: string[]
+}
+
+const Info = ({ showKeyboard, number, category, title, description, colors = [] }: InfoProps) => {
   const childVariants = {
     hidden: { x: 50, opacity: 0 },
     visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
@@ -21,21 +29,21 @@ const Info = ({ t, showKeyboard }: InfoProps) => {
     <PageTransition transition={showKeyboard}>
       <div className={StyledInfoWrapper}>
         <motion.div variants={childVariants} className={styledNumber}>
-          01
+          {number}
         </motion.div>
         <motion.div variants={childVariants} className={StyledCategory}>
-          Modern Art
+          {category}
         </motion.div>
         <motion.h1 variants={childVariants} className={StyledTitle}>
-          MACRO KEYBOARD
+          {title}
         </motion.h1>
         <motion.article variants={childVariants} className={StyledText}>
-          {t('mainExplanation')}
+          {description}
         </motion.article>
         <div className={StyledCircle}>
-          <motion.div variants={childVariantsButton} className={circleButton({ color: 'white' })} />
-          <motion.div variants={childVariantsButton} className={circleButton({ color: 'Orange' })} />
-          <motion.div variants={childVariantsButton} className={circleButton({ color: 'black' })} />
+          {colors.map((color, index) => (
+            <motion.div key={index} variants={childVariantsButton} className={circleButton({ color: color })} />
+          ))}
         </div>
       </div>
     </PageTransition>
@@ -109,7 +117,7 @@ const circleButton = (props: CircleButtonProps) =>
   css({
     width: '3rem',
     height: '3rem',
-    backgroundColor: props.color === 'white' ? 'white' : props.color === 'Orange' ? 'Orange' : 'Black',
+    backgroundColor: props.color,
     border: 'none',
     borderRadius: '50%',
     textAlign: 'center',
