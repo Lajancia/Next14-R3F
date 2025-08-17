@@ -2,7 +2,6 @@
 import { css } from '../../../styled-system/css'
 import { motion } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
-import { CircleButtonProps } from '../types/keyboard'
 
 export interface InfoProps {
   showKeyboard: boolean
@@ -42,7 +41,12 @@ const Info = ({ showKeyboard, number, category, title, description, colors = [] 
         </motion.article>
         <div className={StyledCircle}>
           {colors.map((color, index) => (
-            <motion.div key={index} variants={childVariantsButton} className={circleButton({ color: color })} />
+            <motion.div
+              key={index}
+              variants={childVariantsButton}
+              className={circleButton()}
+              style={{ backgroundColor: color }}
+            />
           ))}
         </div>
       </div>
@@ -113,11 +117,10 @@ const StyledText = css({
   xl: { fontSize: '1rem' },
 })
 
-const circleButton = (props: CircleButtonProps) =>
+const circleButton = () =>
   css({
     width: '3rem',
     height: '3rem',
-    backgroundColor: props.color,
     border: 'none',
     borderRadius: '50%',
     textAlign: 'center',
