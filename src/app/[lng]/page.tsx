@@ -201,13 +201,13 @@ const ArrowButton = css({
   background: 'none',
   border: 'none',
   color: 'MainText',
-  fontSize: '2rem',
+  fontSize: '2.5rem', // 아이콘 크기를 키워 터치하기 쉽게 만듭니다.
   cursor: 'pointer',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   transition: 'transform 0.3s',
-  padding: '0.5rem',
+  padding: '0.5rem', // 눈에 보이지 않는 클릭 영역을 확보합니다.
 })
 
 const TextContentStyle = css({
