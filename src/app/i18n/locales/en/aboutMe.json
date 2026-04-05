@@ -1,5 +1,5 @@
 {
-  "Section01explanation": "I am a front-end developer with 3 years of experience. I primarily use Next.js and React. I am also capable of developing interactive 3D web experiences using Blender and React-Three-Fiber.",
+  "Section01explanation": "I am a front-end developer with 4 years of experience. I primarily use Next.js and React. I am also capable of developing interactive 3D web experiences using Blender and React-Three-Fiber.",
   "Section02Work01Detail01": "Developed, managed, and improved the company's website.",
   "Section02Work01Detail02": "Contributed to optimizing deployment time by collaborating with DevOps, reducing deployment time from 15 minutes to 3 minutes.",
   "Section02Work01Detail03": "Conducted in-house training and implementation of Docker and MSW mocking.",
@@ -27,6 +27,26 @@
   "Section04Sub04Detail01": "Developed a web application for viewing Common SRL's published magazines and design portfolio",
   "Section04Sub04Detail02": "Managed the Common SRL domain and handled Hostinger web hosting",
 
+  "Section04Title05": "Jenkins CI/CD Pipeline Construction and Automation",
+  "Section04Sub05Detail01": "Improved Arontier's CI/CD environment with Jenkins to create a fully automated pipeline",
+  "Section04Sub05Detail02": "Built automatic build/deploy system via GitHub Webhook integration",
+  "Section04Sub05Detail03": "Implemented custom build steps using Shell scripts and maintained them",
+
+  "Section04Title06": "Cypress E2E Test Automation",
+  "Section04Sub06Detail01": "Built frontend E2E test suite using Cypress",
+  "Section04Sub06Detail02": "Automated tests in Docker container environment and integrated with CI",
+  "Section04Sub06Detail03": "Generated test coverage reports and built sharing system for the team",
+
+  "Section04Title07": "AD3 AI Protein Analysis Platform",
+  "Section04Sub07Detail01": "Developed frontend for AD3, an AI protein analysis platform based on React",
+  "Section04Sub07Detail02": "Integrated Molstar and RDkit to implement 3D protein visualization",
+  "Section04Sub07Detail03": "Standardized development/deployment environment using Docker Compose",
+
+  "Section04Title08": "DevSecOps Security Pipeline Construction",
+  "Section04Sub08Detail01": "Built code security vulnerability scanning system using Snyk and SonarQube",
+  "Section04Sub08Detail02": "Automated web application security testing using ZAP",
+  "Section04Sub08Detail03": "Implemented Docker security scanning and image accessibility management policies",
+
   "Section05Articles": "These are personal documents reflecting on various problems encountered during development and the processes to solve them.",
   "Section05Article01": "External Injection of Docker Environment Variables (With Next14)",
   "Section05Article02": "About AWS",
@@ -36,6 +56,5 @@
   "Section02Work03Date": "2025.03 ~ Present",
   "Section02Work03Detail01": "Developed frontend for AD3, an AI protein analysis platform",
   "Section02Work03Detail02": "Built DevSecOps pipeline (Docker, Jenkins, Snyk, SonarQube)",
-  "Section02Work03Detail03": "Implemented Cypress automated testing",
-  "Section01explanation": "I am a front-end developer with 4 years of experience. I primarily use Next.js and React. I am also capable of developing interactive 3D web experiences using Blender and React-Three-Fiber."
+  "Section02Work03Detail03": "Implemented Cypress automated testing"
 }

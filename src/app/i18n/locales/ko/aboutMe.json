@@ -1,5 +1,5 @@
 {
-  "Section01explanation": "안녕하세요! 저는 3년차 프론트엔드 개발자 황수민 입니다. \n\n Next14와 React 프레임워크를 사용하며, 이외에도 Git, Linux, Docker, Jenkins, Grafana, Figma, Blender, React-Three-Fiber 등 다양한 기술을 사용하고 있습니다. 함께 일하고 싶은 개발자가 되는 것을 목표로 늘 더 나은 커뮤니케이션과 개발 및 성장 위해 노력하고 있습니다 :)",
+  "Section01explanation": "안녕하세요! 저는 4년차 프론트엔드 개발자 황수민 입니다. \n\n Next14와 React 프레임워크를 사용하며, 이외에도 Git, Linux, Docker, Jenkins, Grafana, Figma, Blender, React-Three-Fiber 등 다양한 기술을 사용하고 있습니다. 함께 일하고 싶은 개발자가 되는 것을 목표로 늘 더 나은 커뮤니케이션과 개발 및 성장 위해 노력하고 있습니다 :)",
   "Section02Work01Detail01": "일루미나리안 공식 홈페이지 개발 및 개선, 유지/보수",
   "Section02Work01Detail02": "DevOps와의 협업을 통한 빌드/배포 시간 최적화 및 CI 인프라 개선.",
   "Section02Work01Detail03": "사내 채용 관리자 페이지 개발 및 Dockerization. MSW mocking 도입",
@@ -8,25 +8,36 @@
   "Section03Work01Detail01": "웹사이트 frontend 개발, 서버 호스팅 및 DNS 관리",
   "Section03Work01Detail02": "Hostinger 웹 퍼블리싱",
   "Section03Work01Detail03": "SNS 인사이트 관리",
-
   "Section04Title01": "Solariant 사내 채용 모집 공고 지원 서비스 및 관리자 페이지 개발",
   "Section04Sub01Detail01": "react-query 및 react-hook-form을 사용한 모집 공고 지원 신청 폼 개발",
   "Section04Sub01Detail02": "Next14 채용 관리 서비스 SSG 마이그레이션 및 다국어 지원 적용, Dockerization",
-
   "Section04Title02": "프론트엔드 도커라이제이션 및 CI/CD 최적화",
   "Section04Sub02Detail01": "DevOps팀과의 협업을 통한 프론트엔드 CI Dockerization 진행을 통해 배포 소요 시간을 12분에서 3분으로 단축",
   "Section04Sub02Detail02": "Docker 환경변수 URL 방식 적용 이미지 재사용성 향상",
   "Section04Sub02Detail03": "사내 Docker 도입 및 적용 방법 교육 진행",
-
   "Section04Title03": "세르비아 전장 스마트팩토리 모니터링 시스템 개발",
   "Section04Sub03Detail01": "React 프론트엔드의 모니터링 시스템 개발에 참여하여 UI/UX 디자인에 Figma를 사용 및 React Apex Chart를 활용한 React 모니터링 웹 개발",
   "Section04Sub03Detail02": "생산 추적을 위해 Java Spring Boot와 MariaDB를 사용하여 백엔드 API를 개발 참여",
   "Section04Sub03Detail03": "시스템 유지보수 및 개선을 위해 세르비아 현지 근로자들과 협력하여 AOI 결함률을 20% 감소시키고 생산 효율성을 향상",
-
   "Section04Title04": "Common SRL 홈페이지 개발",
   "Section04Sub04Detail01": "Common SRL 발행 잡지 열람 및 디자인 포트폴리오 확인 가능한 웹 애플리케이션 개발",
   "Section04Sub04Detail02": "Common SRL 도메인 관리 및 Hostinger 웹 호스팅 진행",
-
+  "Section04Title05": "Jenkins CI/CD 파이프라인 구축 및 자동화",
+  "Section04Sub05Detail01": "Arontier의 CI/CD 환경을 Jenkins를 통한 완전 자동화 파이프라인으로 개선",
+  "Section04Sub05Detail02": "GitHub Webhook 연동을 통한 자동 빌드/배포 시스템 구축",
+  "Section04Sub05Detail03": "Shell 스크립트를 활용한 커스텀 빌드 스텝 구현 및 유지보수",
+  "Section04Title06": "Cypress E2E 테스트 자동화",
+  "Section04Sub06Detail01": "Cypress를 활용한 프론트엔드 E2E 테스트 스위트 구축",
+  "Section04Sub06Detail02": "Docker 컨테이너 환경에서의 테스트 자동화 및 CI 통합",
+  "Section04Sub06Detail03": "테스트 커버리지 리포트 생성 및 팀 공유 시스템 구축",
+  "Section04Title07": "AD3 AI 단백질 분석 플랫폼",
+  "Section04Sub07Detail01": "React 기반의 AI 단백질 분석 플랫폼 AD3 프론트엔드 개발",
+  "Section04Sub07Detail02": "Molstar 및 RDkit 통합을 통한 3D 단백질 시각화 구현",
+  "Section04Sub07Detail03": "Docker Compose를 활용한 개발/배포 환경 표준화",
+  "Section04Title08": "DevSecOps 보안 파이프라인 구축",
+  "Section04Sub08Detail01": "Snyk와 SonarQube를 통한 코드 보안 취약점 검사 시스템 구축",
+  "Section04Sub08Detail02": "ZAP을 활용한 웹 애플리케이션 보안 테스트 자동화",
+  "Section04Sub08Detail03": "Docker 보안 스캔 및 이미지 접근성 관리 정책 수립",
   "Section05Articles": "개발을 하면서 겪었던 여러 문제들의 고찰과 이를 해결했던 과정을 작성한 개인 문서들입니다.",
   "Section05Article01": "도커 환경변수 외부 주입 (With Next14)",
   "Section05Article02": "AWS에 대하여",
@@ -36,6 +47,5 @@
   "Section02Work03Date": "2025.03 ~ 현재",
   "Section02Work03Detail01": "AI 단백질 분석 플랫폼 AD3 프론트엔드 개발",
   "Section02Work03Detail02": "DevSecOps 파이프라인 구축 (Docker, Jenkins, Snyk, SonarQube)",
-  "Section02Work03Detail03": "Cypress 자동화 테스트 도입",
-  "Section01explanation": "안녕하세요! 저는 4년차 프론트엔드 개발자 황수민 입니다. \n\n Next14와 React 프레임워크를 사용하며, 이외에도 Git, Linux, Docker, Jenkins, Grafana, Figma, Blender, React-Three-Fiber 등 다양한 기술을 사용하고 있습니다. 함께 일하고 싶은 개발자가 되는 것을 목표로 늘 더 나은 커뮤니케이션과 개발 및 성장 위해 노력하고 있습니다 :)"
+  "Section02Work03Detail03": "Cypress 자동화 테스트 도입"
 }

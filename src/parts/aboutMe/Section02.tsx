@@ -36,7 +36,7 @@ const Section01 = ({ t, showSection }: SectionProps) => {
               <motion.div className={StyledWorkDateLeft} variants={childInfo}>
                 <div className={StyledMobile}>{t('Section02Work03Date')}</div>
                 <div className={StyledPosition}>Frontend Developer</div>
-                <div className={StyledCompany}>AronTIER</div>
+                <div className={StyledCompany}>Arontier</div>
                 <ul className={StyledUL}>
                   <li className={StyledLI}>{t('Section02Work03Detail01')}</li>
                   <li className={StyledLI}>{t('Section02Work03Detail02')}</li>

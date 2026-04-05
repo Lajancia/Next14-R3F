@@ -9,6 +9,10 @@ const ProjectSkills = {
   project02: ['Next14', 'Docker', 'Jenkins', 'Typescript', 'Github', 'AWS'],
   project03: ['React', 'Python', 'Apext Chart', 'Github', 'Java Spring Boot', 'Linux'],
   project04: ['Vue.js', 'Vuetify', 'Github', 'Shared Host'],
+  project05: ['React.js', 'MUI', 'Molstar', 'RDkit', 'Docker', 'Docker Compose'],
+  project06: ['Snyk', 'ZAP', 'SonarQube', 'Docker', 'Jenkins'],
+  project07: ['Cypress', 'Jenkins', 'Docker'],
+  project08: ['Jenkins', 'Docker', 'Shell Script'],
 }
 const Section04 = ({ t, showSection }: SectionProps) => {
   const parentVariants = {
@@ -32,12 +36,66 @@ const Section04 = ({ t, showSection }: SectionProps) => {
     <div className={StyledInfoWrapper}>
       <PageTransition transition={showSection} parentVariant={parentVariants}>
         <motion.div variants={childVariantsContents} className={StyledCategory}>
-          Career Profile 2Y 11M
+          Career Profile 3Y 7M
         </motion.div>
         <motion.h1 variants={childVariantsContents} className={StyledTitle}>
           {`PROJECTS`}
         </motion.h1>
         <article className={StyledText}>
+          <motion.div variants={childVariantsContents}>
+            <h3 className={StyledDate}>2025.03 ~ 현재</h3>
+            <h2 className={StyledProjectTitle}>{t('Section04Title07')}</h2>
+            {ProjectSkills.project07.map((skill, index) => {
+              return <CustomToggle key={index} toggleName={skill} />
+            })}
+            <p className={StyledCompany}>Arontier</p>
+            <ul>
+              <li className={StyledList}>{t('Section04Sub07Detail01')}</li>
+              <li className={StyledList}>{t('Section04Sub07Detail02')}</li>
+              <li className={StyledList}>{t('Section04Sub07Detail03')}</li>
+            </ul>
+          </motion.div>
+          <motion.div className={StyledLine} variants={childVariantsLine} />
+          <motion.div variants={childVariantsContents}>
+            <h3 className={StyledDate}>2026.01 ~ 2026.03</h3>
+            <h2 className={StyledProjectTitle}>{t('Section04Title08')}</h2>
+            {ProjectSkills.project08.map((skill, index) => {
+              return <CustomToggle key={index} toggleName={skill} />
+            })}
+            <p className={StyledCompany}>Arontier</p>
+            <ul>
+              <li className={StyledList}>{t('Section04Sub08Detail01')}</li>
+              <li className={StyledList}>{t('Section04Sub08Detail02')}</li>
+            </ul>
+          </motion.div>
+          <motion.div className={StyledLine} variants={childVariantsLine} />
+          <motion.div variants={childVariantsContents}>
+            <h3 className={StyledDate}>2025.07 ~ 2025.10</h3>
+            <h2 className={StyledProjectTitle}>{t('Section04Title06')}</h2>
+            {ProjectSkills.project06.map((skill, index) => {
+              return <CustomToggle key={index} toggleName={skill} />
+            })}
+            <p className={StyledCompany}>Arontier</p>
+            <ul>
+              <li className={StyledList}>{t('Section04Sub06Detail01')}</li>
+              <li className={StyledList}>{t('Section04Sub06Detail02')}</li>
+              <li className={StyledList}>{t('Section04Sub06Detail03')}</li>
+            </ul>
+          </motion.div>
+          <motion.div className={StyledLine} variants={childVariantsLine} />
+          <motion.div variants={childVariantsContents}>
+            <h3 className={StyledDate}>2025.04 ~ 2025.06</h3>
+            <h2 className={StyledProjectTitle}>{t('Section04Title05')}</h2>
+            {ProjectSkills.project05.map((skill, index) => {
+              return <CustomToggle key={index} toggleName={skill} />
+            })}
+            <p className={StyledCompany}>Arontier</p>
+            <ul>
+              <li className={StyledList}>{t('Section04Sub05Detail01')}</li>
+              <li className={StyledList}>{t('Section04Sub05Detail02')}</li>
+            </ul>
+          </motion.div>
+          <motion.div className={StyledLine} variants={childVariantsLine} />
           <motion.div variants={childVariantsContents}>
             <h3 className={StyledDate}>2024.11 ~ 2024.01</h3>
             <h2 className={StyledProjectTitle}>{t('Section04Title01')}</h2>
@@ -50,6 +108,7 @@ const Section04 = ({ t, showSection }: SectionProps) => {
               <li className={StyledList}>{t('Section04Sub01Detail02')}</li>
             </ul>
           </motion.div>
+
           <motion.div className={StyledLine} variants={childVariantsLine} />
           <motion.div variants={childVariantsContents}>
             <h3 className={StyledDate}>2024.07 ~ 2024.12</h3>
