@@ -1,1 +1,7 @@
-{ "sample": "샘플" }
+{
+  "sample": "샘플",
+  "Section02Work03Date": "2025.03 ~ 현재",
+  "Section02Work03Detail01": "AI 단백질 분석 플랫폼 AD3 프론트엔드 개발",
+  "Section02Work03Detail02": "DevSecOps 파이프라인 구축 (Docker, Jenkins, Snyk, SonarQube)",
+  "Section02Work03Detail03": "Cypress 자동화 테스트 도입"
+}
