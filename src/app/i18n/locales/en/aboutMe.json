@@ -32,5 +32,9 @@
   "Section05Article02": "About AWS",
   "Section05Article03": "Next14 Rendering Method and SSG Migration",
   "Section05Article04": "Docker + Jenkins + Github + Grafana + Next14",
-  "Section05Article05": "Experience Using React-Three-Fiber + WebXR"
+  "Section05Article05": "Experience Using React-Three-Fiber + WebXR",
+  "Section02Work03Date": "2025.03 ~ Present",
+  "Section02Work03Detail01": "Developed frontend for AD3, an AI protein analysis platform",
+  "Section02Work03Detail02": "Built DevSecOps pipeline (Docker, Jenkins, Snyk, SonarQube)",
+  "Section02Work03Detail03": "Implemented Cypress automated testing"
 }

@@ -32,5 +32,9 @@
   "Section05Article02": "AWS에 대하여",
   "Section05Article03": "Next14 랜더링 방식 및 SSG 마이그레이션",
   "Section05Article04": "Docker + Jenkins + Github + Grafana + Next14",
-  "Section05Article05": "React-Three-Fiber + WebXR 사용기"
+  "Section05Article05": "React-Three-Fiber + WebXR 사용기",
+  "Section02Work03Date": "2025.03 ~ 현재",
+  "Section02Work03Detail01": "AI 단백질 분석 플랫폼 AD3 프론트엔드 개발",
+  "Section02Work03Detail02": "DevSecOps 파이프라인 구축 (Docker, Jenkins, Snyk, SonarQube)",
+  "Section02Work03Detail03": "Cypress 자동화 테스트 도입"
 }
