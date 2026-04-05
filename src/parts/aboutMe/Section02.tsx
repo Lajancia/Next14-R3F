@@ -127,7 +127,10 @@ const StyledWorkDate = css({
 })
 
 const StyledWorkDateLeft = css({
-  ...StyledWorkDate,
+  display: 'none',
+  marginTop: '1rem',
+  height: '100%',
+  lg: { display: 'block' },
   textAlign: 'left',
 })
 
