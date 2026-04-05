@@ -6,5 +6,9 @@
   "Section02Work02Detail01": "Developed and maintained a smart monitoring web application for efficient production management at the manufacturing plant in Serbia.",
   "Section02Work02Detail02": "Responsible for Java Spring Boot API migration and additional development.",
   "Section03Work01Detail01": "Developed the company website frontend, managed DNS and web publishing, and handled SNS insights management.",
-  "Section03Work01Detail02": "Responsible for frontend maintenance and support."
+  "Section03Work01Detail02": "Responsible for frontend maintenance and support.",
+  "Section02Work03Date": "2025.03 ~ Present",
+  "Section02Work03Detail01": "Developed frontend for AD3, an AI protein analysis platform",
+  "Section02Work03Detail02": "Built DevSecOps pipeline (Docker, Jenkins, Snyk, SonarQube)",
+  "Section02Work03Detail03": "Implemented Cypress automated testing"
 }

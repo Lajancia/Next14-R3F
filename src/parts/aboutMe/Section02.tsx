@@ -34,13 +34,13 @@ const Section01 = ({ t, showSection }: SectionProps) => {
           <div className={StyledWorkLineContainer}>
             <div className={StyledLeft}>
               <motion.div className={StyledWorkDateLeft} variants={childInfo}>
-                <div className={StyledMobile}>2025.03 ~ 현재</div>
+                <div className={StyledMobile}>{t('Section02Work03Date')}</div>
                 <div className={StyledPosition}>Frontend Developer</div>
                 <div className={StyledCompany}>AronTIER</div>
                 <ul className={StyledUL}>
-                  <li className={StyledLI}>AI 단백질 분석 플랫폼 AD3 프론트엔드 개발</li>
-                  <li className={StyledLI}>DevSecOps 파이프라인 구축 (Docker, Jenkins, Snyk, SonarQube)</li>
-                  <li className={StyledLI}>Cypress 자동화 테스트 도입</li>
+                  <li className={StyledLI}>{t('Section02Work03Detail01')}</li>
+                  <li className={StyledLI}>{t('Section02Work03Detail02')}</li>
+                  <li className={StyledLI}>{t('Section02Work03Detail03')}</li>
                 </ul>
               </motion.div>
               <motion.div className={StyledWorkDate} variants={childInfo}>

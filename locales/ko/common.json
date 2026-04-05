@@ -6,5 +6,9 @@
   "Section02Work02Detail01": "Developed and maintained a smart monitoring web application for efficient production management at the manufacturing plant in Serbia.",
   "Section02Work02Detail02": "Responsible for Java Spring Boot API migration and additional development.",
   "Section03Work01Detail01": "Developed the company website frontend, managed DNS and web publishing, and handled SNS insights management.",
-  "Section03Work01Detail02": "Responsible for frontend maintenance and support."
+  "Section03Work01Detail02": "Responsible for frontend maintenance and support.",
+  "Section02Work03Date": "2025.03 ~ 현재",
+  "Section02Work03Detail01": "AI 단백질 분석 플랫폼 AD3 프론트엔드 개발",
+  "Section02Work03Detail02": "DevSecOps 파이프라인 구축 (Docker, Jenkins, Snyk, SonarQube)",
+  "Section02Work03Detail03": "Cypress 자동화 테스트 도입"
 }
