@@ -33,6 +33,16 @@ const Section01 = ({ t, showSection }: SectionProps) => {
           </motion.h1>
           <div className={StyledWorkLineContainer}>
             <div className={StyledLeft}>
+              <motion.div className={StyledWorkDateLeft} variants={childInfo}>
+                <div className={StyledMobile}>2025.03 ~ 현재</div>
+                <div className={StyledPosition}>Frontend Developer</div>
+                <div className={StyledCompany}>AronTIER</div>
+                <ul className={StyledUL}>
+                  <li className={StyledLI}>AI 단백질 분석 플랫폼 AD3 프론트엔드 개발</li>
+                  <li className={StyledLI}>DevSecOps 파이프라인 구축 (Docker, Jenkins, Snyk, SonarQube)</li>
+                  <li className={StyledLI}>Cypress 자동화 테스트 도입</li>
+                </ul>
+              </motion.div>
               <motion.div className={StyledWorkDate} variants={childInfo}>
                 2024.06 ~ 2025.01
               </motion.div>
@@ -51,6 +61,9 @@ const Section01 = ({ t, showSection }: SectionProps) => {
 
             <motion.div className={StyledLine} variants={childVariantsLine} />
             <div className={StyledRight}>
+              <motion.div className={StyledWork} variants={childInfo}>
+                2025.03 ~ 현재
+              </motion.div>
               <motion.div className={StyledWork} variants={childInfo}>
                 <div className={StyledMobile}>2024.06 ~ 2025.01</div>
                 <div className={StyledPosition}>Frontend Developer</div>
@@ -111,6 +124,11 @@ const StyledWorkDate = css({
   marginTop: '1rem',
   height: '100%',
   lg: { display: 'block' },
+})
+
+const StyledWorkDateLeft = css({
+  ...StyledWorkDate,
+  textAlign: 'left',
 })
 
 const StyledInfoWrapper = css({
