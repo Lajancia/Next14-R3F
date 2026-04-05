@@ -36,5 +36,6 @@
   "Section02Work03Date": "2025.03 ~ 현재",
   "Section02Work03Detail01": "AI 단백질 분석 플랫폼 AD3 프론트엔드 개발",
   "Section02Work03Detail02": "DevSecOps 파이프라인 구축 (Docker, Jenkins, Snyk, SonarQube)",
-  "Section02Work03Detail03": "Cypress 자동화 테스트 도입"
+  "Section02Work03Detail03": "Cypress 자동화 테스트 도입",
+  "Section01explanation": "안녕하세요! 저는 4년차 프론트엔드 개발자 황수민 입니다. \n\n Next14와 React 프레임워크를 사용하며, 이외에도 Git, Linux, Docker, Jenkins, Grafana, Figma, Blender, React-Three-Fiber 등 다양한 기술을 사용하고 있습니다. 함께 일하고 싶은 개발자가 되는 것을 목표로 늘 더 나은 커뮤니케이션과 개발 및 성장 위해 노력하고 있습니다 :)"
 }

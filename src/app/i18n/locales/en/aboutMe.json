@@ -36,5 +36,6 @@
   "Section02Work03Date": "2025.03 ~ Present",
   "Section02Work03Detail01": "Developed frontend for AD3, an AI protein analysis platform",
   "Section02Work03Detail02": "Built DevSecOps pipeline (Docker, Jenkins, Snyk, SonarQube)",
-  "Section02Work03Detail03": "Implemented Cypress automated testing"
+  "Section02Work03Detail03": "Implemented Cypress automated testing",
+  "Section01explanation": "I am a front-end developer with 4 years of experience. I primarily use Next.js and React. I am also capable of developing interactive 3D web experiences using Blender and React-Three-Fiber."
 }
