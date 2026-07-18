@@ -1,13 +1,13 @@
 {
-  "name": "react-three-next",
+  "name": "soominlab-portfolio",
   "version": "2.0.0",
   "authors": [
-    "Renaud ROHLINGER <https://twitter.com/onirenaud>"
+    "SoominLab <https://github.com/g3941813-svg>"
   ],
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "scripts": {
     "lint": "next lint --fix --dir app",
