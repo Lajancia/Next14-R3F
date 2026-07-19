@@ -1,6 +1,7 @@
 {
-  "name": "R3F Next Starter",
-  "short_name": "R3F Next Starter",
+  "name": "SoominLab Portfolio",
+  "short_name": "SoominLab",
+  "description": "SoominLab — 3D Portfolio built with React Three Fibler",
   "icons": [
     {
       "src": "/icons/apple-touch-icon.png",
