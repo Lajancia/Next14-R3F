@@ -4,20 +4,29 @@ import PageTransition from '../../templates/PageAnimation'
 import CustomToggle from 'src/components/CustomToggle'
 import { SectionProps } from '../types/aboutMe'
 
-const ProjectSkills = {
-  project01: ['Next14', 'react-query', 'react-hook-form', 'Typescript', 'Github', 'Figma'],
-  project02: ['Next14', 'Docker', 'Jenkins', 'Typescript', 'Github', 'AWS'],
-  project03: ['React', 'Python', 'Apext Chart', 'Github', 'Java Spring Boot', 'Linux'],
-  project04: ['Vue.js', 'Vuetify', 'Github', 'Shared Host'],
-  project05: ['React.js', 'MUI', 'Molstar', 'RDkit', 'Docker', 'Docker Compose'],
-  project06: ['Snyk', 'ZAP', 'SonarQube', 'Docker', 'Jenkins'],
-  project07: ['Cypress', 'Jenkins', 'Docker'],
-  project08: ['Jenkins', 'Docker', 'Shell Script'],
+type ProjectItem = {
+  titleKey: string
+  dateKey: string
+  companyKey: string
+  stackKey: string
+  details: string[]
 }
+
 const Section04 = ({ t, showSection }: SectionProps) => {
+  const projects: ProjectItem[] = [
+    { titleKey: 'Section04Title01', dateKey: 'Section04Date01', companyKey: 'Section04Company01', stackKey: 'Section04Stack01', details: ['Section04Sub01Detail01', 'Section04Sub01Detail02', 'Section04Sub01Detail03', 'Section04Sub01Detail04'] },
+    { titleKey: 'Section04Title02', dateKey: 'Section04Date02', companyKey: 'Section04Company02', stackKey: 'Section04Stack02', details: ['Section04Sub02Detail01', 'Section04Sub02Detail02', 'Section04Sub02Detail03', 'Section04Sub02Detail04'] },
+    { titleKey: 'Section04Title03', dateKey: 'Section04Date03', companyKey: 'Section04Company03', stackKey: 'Section04Stack03', details: ['Section04Sub03Detail01', 'Section04Sub03Detail02', 'Section04Sub03Detail03', 'Section04Sub03Detail04'] },
+    { titleKey: 'Section04Title04', dateKey: 'Section04Date04', companyKey: 'Section04Company04', stackKey: 'Section04Stack04', details: ['Section04Sub04Detail01', 'Section04Sub04Detail02', 'Section04Sub04Detail03', 'Section04Sub04Detail04'] },
+    { titleKey: 'Section04Title05', dateKey: 'Section04Date05', companyKey: 'Section04Company05', stackKey: 'Section04Stack05', details: ['Section04Sub05Detail01', 'Section04Sub05Detail02', 'Section04Sub05Detail03'] },
+    { titleKey: 'Section04Title06', dateKey: 'Section04Date06', companyKey: 'Section04Company06', stackKey: 'Section04Stack06', details: ['Section04Sub06Detail01', 'Section04Sub06Detail02', 'Section04Sub06Detail03'] },
+    { titleKey: 'Section04Title07', dateKey: 'Section04Date07', companyKey: 'Section04Company07', stackKey: 'Section04Stack07', details: ['Section04Sub07Detail01', 'Section04Sub07Detail02', 'Section04Sub07Detail03', 'Section04Sub07Detail04'] },
+    { titleKey: 'Section04Title08', dateKey: 'Section04Date08', companyKey: 'Section04Company08', stackKey: 'Section04Stack08', details: ['Section04Sub08Detail01', 'Section04Sub08Detail02', 'Section04Sub08Detail03'] },
+  ]
+
   const parentVariants = {
     hidden: { x: 50, opacity: 0 },
-    visible: { x: 0, opacity: 1, transition: { duration: 0.8, staggerChildren: 0.8 } },
+    visible: { x: 0, opacity: 1, transition: { duration: 0.8, staggerChildren: 0.3 } },
     exit: { x: 50, opacity: 0, transition: { duration: 0.8 } },
   }
   const childVariantsContents = {
@@ -32,127 +41,41 @@ const Section04 = ({ t, showSection }: SectionProps) => {
     exit: { width: 0, opacity: 0, transition: { duration: 0.8 } },
   }
 
+  const getStackArray = (stackKey: string): string[] => {
+    const stack = t(stackKey)
+    return stack.split(', ').map(s => s.trim())
+  }
+
   return (
     <div className={StyledInfoWrapper}>
       <PageTransition transition={showSection} parentVariant={parentVariants}>
         <motion.div variants={childVariantsContents} className={StyledCategory}>
-          Career Profile 3Y 7M
+          Career Profile 4Y 5M
         </motion.div>
         <motion.h1 variants={childVariantsContents} className={StyledTitle}>
           {`PROJECTS`}
         </motion.h1>
         <article className={StyledText}>
-          <motion.div variants={childVariantsContents}>
-            <h3 className={StyledDate}>2025.03 ~ 현재</h3>
-            <h2 className={StyledProjectTitle}>{t('Section04Title07')}</h2>
-            {ProjectSkills.project07.map((skill, index) => {
-              return <CustomToggle key={index} toggleName={skill} />
-            })}
-            <p className={StyledCompany}>Arontier</p>
-            <ul>
-              <li className={StyledList}>{t('Section04Sub07Detail01')}</li>
-              <li className={StyledList}>{t('Section04Sub07Detail02')}</li>
-              <li className={StyledList}>{t('Section04Sub07Detail03')}</li>
-            </ul>
-          </motion.div>
-          <motion.div className={StyledLine} variants={childVariantsLine} />
-          <motion.div variants={childVariantsContents}>
-            <h3 className={StyledDate}>2026.01 ~ 2026.03</h3>
-            <h2 className={StyledProjectTitle}>{t('Section04Title08')}</h2>
-            {ProjectSkills.project08.map((skill, index) => {
-              return <CustomToggle key={index} toggleName={skill} />
-            })}
-            <p className={StyledCompany}>Arontier</p>
-            <ul>
-              <li className={StyledList}>{t('Section04Sub08Detail01')}</li>
-              <li className={StyledList}>{t('Section04Sub08Detail02')}</li>
-            </ul>
-          </motion.div>
-          <motion.div className={StyledLine} variants={childVariantsLine} />
-          <motion.div variants={childVariantsContents}>
-            <h3 className={StyledDate}>2025.07 ~ 2025.10</h3>
-            <h2 className={StyledProjectTitle}>{t('Section04Title06')}</h2>
-            {ProjectSkills.project06.map((skill, index) => {
-              return <CustomToggle key={index} toggleName={skill} />
-            })}
-            <p className={StyledCompany}>Arontier</p>
-            <ul>
-              <li className={StyledList}>{t('Section04Sub06Detail01')}</li>
-              <li className={StyledList}>{t('Section04Sub06Detail02')}</li>
-              <li className={StyledList}>{t('Section04Sub06Detail03')}</li>
-            </ul>
-          </motion.div>
-          <motion.div className={StyledLine} variants={childVariantsLine} />
-          <motion.div variants={childVariantsContents}>
-            <h3 className={StyledDate}>2025.04 ~ 2025.06</h3>
-            <h2 className={StyledProjectTitle}>{t('Section04Title05')}</h2>
-            {ProjectSkills.project05.map((skill, index) => {
-              return <CustomToggle key={index} toggleName={skill} />
-            })}
-            <p className={StyledCompany}>Arontier</p>
-            <ul>
-              <li className={StyledList}>{t('Section04Sub05Detail01')}</li>
-              <li className={StyledList}>{t('Section04Sub05Detail02')}</li>
-            </ul>
-          </motion.div>
-          <motion.div className={StyledLine} variants={childVariantsLine} />
-          <motion.div variants={childVariantsContents}>
-            <h3 className={StyledDate}>2024.11 ~ 2024.01</h3>
-            <h2 className={StyledProjectTitle}>{t('Section04Title01')}</h2>
-            {ProjectSkills.project01.map((skill, index) => {
-              return <CustomToggle key={index} toggleName={skill} />
-            })}
-            <p className={StyledCompany}>Illuminarean</p>
-            <ul>
-              <li className={StyledList}>{t('Section04Sub01Detail01')}</li>
-              <li className={StyledList}>{t('Section04Sub01Detail02')}</li>
-            </ul>
-          </motion.div>
-
-          <motion.div className={StyledLine} variants={childVariantsLine} />
-          <motion.div variants={childVariantsContents}>
-            <h3 className={StyledDate}>2024.07 ~ 2024.12</h3>
-            <h2 className={StyledProjectTitle}>{t('Section04Title02')}</h2>
-            {ProjectSkills.project02.map((skill, index) => {
-              return <CustomToggle key={index} toggleName={skill} />
-            })}
-            <p className={StyledCompany}>Illuminarean</p>
-            <ul>
-              <li className={StyledList}>{t('Section04Sub02Detail01')}</li>
-              <li className={StyledList}>{t('Section04Sub02Detail02')}</li>
-              <li className={StyledList}>{t('Section04Sub02Detail03')}</li>
-            </ul>
-          </motion.div>
-
-          <motion.div className={StyledLine} variants={childVariantsLine} />
-          <motion.div variants={childVariantsContents}>
-            <h3 className={StyledDate}>2023.01 ~ 2023.11</h3>
-            <h2 className={StyledProjectTitle}>{t('Section04Title03')}</h2>
-            {ProjectSkills.project03.map((skill, index) => {
-              return <CustomToggle key={index} toggleName={skill} />
-            })}
-            <p className={StyledCompany}> YURA R&D Center</p>
-            <ul>
-              <li className={StyledList}>{t('Section04Sub03Detail01')}</li>
-              <li className={StyledList}>{t('Section04Sub03Detail02')}</li>
-              <li className={StyledList}>{t('Section04Sub03Detail03')}</li>
-            </ul>
-          </motion.div>
-
-          <motion.div className={StyledLine} variants={childVariantsLine} />
-          <motion.div variants={childVariantsContents}>
-            <h3 className={StyledDate}>2021.11 ~ 2022.05</h3>
-            <h2 className={StyledProjectTitle}>{t('Section04Title04')}</h2>
-            {ProjectSkills.project04.map((skill, index) => {
-              return <CustomToggle key={index} toggleName={skill} />
-            })}
-            <p className={StyledCompany}> Common SRL</p>
-            <ul>
-              <li className={StyledList}>{t('Section04Sub04Detail01')}</li>
-              <li className={StyledList}>{t('Section04Sub04Detail02')}</li>
-            </ul>
-          </motion.div>
-          <motion.div className={StyledLine} variants={childVariantsLine} />
+          {projects.map((project, index) => (
+            <motion.div key={index} variants={childVariantsContents}>
+              <h3 className={StyledDate}>{t(project.dateKey)}</h3>
+              <h2 className={StyledProjectTitle}>{t(project.titleKey)}</h2>
+              <div className={StyledStackRow}>
+                {getStackArray(project.stackKey).map((skill, i) => (
+                  <CustomToggle key={i} toggleName={skill} />
+                ))}
+              </div>
+              <p className={StyledCompany}>{t(project.companyKey)}</p>
+              <ul>
+                {project.details.map((detail, i) => (
+                  <li key={i} className={StyledList}>{t(detail)}</li>
+                ))}
+              </ul>
+              {index < projects.length - 1 && (
+                <motion.div className={StyledLine} variants={childVariantsLine} />
+              )}
+            </motion.div>
+          ))}
         </article>
       </PageTransition>
     </div>
@@ -170,7 +93,7 @@ const StyledList = css({
   listStyleType: 'disc',
   marginLeft: '1.5rem',
   fontSize: '1rem',
-  lg: { fontSize: '1.3rem' },
+  lg: { fontSize: '1.1rem' },
 })
 
 const StyledInfoWrapper = css({
@@ -217,4 +140,12 @@ const StyledProjectTitle = css({
 
 const StyledCompany = css({
   fontSize: '1.2rem',
+  marginBottom: '0.5rem',
+})
+
+const StyledStackRow = css({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '0.3rem',
+  marginBottom: '0.5rem',
 })

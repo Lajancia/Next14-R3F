@@ -1,26 +1,35 @@
 import { css } from '../../../styled-system/css'
-import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
 import { SectionProps } from '../types/aboutMe'
 
-const Section01 = ({ t, showSection }: SectionProps) => {
+type WorkItem = {
+  dateKey: string
+  companyKey: string
+  roleKey: string
+  details: string[]
+}
+
+const Section02 = ({ t, showSection }: SectionProps) => {
+  const works: WorkItem[] = [
+    { dateKey: 'Section02Work01Date', companyKey: 'Section02Work01Company', roleKey: 'Section02Work01Role', details: ['Section02Work01Detail01', 'Section02Work01Detail02', 'Section02Work01Detail03', 'Section02Work01Detail04', 'Section02Work01Detail05'] },
+    { dateKey: 'Section02Work02Date', companyKey: 'Section02Work02Company', roleKey: 'Section02Work02Role', details: ['Section02Work02Detail01', 'Section02Work02Detail02'] },
+    { dateKey: 'Section02Work03Date', companyKey: 'Section02Work03Company', roleKey: 'Section02Work03Role', details: ['Section02Work03Detail01', 'Section02Work03Detail02', 'Section02Work03Detail03'] },
+    { dateKey: 'Section02Work04Date', companyKey: 'Section02Work04Company', roleKey: 'Section02Work04Role', details: ['Section02Work04Detail01', 'Section02Work04Detail02'] },
+  ]
+
   const childVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.8, staggerChildren: 2 } },
+    visible: { opacity: 1, transition: { duration: 0.8, staggerChildren: 0.3 } },
     exit: { opacity: 0, transition: { duration: 0.8 } },
   }
-  const childVariantsLine = {
-    hidden: { height: 0, opacity: 0 },
-    visible: { height: '100%', y: 0, opacity: 1, transition: { duration: 1, delay: 1 } },
-    exit: { height: 0, opacity: 0, transition: { duration: 0.8 } },
+
+  const childItem = {
+    hidden: { x: -30, opacity: 0 },
+    visible: { x: 0, opacity: 1, transition: { duration: 0.6 } },
+    exit: { x: -30, opacity: 0, transition: { duration: 0.6 } },
   }
 
-  const childInfo = {
-    hidden: { x: -50, y: 0, opacity: 0, height: '100%' },
-    visible: { x: 0, y: 0, opacity: 1, height: '100%', transition: { duration: 0.8 } },
-    exit: { x: -50, y: 0, opacity: 0, transition: { duration: 0.8 } },
-  }
   return (
     <div className={StyledInfoWrapper}>
       <AnimatePresence>
@@ -31,71 +40,24 @@ const Section01 = ({ t, showSection }: SectionProps) => {
           <motion.h1 variants={childVariants} className={StyledTitle}>
             WORK EXPERIENCE
           </motion.h1>
-          <div className={StyledWorkLineContainer}>
-            <div className={StyledLeft}>
-              <motion.div className={StyledWorkDateLeft} variants={childInfo}>
-                <div className={StyledMobile}>{t('Section02Work03Date')}</div>
-                <div className={StyledPosition}>Frontend Developer</div>
-                <div className={StyledCompany}>Arontier</div>
-                <ul className={StyledUL}>
-                  <li className={StyledLI}>{t('Section02Work03Detail01')}</li>
-                  <li className={StyledLI}>{t('Section02Work03Detail02')}</li>
-                  <li className={StyledLI}>{t('Section02Work03Detail03')}</li>
-                </ul>
-              </motion.div>
-              <motion.div className={StyledWorkDate} variants={childInfo}>
-                2024.06 ~ 2025.01
-              </motion.div>
-              <motion.div className={StyledWork} variants={childInfo}>
-                <div className={StyledPosition}>Associate Research Engineer</div>
-                <div className={StyledCompany}>YURA R&D Center</div>
-                <ul className={StyledUL}>
-                  <li className={StyledLI}>{t('Section02Work02Detail01')}</li>
-                  <li className={StyledLI}>{t('Section02Work02Detail02')}</li>
-                </ul>
-              </motion.div>
-              <motion.div className={StyledWorkDate} variants={childInfo}>
-                2021.11 ~ 2022.05
-              </motion.div>
-            </div>
-
-            <motion.div className={StyledLine} variants={childVariantsLine} />
-            <div className={StyledRight}>
-              <motion.div className={StyledWork} variants={childInfo}>
-                2025.03 ~ 현재
-              </motion.div>
-              <motion.div className={StyledWork} variants={childInfo}>
-                <div className={StyledMobile}>2024.06 ~ 2025.01</div>
-                <div className={StyledPosition}>Frontend Developer</div>
-                <div className={StyledCompany}>Illuminarean</div>
-                <ul className={StyledUL}>
-                  <li className={StyledLI}>{t('Section02Work01Detail01')}</li>
-                  <li className={StyledLI}>{t('Section02Work01Detail02')}</li>
-                  <li className={StyledLI}>{t('Section02Work01Detail03')}</li>
-                </ul>
-              </motion.div>
-              <motion.div className={StyledWork} variants={childInfo}>
-                2022.10 ~ 2024.05
-                <motion.div className={StyledMobile} variants={childInfo}>
-                  <div className={StyledPosition}>Associate Research Engineer</div>
-                  <div className={StyledCompany}>YURA R&D Center</div>
-                  <ul className={StyledUL}>
-                    <li className={StyledLI}>{t('Section02Work02Detail01')}</li>
-                    <li className={StyledLI}>{t('Section02Work02Detail02')}</li>
-                  </ul>
+          <div className={StyledTimelineContainer}>
+            <motion.div className={StyledLine} variants={childVariants} />
+            <div className={StyledTimeline}>
+              {works.map((work, index) => (
+                <motion.div key={index} variants={childItem} className={StyledTimelineItem}>
+                  <div className={StyledDot} />
+                  <div className={StyledCard}>
+                    <div className={StyledDate}>{t(work.dateKey)}</div>
+                    <div className={StyledCompany}>{t(work.companyKey)}</div>
+                    <div className={StyledRole}>{t(work.roleKey)}</div>
+                    <ul className={StyledUL}>
+                      {work.details.map((detail, i) => (
+                        <li key={i} className={StyledLI}>{t(detail)}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </motion.div>
-              </motion.div>
-              <motion.div className={StyledWork} variants={childInfo}>
-                <div className={StyledMobile}>2021.11 ~ 2022.05</div>
-                <div className={StyledPosition}>Web Developer</div>
-                <div className={StyledCompany}>CommON SRL</div>
-
-                <ul className={StyledUL}>
-                  <li className={StyledLI}>{t('Section03Work01Detail01')}</li>
-                  <li className={StyledLI}> {t('Section03Work01Detail02')}</li>
-                  <li className={StyledLI}> {t('Section03Work01Detail03')}</li>
-                </ul>
-              </motion.div>
+              ))}
             </div>
           </div>
         </PageTransition>
@@ -103,89 +65,27 @@ const Section01 = ({ t, showSection }: SectionProps) => {
     </div>
   )
 }
-export default Section01
+export default Section02
 
-const StyledMobile = css({
-  display: 'block',
-
-  lg: { display: 'none' },
-})
 const StyledUL = css({
-  listStyleType: 'decimal',
+  listStyleType: 'disc',
 })
 
 const StyledLI = css({
   listStylePosition: 'inside',
-})
-
-const StyledWorkDate = css({
-  display: 'none',
-  textAlign: 'right',
-  marginTop: '1rem',
-  height: '100%',
-  lg: { display: 'block' },
-})
-
-const StyledWorkDateLeft = css({
-  display: 'none',
-  marginTop: '1rem',
-  height: '100%',
-  lg: { display: 'block' },
-  textAlign: 'left',
+  fontSize: '0.95rem',
+  marginBottom: '0.3rem',
+  lg: { fontSize: '1.1rem' },
 })
 
 const StyledInfoWrapper = css({
   textAlign: 'center',
   width: '100%',
   padding: '2rem',
-  height: '60rem',
+  minHeight: '100dvh',
   color: 'white',
-  gap: '1rem',
   marginTop: '10vh',
   lg: { padding: '5rem' },
-})
-const StyledPosition = css({
-  fontSize: '1rem',
-})
-
-const StyledCompany = css({
-  fontSize: '2.5rem',
-  lineHeight: '1.5rem',
-  paddingBottom: '1rem',
-})
-
-const StyledLeft = css({
-  display: 'none',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  marginRight: '1rem',
-  marginTop: ' 3rem',
-  width: '35rem',
-  color: 'MainText',
-  textAlign: 'right',
-
-  lg: { display: 'flex' },
-})
-
-const StyledRight = css({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  marginLeft: '1rem',
-  marginTop: ' 1rem',
-  width: '35rem',
-  color: 'MainText',
-  textAlign: 'left',
-  lg: { marginTop: ' 3rem' },
-})
-
-const StyledWork = css({
-  height: 'auto',
-  marginBottom: '1rem',
-  textAlign: 'left',
-  padding: '1rem',
-
-  lg: { height: '30%' },
 })
 
 const StyledCategory = css({
@@ -199,21 +99,96 @@ const StyledTitle = css({
   fontSize: '3rem',
   lineHeight: '100%',
   color: 'MainText',
-  paddingBottom: '2rem',
-
-  lg: { fontSize: '5rem', paddingBottom: '0' },
+  paddingBottom: '3rem',
+  lg: { fontSize: '5rem' },
 })
 
-const StyledWorkLineContainer = css({
-  margin: 0,
+const StyledTimelineContainer = css({
   display: 'flex',
   justifyContent: 'center',
-  height: '100%',
+  position: 'relative',
+  width: '100%',
+  maxWidth: '50rem',
+  margin: '0 auto',
 })
 
 const StyledLine = css({
+  position: 'absolute',
+  left: { base: '1rem', lg: '50%' },
+  transform: { base: 'none', lg: 'translateX(-50%)' },
   width: '2px',
   backgroundColor: 'MainText',
-  position: 'relative',
   height: '100%',
+})
+
+const StyledTimeline = css({
+  display: 'flex',
+  flexDirection: 'column',
+  width: '100%',
+  paddingLeft: { base: '2.5rem', lg: '0' },
+})
+
+const StyledTimelineItem = css({
+  display: 'flex',
+  alignItems: 'flex-start',
+  marginBottom: '2rem',
+  position: 'relative',
+  lg: {
+    width: '100%',
+    '&:nth-child(odd)': {
+      paddingRight: 'calc(50% + 2rem)',
+      textAlign: 'right',
+      '& ul': { textAlign: 'right' },
+    },
+    '&:nth-child(even)': {
+      paddingLeft: 'calc(50% + 2rem)',
+      marginLeft: 'auto',
+      textAlign: 'left',
+    },
+  },
+})
+
+const StyledDot = css({
+  position: 'absolute',
+  left: { base: '0.65rem', lg: '50%' },
+  transform: { base: 'none', lg: 'translateX(-50%)' },
+  width: '0.7rem',
+  height: '0.7rem',
+  backgroundColor: 'Orange',
+  borderRadius: '50%',
+  marginTop: '0.5rem',
+  zIndex: 1,
+})
+
+const StyledCard = css({
+  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+  borderRadius: '0.5rem',
+  padding: '1.2rem',
+  width: '100%',
+  textAlign: 'left',
+  backdropFilter: 'blur(4px)',
+  border: '1px solid rgba(255, 255, 255, 0.1)',
+  lg: { padding: '1.5rem' },
+})
+
+const StyledDate = css({
+  fontSize: '0.9rem',
+  color: 'Orange',
+  fontWeight: 'bold',
+  marginBottom: '0.3rem',
+})
+
+const StyledCompany = css({
+  fontSize: '1.5rem',
+  fontWeight: 'bold',
+  lineHeight: '1.8rem',
+  color: 'MainText',
+  lg: { fontSize: '2rem' },
+})
+
+const StyledRole = css({
+  fontSize: '0.9rem',
+  color: 'rgba(255,255,255,0.6)',
+  marginBottom: '0.8rem',
+  lg: { fontSize: '1rem' },
 })

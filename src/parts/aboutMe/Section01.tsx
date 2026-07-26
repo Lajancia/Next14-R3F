@@ -1,5 +1,4 @@
 import { css } from '../../../styled-system/css'
-import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import PageTransition from '../../templates/PageAnimation'
 import { SectionProps } from '../types/aboutMe'
@@ -8,11 +7,6 @@ const Section01 = ({ t, showSection }: SectionProps) => {
   const childVariants = {
     hidden: { x: 50, opacity: 0 },
     visible: { x: 0, opacity: 1, transition: { duration: 0.8 } },
-    exit: { x: 50, opacity: 0, transition: { duration: 0.8 } },
-  }
-  const childVariantsButton = {
-    hidden: { x: 0, y: 50, opacity: 0 },
-    visible: { x: 0, y: 0, opacity: 1, transition: { duration: 0.8 } },
     exit: { x: 50, opacity: 0, transition: { duration: 0.8 } },
   }
 
@@ -29,6 +23,9 @@ const Section01 = ({ t, showSection }: SectionProps) => {
               <br />
               {`I'm Soomin Hwang`}
             </motion.h1>
+            <motion.p variants={childVariants} className={StyledSubtitle}>
+              {`Frontend Developer · 4+ Years`}
+            </motion.p>
             <motion.article variants={childVariants} className={StyledText}>
               {t('Section01explanation')}
             </motion.article>
@@ -67,6 +64,13 @@ const StyledTitle = css({
   color: 'MainText',
   lg: { fontSize: '4rem' },
   xl: { fontSize: '5rem' },
+})
+
+const StyledSubtitle = css({
+  fontSize: '1.2rem',
+  color: 'Orange',
+  paddingBottom: '1rem',
+  lg: { fontSize: '1.5rem' },
 })
 
 const StyledText = css({
