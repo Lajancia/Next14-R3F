@@ -83,7 +83,7 @@ const StyledInfoWrapper = css({
   width: '100%',
   padding: '2rem',
   minHeight: '100dvh',
-  color: 'white',
+  color: 'MainText',
   marginTop: '10vh',
   lg: { padding: '5rem' },
 })
@@ -161,13 +161,13 @@ const StyledDot = css({
 })
 
 const StyledCard = css({
-  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+  backgroundColor: { base: 'rgba(30,30,30,0.04)', _dark: 'rgba(255,255,255,0.05)' },
   borderRadius: '0.5rem',
   padding: '1.2rem',
   width: '100%',
   textAlign: 'left',
   backdropFilter: 'blur(4px)',
-  border: '1px solid rgba(255, 255, 255, 0.1)',
+  border: { base: '1px solid rgba(30,30,30,0.1)', _dark: '1px solid rgba(255,255,255,0.1)' },
   lg: { padding: '1.5rem' },
 })
 
@@ -188,7 +188,7 @@ const StyledCompany = css({
 
 const StyledRole = css({
   fontSize: '0.9rem',
-  color: 'rgba(255,255,255,0.6)',
+  color: { base: 'rgba(30,30,30,0.5)', _dark: 'rgba(233,233,233,0.6)' },
   marginBottom: '0.8rem',
   lg: { fontSize: '1rem' },
 })

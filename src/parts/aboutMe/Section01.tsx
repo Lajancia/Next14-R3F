@@ -44,7 +44,7 @@ const StyledInfoWrapper = css({
   alignItems: 'center',
   padding: '2.5rem',
   height: '100dvh',
-  color: 'white',
+  color: 'MainText',
   gap: '1rem',
 
   lg: { width: '60%', padding: '5rem 5rem' },

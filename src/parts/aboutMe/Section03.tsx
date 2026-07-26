@@ -108,7 +108,7 @@ const StyledInfoWrapper = css({
   justifyContent: 'center',
 
   height: '90%',
-  color: 'white',
+  color: 'MainText',
   gap: '1rem',
 
   lg: { width: '100%' },
