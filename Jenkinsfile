@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         GHCR_IMAGE = 'ghcr.io/g3941813-svg/next14-r3f'
-        GITOPS_REPO = 'github.com/g3941813-svg/next-r3f-ops.git'
     }
 
     stages {
@@ -30,22 +29,19 @@ pipeline {
             steps {
                 script {
                     def shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-                    withCredentials([usernamePassword(credentialsId: 'github-token',
-                                                      usernameVariable: 'GIT_USER',
-                                                      passwordVariable: 'GIT_PAT')]) {
-                        sh """
-                            rm -rf gitops-tmp
-                            git clone https://\$GIT_USER:\$GIT_PAT@${GITOPS_REPO} gitops-tmp
-                            cd gitops-tmp
-                            sed -i 's|image: ghcr.io/g3941813-svg/next14-r3f:.*|image: ${GHCR_IMAGE}:${shortCommit}|' next-r3f.yaml
-                            git config user.name "Jenkins CI"
-                            git config user.email "ci@soominlab.com"
-                            git add next-r3f.yaml
-                            git commit -m "chore: update image tag to ${shortCommit}"
-                            git push
-                            cd .. && rm -rf gitops-tmp
-                        """
-                    }
+                    sh """
+                        export GIT_TERMINAL_PROMPT=0
+                        rm -rf gitops-tmp
+                        git clone https://github.com/g3941813-svg/next-r3f-ops.git gitops-tmp
+                        cd gitops-tmp
+                        sed -i 's|image: ghcr.io/g3941813-svg/next14-r3f:.*|image: ${GHCR_IMAGE}:${shortCommit}|' next-r3f.yaml
+                        git config user.name "Jenkins CI"
+                        git config user.email "ci@soominlab.com"
+                        git add next-r3f.yaml
+                        git commit -m "chore: update image tag to ${shortCommit}"
+                        git push
+                        cd .. && rm -rf gitops-tmp
+                    """
                 }
             }
         }
