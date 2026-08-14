@@ -1,7 +1,6 @@
 import { cookies } from 'next/headers'
 import '../../../index.css'
 import Underlay from '../../parts/keyboard/Underlay'
-import { Do_Hyeon } from 'next/font/google'
 import './styles.css'
 import { languages } from '../i18n/settings'
 import { dir } from 'i18next'
@@ -18,11 +17,6 @@ interface RootLayoutProps {
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }))
 }
-
-const DoHyeon = Do_Hyeon({
-  subsets: ['latin'],
-  weight: ['400'],
-})
 
 export const metadata = {
   title: 'SoominLab Portfolio',
@@ -42,7 +36,10 @@ export default async function RootLayout({ children, modal, params: { lng } }: R
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body style={{ overflow: 'hidden' }} className={DoHyeon.className}>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet" />
+      <body style={{ overflow: 'hidden' }}>
         {/* To avoid FOUT with styled-components wrap Layout with StyledComponentsRegistry https://beta.nextjs.org/docs/styling/css-in-js#styled-components */}
         <Underlay />
         <div style={{ position: 'relative', width: ' 100%', height: '100%', overflow: 'auto', touchAction: 'auto' }}>
