@@ -1,32 +1,68 @@
 pipeline {
     agent any
-    
-    stages() {
-        
+
+    environment {
+        GHCR_IMAGE = 'ghcr.io/g3941813-svg/next14-r3f'
+        GITOPS_REPO = 'github.com/g3941813-svg/next-r3f-ops.git'
+    }
+
+    stages {
         stage('Checkout') {
-                steps {
-                    checkout scmGit(branches: [[name: 'main']], 
-                                    userRemoteConfigs: [[url: 'https://github.com/Lajancia/Next14-R3F']])
-                }
-            }
-
-        stage('Docker Image Build') {
             steps {
-                echo 'Docker building..'
+                checkout scm
+            }
+        }
+
+        stage('Docker Build & Push') {
+            steps {
                 script {
-                    sh 'docker build --no-cache -t next14-r3f .'
+                    def shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+                    echo "Building image: ${GHCR_IMAGE}:${shortCommit}"
+                    sh "docker build -f dockerfile -t ${GHCR_IMAGE}:${shortCommit} ."
+                    sh "docker tag ${GHCR_IMAGE}:${shortCommit} ${GHCR_IMAGE}:latest"
+                    sh "docker push ${GHCR_IMAGE}:${shortCommit}"
+                    sh "docker push ${GHCR_IMAGE}:latest"
                 }
             }
-        
         }
 
-         stage('Run Docker Container') {
+        stage('Update GitOps Repo') {
             steps {
-                sh 'docker stop next-r3f || true'
-                sh 'docker rm next-r3f || true'
-                sh 'docker run -d --name next-r3f --network my-network next14-r3f'
+                script {
+                    def shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+                    withCredentials([usernamePassword(credentialsId: 'github-token',
+                                                      usernameVariable: 'GIT_USER',
+                                                      passwordVariable: 'GIT_PAT')]) {
+                        sh """
+                            rm -rf gitops-tmp
+                            git clone https://\$GIT_USER:\$GIT_PAT@${GITOPS_REPO} gitops-tmp
+                            cd gitops-tmp
+                            sed -i 's|image: ghcr.io/g3941813-svg/next14-r3f:.*|image: ${GHCR_IMAGE}:${shortCommit}|' next-r3f.yaml
+                            git config user.name "Jenkins CI"
+                            git config user.email "ci@soominlab.com"
+                            git add next-r3f.yaml
+                            git commit -m "chore: update image tag to ${shortCommit}"
+                            git push
+                            cd .. && rm -rf gitops-tmp
+                        """
+                    }
+                }
             }
         }
-   		// stage...
-   	}
+
+        stage('Cleanup') {
+            steps {
+                sh 'docker image prune -f || true'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Pipeline completed successfully! Image pushed to GHCR and GitOps repo updated.'
+        }
+        failure {
+            echo '❌ Pipeline failed. Check Jenkins logs for details.'
+        }
+    }
 }
