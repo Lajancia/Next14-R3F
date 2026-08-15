@@ -8,7 +8,7 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
+  reactStrictMode: false,
   images: {},
   webpack(config, { isServer }) {
     if (!isServer) {

@@ -1,15 +1,17 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import Header from '../../components/Header'
 import Info from '../../parts/keyboard/Info'
 import { css } from '../../../styled-system/css'
 import { useEffect, useState, useRef, useCallback } from 'react'
-import BackgroundText from '../../parts/keyboard/BackgroundText'
-import Keyboards from '../../parts/keyboard/Keyboard'
-import Motorcycle from '../../parts/keyboard/Bike'
 import Footer from '../../components/Footer'
 import { useTranslation } from '../i18n/client'
 import { FaAngleDoubleDown, FaAngleDoubleUp } from 'react-icons/fa'
+
+const BackgroundText = dynamic(() => import('../../parts/keyboard/BackgroundText'), { ssr: false })
+const Keyboards = dynamic(() => import('../../parts/keyboard/Keyboard'), { ssr: false })
+const Motorcycle = dynamic(() => import('../../parts/keyboard/Bike'), { ssr: false })
 
 export default function ClientPage({ lng }: { lng: string }) {
   const ref = useRef<HTMLDivElement>(null)
