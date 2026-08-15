@@ -31,9 +31,11 @@ export default async function RootLayout({ children, modal, params: { lng } }: R
 
   return (
     <html className='antialiased' data-color-mode={theme} lang={lng} dir={dir(lng)}>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet" />
+      <head>
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
+        <link href='https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap' rel='stylesheet' />
+      </head>
       <body style={{ overflow: 'hidden' }}>
         {/* To avoid FOUT with styled-components wrap Layout with StyledComponentsRegistry https://beta.nextjs.org/docs/styling/css-in-js#styled-components */}
         <Underlay />
