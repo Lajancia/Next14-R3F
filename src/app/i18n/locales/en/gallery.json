@@ -1,0 +1,33 @@
+{
+  "title": "Architecture",
+  "subtitle": "How this portfolio is built & deployed",
+  "user": {
+    "title": "User Access",
+    "desc": "Browser-based access via soominlab.com on ports 80/443 with full SSL encryption."
+  },
+  "nginx": {
+    "title": "Nginx + Certbot",
+    "desc": "Docker-based reverse proxy handling SSL termination via Let's Encrypt, serving soominlab.com and subdomains."
+  },
+  "nextjs": {
+    "title": "Next.js 14 + R3F",
+    "desc": "React Three Fiber 3D portfolio app running on port 3000 inside a Docker container, deployed by k3s."
+  },
+  "k3s": {
+    "title": "k3s + ArgoCD",
+    "desc": "Lightweight single-node Kubernetes cluster. ArgoCD watches the GitOps repo and auto-syncs deployments."
+  },
+  "jenkins": {
+    "title": "Jenkins CI",
+    "desc": "Automated pipeline: GitHub push → Docker build → GHCR push → GitOps repo update → ArgoCD auto-sync."
+  },
+  "github": {
+    "title": "GitHub + GHCR",
+    "desc": "Source code repository and Docker image registry (GitHub Container Registry). ArgoCD pulls images from here."
+  },
+  "tailscale": {
+    "title": "Tailscale + UFW",
+    "desc": "WireGuard-based secure VPN for management access (SSH, k3s API, Hermes agent). UFW blocks all except 80/443."
+  },
+  "hint": "Select or hover over a node to see details"
+}
