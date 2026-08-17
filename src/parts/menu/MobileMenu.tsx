@@ -23,7 +23,7 @@ export default function MobileMenu() {
         <div className={StyledWrapper} onClick={handleClose}>
           <Link href={'/'}>Home</Link>
           <Link href={'/aboutMe'}>About Me</Link>
-          <Link href={'/gallery'}>Gallery</Link>
+          <Link href={'/pipeline'}>Pipeline</Link>
           <button
             onClick={() => {
               closeModal()

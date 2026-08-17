@@ -21,6 +21,6 @@
     "baseUrl": ".", // 프로젝트 루트를 기준으로 설정
     "paths": { "three-stdlib": ["types/three-stdlib.d.ts"] }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/app/[lng]/gallery/page.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/app/[lng]/pipeline/page.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

@@ -8,7 +8,6 @@ import { ReactNode } from 'react'
 
 interface RootLayoutProps {
   children: ReactNode
-  modal: ReactNode
   params: {
     lng: string
   }
@@ -23,7 +22,7 @@ export const metadata = {
   description: 'A minimal starter for Nextjs + React-three-fiber and Threejs.',
 }
 
-export default async function RootLayout({ children, modal, params: { lng } }: RootLayoutProps) {
+export default async function RootLayout({ children, params: { lng } }: RootLayoutProps) {
   const store = cookies()
   // @ts-ignore
   const themeName = store.get('theme') ? store.get('theme').value : 'dark'
@@ -41,7 +40,6 @@ export default async function RootLayout({ children, modal, params: { lng } }: R
         <Underlay />
         <div style={{ position: 'relative', width: ' 100%', height: '100%', overflow: 'auto', touchAction: 'auto' }}>
           {children}
-          {modal}
         </div>
       </body>
     </html>
