@@ -11,8 +11,8 @@ npm run dev
 ### Main Home Page
 * Macro Keyboard
 
-### Gallery Page
-* Images display
+### Pipeline Page
+* Infrastructure diagram
 
 ### About Page
 * Skills
@@ -29,7 +29,7 @@ npm run dev
 - [ ] npm to yarn
 - [ ] webpack to vite
 - [ ] Astronaut animation
-- [ ] mobile gallery vertical scroll
+- [ ] mobile pipeline vertical scroll
 - [ ] % loading to bar
 - [ ] main home page new object
 - [ ] Improve work history

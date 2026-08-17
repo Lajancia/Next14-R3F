@@ -5,9 +5,8 @@ export const StyledFlexContainer = css({ width: '100vw', height: '72dvh', lg: { 
 export const StyledFooter = css({
   overflow: 'hidden',
   zIndex: 1,
-  position: 'absolute',
-  bottom: 0,
-  height: '10vh',
+  position: 'relative',
+  height: '10dvh',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',

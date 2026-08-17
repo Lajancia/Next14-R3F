@@ -16,15 +16,15 @@ type PageProps = {
 }
 
 export default function Page({ params: { lng } }: PageProps) {
-  const { t } = useTranslation(lng, 'gallery')
-  const [showGallery, setShowGallery] = useState(false)
+  const { t } = useTranslation(lng, 'pipeline')
+  const [showPipeline, setShowPipeline] = useState(false)
 
   useEffect(() => {
-    setShowGallery(true)
+    setShowPipeline(true)
   }, [])
 
-  const handleCloseGallery = () => {
-    setShowGallery(!showGallery)
+  const handleClosePipeline = () => {
+    setShowPipeline(!showPipeline)
   }
 
   const nodes = useMemo<NodeInfo[]>(
@@ -45,18 +45,18 @@ export default function Page({ params: { lng } }: PageProps) {
         desc: t('nextjs.desc'),
       },
       {
-        id: 'k3s',
-        label: 'k3s',
-        subtitle: 'K8s + ArgoCD',
-        title: t('k3s.title'),
-        desc: t('k3s.desc'),
-      },
-      {
         id: 'jenkins',
         label: 'Jenkins',
         subtitle: 'CI Pipeline',
         title: t('jenkins.title'),
         desc: t('jenkins.desc'),
+      },
+      {
+        id: 'k3s',
+        label: 'k3s',
+        subtitle: 'K8s + ArgoCD',
+        title: t('k3s.title'),
+        desc: t('k3s.desc'),
       },
       {
         id: 'github',
@@ -79,21 +79,21 @@ export default function Page({ params: { lng } }: PageProps) {
   return (
     <>
       <div className={StyledHeaderContainer}>
-        <Header lng={lng} handleClose={handleCloseGallery} />
+        <Header lng={lng} handleClose={handleClosePipeline} />
       </div>
       <div className={StyledTitleContainer}>
-        <PageTransition transition={showGallery}>
+        <PageTransition transition={showPipeline}>
           <h1 className={StyledTitle}>{t('title')}</h1>
           <p className={StyledSubtitle}>{t('subtitle')}</p>
         </PageTransition>
       </div>
       <div className={StyledFlexContainer}>
-        <PageTransition transition={showGallery}>
+        <PageTransition transition={showPipeline}>
           <InfrastructureDiagram nodes={nodes} hint={t('hint')} />
         </PageTransition>
       </div>
       <div className={StyledFooter}>
-        <Footer showFooter={showGallery} />
+        <Footer showFooter={showPipeline} />
       </div>
     </>
   )

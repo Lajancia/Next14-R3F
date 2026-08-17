@@ -29,5 +29,5 @@
     "title": "Tailscale + UFW",
     "desc": "WireGuard-based secure VPN for management access (SSH, k3s API, Hermes agent). UFW blocks all except 80/443."
   },
-  "hint": "Select or hover over a node to see details"
+  "hint": "Scroll down to follow the infrastructure flow"
 }

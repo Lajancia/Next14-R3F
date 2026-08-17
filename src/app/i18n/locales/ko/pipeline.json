@@ -29,5 +29,5 @@
     "title": "Tailscale + UFW",
     "desc": "WireGuard 기반 보안 VPN으로 관리망(SSH, k3s API, Hermes 에이전트)을 보호. UFW는 80/443 외 전부 차단."
   },
-  "hint": "노드를 선택하거나 마우스를 올리면 상세 설명이 나와요"
+  "hint": "아래로 스크롤해 인프라 흐름을 따라가 보세요"
 }

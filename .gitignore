@@ -44,3 +44,5 @@ report.*.json
 ## Panda
 styled-system
 styled-system-studio
+# typescript build info
+*.tsbuildinfo

@@ -1,12 +1,11 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { FaUser, FaShieldAlt, FaBolt, FaNetworkWired, FaCogs, FaGithub, FaLock } from 'react-icons/fa'
 import { IconType } from 'react-icons'
 import { css } from '../../../styled-system/css'
 
-/* ─── Types ─── */
 export interface NodeInfo {
   id: string
   label: string
@@ -20,393 +19,214 @@ interface InfrastructureDiagramProps {
   hint?: string
 }
 
-/* ─── Node config ─── */
 interface NodeMeta {
   icon: IconType
   color: string
-  x: number
-  y: number
 }
 
 const nodeMeta: Record<string, NodeMeta> = {
-  user: { icon: FaUser, color: '#f54927', x: 135, y: 190 },
-  nginx: { icon: FaShieldAlt, color: '#0cf', x: 375, y: 190 },
-  nextjs: { icon: FaBolt, color: '#E9E9E9', x: 615, y: 190 },
-  k3s: { icon: FaNetworkWired, color: '#00d4aa', x: 855, y: 190 },
-  jenkins: { icon: FaCogs, color: '#d24939', x: 615, y: 405 },
-  github: { icon: FaGithub, color: '#6e5494', x: 375, y: 405 },
-  tailscale: { icon: FaLock, color: '#6b3fa0', x: 135, y: 405 },
+  user: { icon: FaUser, color: '#f54927' },
+  nginx: { icon: FaShieldAlt, color: '#0cf' },
+  nextjs: { icon: FaBolt, color: '#f3f3f3' },
+  k3s: { icon: FaNetworkWired, color: '#00d4aa' },
+  jenkins: { icon: FaCogs, color: '#d24939' },
+  github: { icon: FaGithub, color: '#8b6ec8' },
+  tailscale: { icon: FaLock, color: '#7350b7' },
 }
 
-const connections: { from: string; to: string; d: string; dashed?: boolean }[] = [
-  { from: 'user', to: 'nginx', d: 'M 230 190 L 280 190' },
-  { from: 'nginx', to: 'nextjs', d: 'M 470 190 L 520 190' },
-  { from: 'nextjs', to: 'k3s', d: 'M 710 190 L 760 190' },
-  { from: 'github', to: 'jenkins', d: 'M 470 405 L 520 405' },
-  { from: 'jenkins', to: 'k3s', d: 'M 710 405 C 710 300, 760 300, 760 190', dashed: true },
-  { from: 'tailscale', to: 'nginx', d: 'M 230 405 C 230 300, 280 300, 280 190', dashed: true },
-]
-
-const CARD_W = 190
-const CARD_H = 112
-
-/* ─── SVG helpers ─── */
-function ArrowDefs() {
-  return (
-    <defs>
-      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 z" fill="#888" />
-      </marker>
-    </defs>
-  )
-}
-
-function FlowDot({ d, color, dur = 3.2, begin = 0 }: { d: string; color: string; dur?: number; begin?: number }) {
-  return (
-    <circle r="4" fill={color} opacity="0.9">
-      <animateMotion dur={`${dur}s`} repeatCount="indefinite" path={d} begin={`${begin}s`} />
-    </circle>
-  )
-}
-
-/* ─── Node card ─── */
-function NodeCard({
-  node,
-  isActive,
-  isDark,
-  onSelect,
-}: {
-  node: NodeInfo
-  isActive: boolean
-  isDark: boolean
-  onSelect: () => void
-}) {
+function TimelineCard({ node, index, activeId, isDark, onSelect }: { node: NodeInfo; index: number; activeId: string | null; isDark: boolean; onSelect: () => void }) {
   const meta = nodeMeta[node.id]
   const Icon = meta.icon
-
-  const bg = isDark ? 'rgba(42,42,42,0.85)' : 'rgba(255,255,255,0.85)'
-  const border = isActive ? meta.color : isDark ? '#3a3a3a' : '#d8d8d8'
-  const shadow = isActive
-    ? `0 10px 32px rgba(0,0,0,${isDark ? 0.45 : 0.18}), 0 0 0 1px ${meta.color}`
-    : `0 6px 24px rgba(0,0,0,${isDark ? 0.35 : 0.1})`
+  const active = activeId === node.id
+  const side = index % 2 === 0 ? 'left' : 'right'
+  const color = node.id === 'nextjs' && !isDark ? '#1e1e1e' : meta.color
 
   return (
-    <motion.button
-      type='button'
-      className={CardBaseStyle}
-      style={{
-        left: `${(meta.x - CARD_W / 2) / 10}%`,
-        top: `${(meta.y - CARD_H / 2) / 5.4}%`,
-        width: `${CARD_W / 10}%`,
-        height: `${CARD_H / 5.4}%`,
-        background: bg,
-        borderColor: border,
-        boxShadow: shadow,
-        transform: isActive ? 'translateY(-6px)' : 'translateY(0)',
-      }}
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.15 + (meta.x / 1000) * 0.8 }}
-      onMouseEnter={onSelect}
-      onFocus={onSelect}
-      onClick={onSelect}
-      aria-pressed={isActive}
-      aria-label={`${node.label}: ${node.title}`}
-    >
-      <Icon style={{ color: meta.color, fontSize: '1.5rem' }} />
-      <div className={CardTextStyle}>
-        <div className={CardLabelStyle}>{node.label}</div>
-        <div className={CardSubStyle}>{node.subtitle}</div>
+    <div className={TimelineItemStyle}>
+      <div className={TimelineRailStyle}>
+        <motion.span
+          className={TimelineDotStyle}
+          style={{ backgroundColor: color, boxShadow: `0 0 0 6px ${color}22` }}
+          animate={active ? { scale: [1, 1.5, 1], opacity: [1, 0.55, 1] } : { scale: 1, opacity: 0.9 }}
+          transition={{ duration: 1.2, repeat: active ? Infinity : 0 }}
+        />
       </div>
-    </motion.button>
-  )
-}
-
-/* ─── Main component ─── */
-export default function InfrastructureDiagram({ nodes, hint }: InfrastructureDiagramProps) {
-  const [isDark, setIsDark] = useState(true)
-  const [activeId, setActiveId] = useState<string | null>(null)
-
-  useEffect(() => {
-    const check = () => {
-      const mode = document.documentElement.getAttribute('data-color-mode')
-      setIsDark(mode !== 'light')
-    }
-    check()
-    const observer = new MutationObserver(check)
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-color-mode'] })
-    return () => observer.disconnect()
-  }, [])
-
-  const activeNode = useMemo(() => nodes.find((n) => n.id === activeId) || null, [nodes, activeId])
-  const activeMeta = activeNode ? nodeMeta[activeNode.id] : null
-
-  const selectNode = (id: string) => setActiveId((current) => (current === id ? null : id))
-  const isLineActive = (from: string, to: string) => activeId === from || activeId === to
-  const lineOpacity = (from: string, to: string) => {
-    if (!activeId) return 0.4
-    return isLineActive(from, to) ? 0.95 : 0.12
-  }
-
-  return (
-    <div className={DiagramRootStyle}>
-      <div className={DiagramScrollStyle}>
-        <div className={DiagramStageStyle}>
-          {/* SVG layer */}
-          <svg className={SvgStyle} viewBox="0 0 1000 540" preserveAspectRatio="none">
-            <ArrowDefs />
-            {connections.map((c) => {
-              const fromMeta = nodeMeta[c.from]
-              const opacity = lineOpacity(c.from, c.to)
-              return (
-                <g key={`${c.from}-${c.to}`}>
-                  <motion.path
-                    d={c.d}
-                    fill="none"
-                    stroke={fromMeta.color}
-                    strokeWidth={opacity > 0.4 ? 3.5 : 2}
-                    strokeDasharray={c.dashed ? '8 6' : undefined}
-                    strokeLinecap="round"
-                    opacity={opacity}
-                    markerEnd="url(#arrow)"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 0.9, delay: 0.4 + (fromMeta.x / 1000) * 0.6 }}
-                  />
-                  <FlowDot d={c.d} color={fromMeta.color} dur={opacity > 0.4 ? 2 : 3.5} begin={0} />
-                  <FlowDot d={c.d} color={fromMeta.color} dur={opacity > 0.4 ? 2 : 3.5} begin={opacity > 0.4 ? 1 : 1.75} />
-                </g>
-              )
-            })}
-          </svg>
-
-          {/* Node cards */}
-          {nodes.map((node) => (
-            <NodeCard
-              key={node.id}
-              node={node}
-              isActive={activeId === node.id}
-              isDark={isDark}
-              onSelect={() => selectNode(node.id)}
+      <motion.button
+        type='button'
+        className={TimelineCardStyle({ side, active })}
+        onClick={onSelect}
+        onFocus={onSelect}
+        initial={{ opacity: 0, y: 52, rotateX: -9 }}
+        whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+        viewport={{ once: false, amount: 0.55 }}
+        transition={{ duration: 0.62, ease: 'easeOut' }}
+        whileHover={{ y: -8, scale: 1.015 }}
+        whileTap={{ scale: 0.98 }}
+        aria-pressed={active}
+      >
+        <motion.span
+          className={IconHaloStyle}
+          style={{ backgroundColor: `${color}18`, color }}
+          animate={active ? { rotate: [0, 8, -8, 0], scale: [1, 1.08, 1] } : { rotate: 0, scale: 1 }}
+          transition={{ duration: 0.85, repeat: active ? Infinity : 0, repeatDelay: 1.4 }}
+        >
+          <Icon />
+        </motion.span>
+        <span className={CardContentStyle}>
+          <span className={CardKickerStyle} style={{ color }}>{`0${index + 1} · ${node.subtitle}`}</span>
+          <strong className={CardTitleStyle}>{node.label}</strong>
+          <span className={CardHeadlineStyle}>{node.title}</span>
+          <span className={CardDescriptionStyle}>{node.desc}</span>
+          <span className={CardFooterStyle}>
+            <span>LIVE PIPELINE</span>
+            <motion.i
+              style={{ backgroundColor: color }}
+              animate={{ opacity: [0.35, 1, 0.35], scale: [0.8, 1, 0.8] }}
+              transition={{ duration: 1.35, repeat: Infinity, delay: index * 0.15 }}
             />
-          ))}
-
-          {/* Info panel */}
-          <AnimatePresence>
-            {activeNode && (
-              <motion.div
-                className={InfoPanelStyle}
-                style={{
-                  background: isDark ? 'rgba(30,30,30,0.88)' : 'rgba(233,233,233,0.88)',
-                  borderColor: isDark ? '#333' : '#ccc',
-                  left: `${activeMeta!.x / 10}%`,
-                  top: activeMeta!.y < 300 ? '42%' : '33%',
-                }}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 16 }}
-                transition={{ duration: 0.25 }}
-              >
-                <span className={InfoTagStyle} style={{ color: nodeMeta[activeNode.id].color }}>
-                  {activeNode.title}
-                </span>
-                <p className={InfoDescStyle}>{activeNode.desc}</p>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-
-      <div className={MobileNodeListStyle}>
-        {nodes.map((node) => {
-          const meta = nodeMeta[node.id]
-          const Icon = meta.icon
-          const isActive = activeId === node.id
-          return (
-            <button
-              key={node.id}
-              type='button'
-              className={MobileNodeStyle({ active: isActive })}
-              onClick={() => selectNode(node.id)}
-              aria-expanded={isActive}
-            >
-              <span className={MobileIconStyle} style={{ color: meta.color }}>
-                <Icon />
-              </span>
-              <span className={MobileNodeCopyStyle}>
-                <strong>{node.label}</strong>
-                <small>{node.subtitle}</small>
-                {isActive && <em>{node.desc}</em>}
-              </span>
-              <span className={MobileExpandStyle}>{isActive ? '−' : '+'}</span>
-            </button>
-          )
-        })}
-      </div>
-
-      {/* Footer hints */}
-      <div className={HintRowStyle}>
-        {hint && <span className={isDark ? HintDark : HintLight}>{hint}</span>}
-      </div>
+          </span>
+        </span>
+        <span className={CardActionStyle} style={{ color }}>{active ? 'ACTIVE' : 'EXPLORE'}</span>
+      </motion.button>
     </div>
   )
 }
 
-/* ─── Styles ─── */
-const DiagramRootStyle = css({
-  width: '100%',
+export default function InfrastructureDiagram({ nodes }: InfrastructureDiagramProps) {
+  const [activeId, setActiveId] = useState<string | null>(nodes[0]?.id ?? null)
+  const [isDark, setIsDark] = useState(true)
+
+  useEffect(() => {
+    setActiveId(nodes[0]?.id ?? null)
+  }, [nodes])
+
+  useEffect(() => {
+    const updateTheme = () => setIsDark(document.documentElement.getAttribute('data-color-mode') !== 'light')
+    updateTheme()
+    const observer = new MutationObserver(updateTheme)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-color-mode'] })
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <section className={RootStyle} aria-label='Infrastructure timeline'>
+      <div className={ScrollAreaStyle}>
+        <div className={TimelineStyle}>
+          <div className={MainLineStyle} />
+          {nodes.map((node, index) => (
+            <div key={node.id}>
+              <TimelineCard node={node} index={index} activeId={activeId} isDark={isDark} onSelect={() => setActiveId(node.id)} />
+              {index < nodes.length - 1 && (
+                <div className={SignalSegmentStyle}>
+                  <motion.span
+                    className={SignalPacketStyle}
+                    animate={{ y: ['0%', '460%'], opacity: [0, 1, 1, 0] }}
+                    transition={{ duration: 1.7, delay: index * 0.17, repeat: Infinity, repeatDelay: 0.5, ease: 'easeInOut' }}
+                  />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className={EndCapStyle}>END OF FLOW</div>
+      </div>
+    </section>
+  )
+}
+
+const RootStyle = css({ width: '100%', height: '100%', overflow: 'hidden' })
+
+const ScrollAreaStyle = css({
   height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  position: 'relative',
-})
-
-const DiagramScrollStyle = css({
-  flex: 1,
-  minHeight: 0,
-  overflow: 'hidden',
-  display: 'none',
-  justifyContent: 'center',
-  md: { display: 'flex' },
-})
-
-const DiagramStageStyle = css({
-  position: 'relative',
-  flex: '0 1 auto',
-  height: '100%',
-  width: 'auto',
-  maxWidth: '100%',
-  aspectRatio: '1000 / 540',
-})
-
-const SvgStyle = css({
-  position: 'absolute',
-  inset: 0,
-  width: '100%',
-  height: '100%',
-})
-
-const CardBaseStyle = css({
-  position: 'absolute',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: '0.3rem',
-  borderRadius: '14px',
-  cursor: 'pointer',
-  appearance: 'none',
-  padding: 0,
-  fontFamily: 'inherit',
-  transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
-  border: '1px solid transparent',
-  boxSizing: 'border-box',
-})
-
-const CardTextStyle = css({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '0.1rem',
-})
-
-const CardLabelStyle = css({
-  fontSize: '1.05rem',
-  fontWeight: 700,
-  color: 'MainText',
-  fontFamily: "'Do Hyeon', sans-serif",
-  whiteSpace: 'nowrap',
-})
-
-const CardSubStyle = css({
-  fontSize: '0.62rem',
-  color: 'orange',
-  fontFamily: "'Do Hyeon', sans-serif",
-  whiteSpace: 'nowrap',
-})
-
-const InfoPanelStyle = css({
-  position: 'absolute',
-  transform: 'translateX(-50%)',
-  display: 'none',
-  width: '28%',
-  minWidth: '240px',
-  maxWidth: '340px',
-  padding: '0.7rem 1.1rem',
-  borderRadius: '12px',
-  textAlign: 'center',
-  backdropFilter: 'blur(12px)',
-  boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
-  zIndex: 2,
-  md: { display: 'block' },
-})
-
-const InfoTagStyle = css({
-  fontSize: '0.85rem',
-  fontWeight: 700,
-  fontFamily: "'Do Hyeon', sans-serif",
-})
-
-const InfoDescStyle = css({
-  fontSize: '0.72rem',
-  color: '#999',
-  margin: 0,
-  marginTop: '0.15rem',
-  lineHeight: 1.5,
-  fontFamily: "'Do Hyeon', sans-serif",
-})
-
-const HintRowStyle = css({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: '0.4rem 1rem',
-  gap: '1rem',
-  flexWrap: 'wrap',
-})
-
-const MobileNodeListStyle = css({
-  display: 'flex',
-  flex: 1,
-  flexDirection: 'column',
   overflowY: 'auto',
-  padding: '0.75rem 1rem 1rem',
-  gap: '0.65rem',
-  md: { display: 'none' },
+  overscrollBehavior: 'contain',
+  scrollSnapType: 'y mandatory',
+  padding: '1.5rem 1rem 5rem',
+  md: { padding: '2.5rem 3rem 6rem' },
 })
 
-const MobileNodeStyle = (props: { active: boolean }) =>
+const TimelineStyle = css({ position: 'relative', maxWidth: '1180px', margin: '0 auto' })
+
+const MainLineStyle = css({
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  left: '1.55rem',
+  width: '1px',
+  background: 'linear-gradient(180deg, transparent, rgba(255,165,0,0.5) 7%, rgba(130,150,255,0.45) 92%, transparent)',
+  md: { left: '50%' },
+})
+
+const TimelineItemStyle = css({
+  position: 'relative',
+  minHeight: '36dvh',
+  display: 'flex',
+  alignItems: 'center',
+  scrollSnapAlign: 'center',
+  md: { minHeight: '42dvh' },
+})
+
+const TimelineRailStyle = css({
+  position: 'absolute',
+  left: '1.05rem',
+  zIndex: 2,
+  md: { left: 'calc(50% - 0.5rem)' },
+})
+
+const TimelineDotStyle = css({ display: 'block', width: '1rem', height: '1rem', borderRadius: '50%', border: '2px solid #1e1e1e' })
+
+const TimelineCardStyle = (props: { side: string; active: boolean }) =>
   css({
+    width: 'calc(100% - 3.8rem)',
+    marginLeft: '3.8rem',
     display: 'flex',
-    width: '100%',
+    position: 'relative',
     alignItems: 'flex-start',
-    gap: '0.8rem',
-    padding: '0.9rem',
-    textAlign: 'left',
+    gap: '1rem',
+    padding: '1.25rem',
     color: 'MainText',
-    background: props.active ? 'rgba(127,127,127,0.16)' : 'rgba(127,127,127,0.08)',
-    border: '1px solid',
-    borderColor: props.active ? 'orange' : 'rgba(127,127,127,0.25)',
-    borderRadius: '12px',
-    cursor: 'pointer',
+    textAlign: 'left',
     fontFamily: 'inherit',
-    transition: 'border-color 0.2s ease, background 0.2s ease',
+    border: '1px solid',
+    borderColor: props.active ? 'orange' : 'rgba(127,127,127,0.28)',
+    borderRadius: '18px',
+    background: props.active ? 'rgba(127,127,127,0.16)' : 'rgba(127,127,127,0.07)',
+    boxShadow: props.active ? '0 14px 44px rgba(0,0,0,0.24)' : '0 8px 28px rgba(0,0,0,0.12)',
+    cursor: 'pointer',
+    md: {
+      width: 'calc(50% - 3rem)',
+      marginLeft: props.side === 'left' ? 0 : 'calc(50% + 3rem)',
+      padding: '1.5rem',
+    },
   })
 
-const MobileIconStyle = css({ fontSize: '1.25rem', paddingTop: '0.15rem' })
-const MobileNodeCopyStyle = css({ display: 'flex', flex: 1, flexDirection: 'column', gap: '0.1rem', fontSize: '1rem' })
-const MobileExpandStyle = css({ color: 'orange', fontSize: '1.3rem', lineHeight: 1 })
-
-const HintDark = css({
-  fontSize: '0.72rem',
-  color: '#666',
-  fontFamily: "'Do Hyeon', sans-serif",
-  letterSpacing: '0.04em',
+const IconHaloStyle = css({
+  display: 'grid',
+  flexShrink: 0,
+  width: '3rem',
+  height: '3rem',
+  placeItems: 'center',
+  borderRadius: '14px',
+  fontSize: '1.35rem',
 })
 
-const HintLight = css({
-  fontSize: '0.72rem',
-  color: '#8a8a8a',
-  fontFamily: "'Do Hyeon', sans-serif",
-  letterSpacing: '0.04em',
+const CardContentStyle = css({ display: 'flex', flex: 1, flexDirection: 'column', gap: '0.2rem' })
+const CardKickerStyle = css({ fontSize: '0.65rem', letterSpacing: '0.06em' })
+const CardTitleStyle = css({ fontSize: '1.35rem', lineHeight: 1.1 })
+const CardHeadlineStyle = css({ fontSize: '0.8rem', color: 'MainText', opacity: 0.75 })
+const CardDescriptionStyle = css({ fontSize: '0.76rem', lineHeight: 1.55, color: '#999', marginTop: '0.35rem' })
+const CardFooterStyle = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.38rem',
+  marginTop: '0.65rem',
+  color: '#777',
+  fontSize: '0.58rem',
+  letterSpacing: '0.1em',
+  '& i': { display: 'block', width: '5px', height: '5px', borderRadius: '50%' },
 })
+const CardActionStyle = css({ fontSize: '0.58rem', letterSpacing: '0.1em', paddingTop: '0.1rem' })
+
+const SignalSegmentStyle = css({ position: 'relative', height: '1.4rem', marginLeft: '1.35rem', overflow: 'hidden', md: { marginLeft: 'calc(50% - 0.2rem)' } })
+const SignalPacketStyle = css({ display: 'block', width: '5px', height: '5px', borderRadius: '50%', background: 'orange', boxShadow: '0 0 12px 4px rgba(255,165,0,0.45)' })
+const EndCapStyle = css({ padding: '3rem 0 1rem', color: '#777', fontSize: '0.65rem', letterSpacing: '0.22em', textAlign: 'center' })
