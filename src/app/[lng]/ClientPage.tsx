@@ -29,7 +29,7 @@ export default function ClientPage({ lng }: { lng: string }) {
   const unmountTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Loading screen state — always start visible (matches SSR)
-  const [isLoading, setIsLoading] = useState(true)
+  const [loadingPhase, setLoadingPhase] = useState<'loading' | 'exiting' | 'done'>('loading')
   const [loadingProgress, setLoadingProgress] = useState(0)
 
   useLayoutEffect(() => {
@@ -37,7 +37,7 @@ export default function ClientPage({ lng }: { lng: string }) {
 
     if (!isFirstVisit) {
       // Already cached — hide loading immediately before paint
-      setIsLoading(false)
+      setLoadingPhase('done')
       setLoadingProgress(100)
       setShowKeyboard(true)
       setShowBackground(true)
@@ -57,11 +57,8 @@ export default function ClientPage({ lng }: { lng: string }) {
       setLoadingProgress(100)
       sessionStorage.setItem('hermes_loaded', '1')
       setTimeout(() => {
-        setIsLoading(false)
-        setShowKeyboard(true)
-        setShowBackground(true)
-        setRenderKeyboard(true)
-      }, 400)
+        setLoadingPhase('exiting')
+      }, 300)
     }
 
     THREE.DefaultLoadingManager.onProgress = onProgress
@@ -77,10 +74,7 @@ export default function ClientPage({ lng }: { lng: string }) {
     }, 5000)
 
     const safety = setTimeout(() => {
-      setIsLoading(false)
-      setShowKeyboard(true)
-      setShowBackground(true)
-      setRenderKeyboard(true)
+      setLoadingPhase('exiting')
     }, 8000)
 
     return () => {
@@ -88,6 +82,18 @@ export default function ClientPage({ lng }: { lng: string }) {
       clearTimeout(safety)
     }
   }, [loadingProgress])
+
+  useEffect(() => {
+    if (loadingPhase === 'exiting') {
+      const timer = setTimeout(() => {
+        setLoadingPhase('done')
+        setShowKeyboard(true)
+        setShowBackground(true)
+        setRenderKeyboard(true)
+      }, 300)
+      return () => clearTimeout(timer)
+    }
+  }, [loadingPhase])
 
   // 컴포넌트가 언마운트될 때 타임아웃을 정리합니다.
   useEffect(() => {
@@ -161,7 +167,7 @@ export default function ClientPage({ lng }: { lng: string }) {
 
   return (
     <>
-      <LoadingScreen progress={loadingProgress} isLoading={isLoading} />
+      <LoadingScreen progress={loadingProgress} loadingPhase={loadingPhase} />
 
       <div className={HeaderContainer}>
         <Header lng={lng} handleClose={handleCloseModel} />

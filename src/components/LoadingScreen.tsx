@@ -1,31 +1,37 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { css } from '../../styled-system/css'
 
 type LoadingScreenProps = {
   progress: number
-  isLoading: boolean
+  loadingPhase: 'loading' | 'exiting' | 'done'
 }
 
-const LoadingScreen = ({ progress, isLoading }: LoadingScreenProps) => {
-  if (!isLoading) return null
+const LoadingScreen = ({ progress, loadingPhase }: LoadingScreenProps) => {
+  if (loadingPhase === 'done') return null
 
   return (
-    <div className={StyledOverlay}>
+    <motion.div
+      className={StyledOverlay}
+      initial={{ y: 0 }}
+      animate={loadingPhase === 'exiting' ? { y: '-100%' } : { y: 0 }}
+      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+    >
       <div className={StyledCenter}>
         <span className={StyledTitle}>Soominlab</span>
       </div>
 
       <div className={StyledProgressArea}>
+        <span className={StyledProgressText}>{progress}%</span>
         <div className={StyledProgressTrack}>
           <div
             className={StyledProgressFill}
             style={{ width: `${progress}%` }}
           />
         </div>
-        <span className={StyledProgressText}>{progress}%</span>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -37,7 +43,7 @@ const StyledOverlay = css({
   left: 0,
   width: '100vw',
   height: '100dvh',
-  backgroundColor: '#0a0a0a',
+  backgroundColor: '#1e1e1e',
   zIndex: 100,
   display: 'flex',
   flexDirection: 'column',
@@ -60,34 +66,27 @@ const StyledTitle = css({
 
 const StyledProgressArea = css({
   position: 'absolute',
-  bottom: '12%',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  width: '80%',
-  maxWidth: '30rem',
+  bottom: '13%',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '0.5rem',
+  gap: '0.4rem',
+})
+
+const StyledProgressText = css({
+  fontSize: '0.8rem',
+  color: 'rgba(255,255,255,0.5)',
+  fontVariantNumeric: 'tabular-nums',
 })
 
 const StyledProgressTrack = css({
-  width: '100%',
-  height: '2px',
-  backgroundColor: 'rgba(255,255,255,0.2)',
-  borderRadius: '1px',
-  overflow: 'hidden',
+  width: '8rem',
+  height: '1px',
+  backgroundColor: 'rgba(255,255,255,0.15)',
 })
 
 const StyledProgressFill = css({
   height: '100%',
-  backgroundColor: '#ffffff',
-  borderRadius: '1px',
+  backgroundColor: 'rgba(255,255,255,0.6)',
   transition: 'width 0.3s ease-out',
-})
-
-const StyledProgressText = css({
-  fontSize: '0.875rem',
-  color: 'rgba(255,255,255,0.6)',
-  fontVariantNumeric: 'tabular-nums',
 })
