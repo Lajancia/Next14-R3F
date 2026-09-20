@@ -35,7 +35,8 @@ type HeaderProps = {
 }
 
 type StyledProps = {
-  currentPath: boolean | string
+  currentPath?: boolean | string
+  isHome?: boolean
 }
 
 const Header = ({ lng, handleClose }: HeaderProps) => {
@@ -45,6 +46,8 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
   const { openModal } = useOpenModalStore()
   const [currentPath, setCurrentPath] = useState(pathname)
   const [theme, setTheme] = useState<'light' | 'dark'>(() => (typeof window === 'undefined' ? 'dark' : getCurrentTheme()) as 'light' | 'dark')
+
+  const isHome = currentPath === '/en' || currentPath === '/ko'
 
   const handleGalleryMove = () => {
     if (pathname.includes('/gallery')) return
@@ -114,14 +117,14 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
     <>
       <MobileMenu />
       <div className={StyledHeaderWrapper}>
-        <div className={StyledBlurOverlay} />
+        {!isHome && <div className={StyledBlurOverlay} />}
         <button onClick={() => handleOpen()} className={StyledMobileMenu}>
           MENU
         </button>
         <div className={StyledHeaderMenu}>
           <button
             disabled={buttonClick}
-            className={StyledHomeLink({ currentPath: currentPath })}
+            className={StyledHomeLink({ currentPath: currentPath, isHome })}
             onClick={() => handleMain()}
           >
             Soominlab
@@ -130,7 +133,7 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
           <div className={StyledOption}>
             <button
               disabled={buttonClick}
-              className={StyledLink({ currentPath: currentPath.includes('/aboutMe') ? true : false })}
+              className={StyledLink({ currentPath: currentPath.includes('/aboutMe') ? true : false, isHome })}
               onClick={() => handleAboutMe()}
               onMouseEnter={handleAboutMeHover}
             >
@@ -143,25 +146,25 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
             disabled={buttonClick}
             onClick={() => handleGalleryMove()}
             onMouseEnter={handleGalleryHover}
-            className={StyledLink({ currentPath: currentPath.includes('/gallery') ? true : false })}
+            className={StyledLink({ currentPath: currentPath.includes('/gallery') ? true : false, isHome })}
           >
             Gallery
           </button>
           <div className={StyledHeaderSetting}>
             <a
               href={`/ko${pathname.replace(/\/(en|ko)/, '')}`}
-              className={StyledLanguageButton({ currentPath: pathname.includes('ko') })}
+              className={StyledLanguageButton({ currentPath: pathname.includes('ko'), isHome })}
             >
               KO
             </a>
             <a
               href={`/en${pathname.replace(/\/(en|ko)/, '')}`}
-              className={StyledLanguageButton({ currentPath: pathname.includes('en') })}
+              className={StyledLanguageButton({ currentPath: pathname.includes('en'), isHome })}
             >
               EN
             </a>
             <button
-              className={StyledThemeButton}
+              className={StyledThemeButton({ isHome })}
               onClick={handleToggleTheme}
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             >
@@ -192,9 +195,9 @@ const StyledMobileMenu = css({
 const StyledLink = (props: StyledProps) =>
   css({
     display: 'none',
-    color: props.currentPath ? 'orange' : 'MainText',
+    color: props.isHome ? 'MainText' : props.currentPath ? 'orange' : 'MainText',
     transition: 'color 0.3s',
-    '&:hover': { color: 'orange' },
+    '&:hover': { color: props.isHome ? 'MainText' : 'orange' },
 
     lg: { display: 'block' },
   })
@@ -226,10 +229,10 @@ const StyledBlurOverlay = css({
 
 const StyledHomeLink = (props: StyledProps) =>
   css({
-    color: props.currentPath === '/en' || props.currentPath === '/ko' ? 'orange' : 'MainText',
+    color: props.isHome ? 'MainText' : props.currentPath === '/en' || props.currentPath === '/ko' ? 'orange' : 'MainText',
     fontSize: '2rem',
     transition: 'color 0.3s',
-    '&:hover': { color: 'orange' },
+    '&:hover': { color: props.isHome ? 'MainText' : 'orange' },
     lg: {
       fontSize: '2.5rem',
     },
@@ -272,28 +275,35 @@ const StyledHeaderSetting = css({
 })
 
 const StyledLanguageButton = (props: StyledProps) =>
-  css({ fontSize: '1.5rem', color: props.currentPath ? 'orange' : 'MainText' })
+  css({
+    fontSize: '1.5rem',
+    color: props.isHome ? 'MainText' : props.currentPath ? 'orange' : 'MainText',
+  })
 
-const StyledThemeButton = css({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '2rem',
-  height: '2rem',
-  borderRadius: '50%',
-  border: '1px solid',
-  borderColor: 'MainText',
-  color: 'MainText',
-  backgroundColor: 'transparent',
-  fontSize: '1.1rem',
-  cursor: 'pointer',
-  transition: 'color 0.3s, border-color 0.3s',
-  '&:hover': { color: 'orange', borderColor: 'orange' },
-  '& svg': {
-    width: '1.1rem',
-    height: '1.1rem',
-  },
-})
+const StyledThemeButton = (props: StyledProps) =>
+  css({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '2rem',
+    height: '2rem',
+    borderRadius: '50%',
+    border: '1px solid',
+    borderColor: 'MainText',
+    color: 'MainText',
+    backgroundColor: 'transparent',
+    fontSize: '1.1rem',
+    cursor: 'pointer',
+    transition: 'color 0.3s, border-color 0.3s',
+    '&:hover': {
+      color: props.isHome ? 'MainText' : 'orange',
+      borderColor: props.isHome ? 'MainText' : 'orange',
+    },
+    '& svg': {
+      width: '1.1rem',
+      height: '1.1rem',
+    },
+  })
 
 const StyledRightSetting = css({
   display: 'flex',
