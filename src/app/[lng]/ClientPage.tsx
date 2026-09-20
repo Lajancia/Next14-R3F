@@ -268,6 +268,7 @@ const MobileNavContainer = css({
   zIndex: 20,
   flexDirection: 'column',
   gap: '1rem',
+  md: { bottom: '8rem' },
   xl: { display: 'none' },
 })
 

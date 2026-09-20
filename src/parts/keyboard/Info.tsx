@@ -68,7 +68,7 @@ const StyledInfoWrapper = css({
   gap: '1rem',
   bottom: 10,
   md: {
-    marginBottom: '10vh',
+    marginBottom: '18vh',
   },
   lg: {
     marginTop: '25%',
