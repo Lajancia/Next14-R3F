@@ -32,6 +32,23 @@ export default function ClientPage({ lng }: { lng: string }) {
   const [loadingPhase, setLoadingPhase] = useState<'loading' | 'exiting' | 'done'>('loading')
   const [loadingProgress, setLoadingProgress] = useState(0)
   const loadingDoneRef = useRef(false)
+  const typingDoneRef = useRef(false)
+  const modelLoadedRef = useRef(false)
+
+  const checkAndTriggerExit = useCallback(() => {
+    if (modelLoadedRef.current && typingDoneRef.current && !loadingDoneRef.current) {
+      loadingDoneRef.current = true
+      sessionStorage.setItem('hermes_loaded', '1')
+      setTimeout(() => {
+        setLoadingPhase('exiting')
+      }, 300)
+    }
+  }, [])
+
+  const handleTypingComplete = useCallback(() => {
+    typingDoneRef.current = true
+    checkAndTriggerExit()
+  }, [checkAndTriggerExit])
 
   useLayoutEffect(() => {
     const isFirstVisit = !sessionStorage.getItem('hermes_loaded')
@@ -55,12 +72,9 @@ export default function ClientPage({ lng }: { lng: string }) {
     }
 
     const onLoad = () => {
-      loadingDoneRef.current = true
+      modelLoadedRef.current = true
       setLoadingProgress(100)
-      sessionStorage.setItem('hermes_loaded', '1')
-      setTimeout(() => {
-        setLoadingPhase('exiting')
-      }, 300)
+      checkAndTriggerExit()
     }
 
     THREE.DefaultLoadingManager.onProgress = onProgress
@@ -77,6 +91,8 @@ export default function ClientPage({ lng }: { lng: string }) {
 
     const safety = setTimeout(() => {
       if (!loadingDoneRef.current) {
+        modelLoadedRef.current = true
+        typingDoneRef.current = true
         setLoadingPhase('exiting')
       }
     }, 8000)
@@ -85,7 +101,7 @@ export default function ClientPage({ lng }: { lng: string }) {
       clearTimeout(fallback)
       clearTimeout(safety)
     }
-  }, [])
+  }, [checkAndTriggerExit])
 
   useEffect(() => {
     if (loadingPhase === 'exiting') {
@@ -94,7 +110,7 @@ export default function ClientPage({ lng }: { lng: string }) {
         setShowKeyboard(true)
         setShowBackground(true)
         setRenderKeyboard(true)
-      }, 300)
+      }, 1000)
       return () => clearTimeout(timer)
     }
   }, [loadingPhase])
@@ -171,7 +187,11 @@ export default function ClientPage({ lng }: { lng: string }) {
 
   return (
     <>
-      <LoadingScreen progress={loadingProgress} loadingPhase={loadingPhase} />
+      <LoadingScreen
+        progress={loadingProgress}
+        loadingPhase={loadingPhase}
+        onTypingComplete={handleTypingComplete}
+      />
 
       <div className={HeaderContainer}>
         <Header lng={lng} handleClose={handleCloseModel} />
