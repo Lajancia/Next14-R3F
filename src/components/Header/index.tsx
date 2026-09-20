@@ -3,10 +3,11 @@
 import { css } from '../../../styled-system/css'
 import '../../../styled-system/styles.css'
 import { usePathname, useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Cookies from 'js-cookie'
 import MobileMenu from '../../parts/menu/MobileMenu'
 import useOpenModalStore from '../../utils/state/menuState'
+import { useGLTF } from '@react-three/drei'
 
 const toggleTheme = () => {
   if (!Cookies.get('theme')) {
@@ -74,6 +75,25 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
     openModal()
   }
 
+  const preloadCube = useRef(false)
+  const handleAboutMeHover = () => {
+    if (!preloadCube.current) {
+      preloadCube.current = true
+      useGLTF.preload('/work.glb')
+    }
+  }
+
+  const preloadGallery = useRef(false)
+  const handleGalleryHover = () => {
+    if (!preloadGallery.current) {
+      preloadGallery.current = true
+      for (let i = 1; i <= 24; i++) {
+        const img = new Image()
+        img.src = `/img/gallery/${i}.jpeg`
+      }
+    }
+  }
+
   useEffect(() => {
     console.log('pathname', pathname)
     setCurrentPath(pathname)
@@ -100,6 +120,7 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
               disabled={buttonClick}
               className={StyledLink({ currentPath: currentPath.includes('/aboutMe') ? true : false })}
               onClick={() => handleAboutMe()}
+              onMouseEnter={handleAboutMeHover}
             >
               About Me
             </button>
@@ -109,6 +130,7 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
           <button
             disabled={buttonClick}
             onClick={() => handleGalleryMove()}
+            onMouseEnter={handleGalleryHover}
             className={StyledLink({ currentPath: currentPath.includes('/gallery') ? true : false })}
           >
             Gallery

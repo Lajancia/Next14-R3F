@@ -7,7 +7,10 @@ import { css } from '../../../styled-system/css'
 import { useEffect, useState, useRef, useCallback } from 'react'
 import Footer from '../../components/Footer'
 import { useTranslation } from '../i18n/client'
+import LoadingScreen from '../../components/LoadingScreen'
 import { FaAngleDoubleDown, FaAngleDoubleUp } from 'react-icons/fa'
+import * as THREE from 'three'
+import { useGLTF } from '@react-three/drei'
 
 const BackgroundText = dynamic(() => import('../../parts/keyboard/BackgroundText'), { ssr: false })
 const Keyboards = dynamic(() => import('../../parts/keyboard/Keyboard'), { ssr: false })
@@ -25,11 +28,54 @@ export default function ClientPage({ lng }: { lng: string }) {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const unmountTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
+  // Loading screen state
+  const [isLoading, setIsLoading] = useState(true)
+  const [loadingProgress, setLoadingProgress] = useState(0)
+
   useEffect(() => {
-    setShowKeyboard(true)
-    setShowBackground(true)
-    setRenderKeyboard(true)
-  }, [])
+    const threshold = 95
+
+    const onProgress = (_url: string, loaded: number, total: number) => {
+      const pct = Math.min(Math.round((loaded / total) * 100), 100)
+      setLoadingProgress((prev) => Math.max(prev, pct))
+    }
+
+    const onLoad = () => {
+      setLoadingProgress(100)
+      setTimeout(() => setIsLoading(false), 400)
+    }
+
+    THREE.DefaultLoadingManager.onProgress = onProgress
+    THREE.DefaultLoadingManager.onLoad = onLoad
+
+    // Start preloading models sequentially
+    useGLTF.preload('/keyboard_website.glb')
+    useGLTF.preload('/bike.glb')
+
+    // Fallback: if preload finishes before onProgress fires
+    const fallback = setTimeout(() => {
+      if (loadingProgress < threshold) {
+        setLoadingProgress((prev) => Math.max(prev, 90))
+      }
+    }, 5000)
+
+    const safety = setTimeout(() => {
+      setIsLoading(false)
+    }, 8000)
+
+    return () => {
+      clearTimeout(fallback)
+      clearTimeout(safety)
+    }
+  }, [loadingProgress])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setShowKeyboard(true)
+      setShowBackground(true)
+      setRenderKeyboard(true)
+    }
+  }, [isLoading])
 
   // 컴포넌트가 언마운트될 때 타임아웃을 정리합니다.
   useEffect(() => {
@@ -103,6 +149,8 @@ export default function ClientPage({ lng }: { lng: string }) {
 
   return (
     <>
+      <LoadingScreen progress={loadingProgress} isLoading={isLoading} />
+
       <div className={HeaderContainer}>
         <Header lng={lng} handleClose={handleCloseModel} />
       </div>
