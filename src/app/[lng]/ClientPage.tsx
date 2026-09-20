@@ -262,8 +262,9 @@ const HeaderContainer = css({
 const MobileNavContainer = css({
   display: 'block',
   position: 'fixed',
-  bottom: '12vh',
-  right: '2rem',
+  bottom: '2rem',
+  left: '50%',
+  transform: 'translateX(-50%)',
   zIndex: 20,
   flexDirection: 'column',
   gap: '1rem',
@@ -281,6 +282,7 @@ const ArrowButton = css({
   alignItems: 'center',
   transition: 'transform 0.3s',
   padding: '0.5rem',
+  animation: 'bounce',
 })
 
 const TextContentStyle = css({
