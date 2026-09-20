@@ -3,10 +3,12 @@
 import { css } from '../../../styled-system/css'
 import '../../../styled-system/styles.css'
 import { usePathname, useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Cookies from 'js-cookie'
 import MobileMenu from '../../parts/menu/MobileMenu'
 import useOpenModalStore from '../../utils/state/menuState'
+import { useGLTF, useTexture } from '@react-three/drei'
+import { FaMoon, FaSun } from 'react-icons/fa'
 
 const toggleTheme = () => {
   if (!Cookies.get('theme')) {
@@ -19,7 +21,13 @@ const toggleTheme = () => {
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
   document.cookie = `theme=${newTheme}; path=/`
   window.document.documentElement.setAttribute('data-color-mode', newTheme)
+  return newTheme
 }
+
+const getCurrentTheme = () =>
+  document.documentElement.getAttribute('data-color-mode') ||
+  Cookies.get('theme') ||
+  'dark'
 
 type HeaderProps = {
   lng: string
@@ -36,14 +44,15 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
   const [buttonClick, setButtonClick] = useState(false)
   const { openModal } = useOpenModalStore()
   const [currentPath, setCurrentPath] = useState(pathname)
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => (typeof window === 'undefined' ? 'dark' : getCurrentTheme()) as 'light' | 'dark')
 
-  const handlePipelineMove = () => {
-    if (pathname.includes('/pipeline')) return
+  const handleGalleryMove = () => {
+    if (pathname.includes('/gallery')) return
     setButtonClick(true)
-    setCurrentPath('/pipeline')
+    setCurrentPath('/gallery')
     handleClose()
     setTimeout(() => {
-      router.push(`/${lng}/pipeline`)
+      router.push(`/${lng}/gallery`)
       setButtonClick(false)
     }, 800)
   }
@@ -70,8 +79,30 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
     }, 800)
   }
 
+  const handleToggleTheme = () => {
+    setTheme(toggleTheme() as 'light' | 'dark')
+  }
+
   const handleOpen = () => {
     openModal()
+  }
+
+  const preloadCube = useRef(false)
+  const handleAboutMeHover = () => {
+    if (!preloadCube.current) {
+      preloadCube.current = true
+      useGLTF.preload('/work.glb')
+    }
+  }
+
+  const preloadGallery = useRef(false)
+  const handleGalleryHover = () => {
+    if (!preloadGallery.current) {
+      preloadGallery.current = true
+      for (let i = 1; i <= 24; i++) {
+        useTexture.preload(`/img/gallery/${i}.jpeg`)
+      }
+    }
   }
 
   useEffect(() => {
@@ -83,6 +114,7 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
     <>
       <MobileMenu />
       <div className={StyledHeaderWrapper}>
+        <div className={StyledBlurOverlay} />
         <button onClick={() => handleOpen()} className={StyledMobileMenu}>
           MENU
         </button>
@@ -100,6 +132,7 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
               disabled={buttonClick}
               className={StyledLink({ currentPath: currentPath.includes('/aboutMe') ? true : false })}
               onClick={() => handleAboutMe()}
+              onMouseEnter={handleAboutMeHover}
             >
               About Me
             </button>
@@ -108,10 +141,11 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
         <div className={StyledRightSetting}>
           <button
             disabled={buttonClick}
-            onClick={() => handlePipelineMove()}
-            className={StyledLink({ currentPath: currentPath.includes('/pipeline') ? true : false })}
+            onClick={() => handleGalleryMove()}
+            onMouseEnter={handleGalleryHover}
+            className={StyledLink({ currentPath: currentPath.includes('/gallery') ? true : false })}
           >
-            Pipeline
+            Gallery
           </button>
           <div className={StyledHeaderSetting}>
             <a
@@ -126,7 +160,13 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
             >
               EN
             </a>
-            <button className={StyledThemeButton} onClick={toggleTheme} />
+            <button
+              className={StyledThemeButton}
+              onClick={handleToggleTheme}
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              {theme === 'dark' ? <FaSun /> : <FaMoon />}
+            </button>
           </div>
         </div>
       </div>
@@ -169,6 +209,19 @@ const StyledHeaderWrapper = css({
   height: '10%',
   lg: { height: '10vh', padding: '3rem 2rem' },
   xl: { height: '20vh', padding: '2rem 2rem' },
+})
+
+const StyledBlurOverlay = css({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  zIndex: -1,
+  pointerEvents: 'none',
+  backdropFilter: 'blur(6px)',
+  maskImage: 'linear-gradient(to bottom, black 0%, rgba(0,0,0,0.5) 55%, transparent 100%)',
+  WebkitMaskImage: 'linear-gradient(to bottom, black 0%, rgba(0,0,0,0.5) 55%, transparent 100%)',
 })
 
 const StyledHomeLink = (props: StyledProps) =>
@@ -222,12 +275,24 @@ const StyledLanguageButton = (props: StyledProps) =>
   css({ fontSize: '1.5rem', color: props.currentPath ? 'orange' : 'MainText' })
 
 const StyledThemeButton = css({
-  color: 'MainText',
-  backgroundColor: 'MainText',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   width: '2rem',
   height: '2rem',
   borderRadius: '50%',
+  border: '1px solid',
+  borderColor: 'MainText',
+  color: 'MainText',
+  backgroundColor: 'transparent',
+  fontSize: '1.1rem',
   cursor: 'pointer',
+  transition: 'color 0.3s, border-color 0.3s',
+  '&:hover': { color: 'orange', borderColor: 'orange' },
+  '& svg': {
+    width: '1.1rem',
+    height: '1.1rem',
+  },
 })
 
 const StyledRightSetting = css({

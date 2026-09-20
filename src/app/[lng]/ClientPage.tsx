@@ -4,10 +4,13 @@ import dynamic from 'next/dynamic'
 import Header from '../../components/Header'
 import Info from '../../parts/keyboard/Info'
 import { css } from '../../../styled-system/css'
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef, useCallback, useLayoutEffect } from 'react'
 import Footer from '../../components/Footer'
 import { useTranslation } from '../i18n/client'
+import LoadingScreen from '../../components/LoadingScreen'
 import { FaAngleDoubleDown, FaAngleDoubleUp } from 'react-icons/fa'
+import * as THREE from 'three'
+import { useGLTF } from '@react-three/drei'
 
 const BackgroundText = dynamic(() => import('../../parts/keyboard/BackgroundText'), { ssr: false })
 const Keyboards = dynamic(() => import('../../parts/keyboard/Keyboard'), { ssr: false })
@@ -25,11 +28,92 @@ export default function ClientPage({ lng }: { lng: string }) {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const unmountTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  useEffect(() => {
-    setShowKeyboard(true)
-    setShowBackground(true)
-    setRenderKeyboard(true)
+  // Loading screen state — always start visible (matches SSR)
+  const [loadingPhase, setLoadingPhase] = useState<'loading' | 'exiting' | 'done'>('loading')
+  const [loadingProgress, setLoadingProgress] = useState(0)
+  const loadingDoneRef = useRef(false)
+  const typingDoneRef = useRef(false)
+  const modelLoadedRef = useRef(false)
+
+  const checkAndTriggerExit = useCallback(() => {
+    if (modelLoadedRef.current && typingDoneRef.current && !loadingDoneRef.current) {
+      loadingDoneRef.current = true
+      sessionStorage.setItem('hermes_loaded', '1')
+      setTimeout(() => {
+        setLoadingPhase('exiting')
+      }, 300)
+    }
   }, [])
+
+  const handleTypingComplete = useCallback(() => {
+    typingDoneRef.current = true
+    checkAndTriggerExit()
+  }, [checkAndTriggerExit])
+
+  useLayoutEffect(() => {
+    const isFirstVisit = !sessionStorage.getItem('hermes_loaded')
+
+    if (!isFirstVisit) {
+      // Already cached — hide loading immediately before paint
+      setLoadingPhase('done')
+      setLoadingProgress(100)
+      setShowKeyboard(true)
+      setShowBackground(true)
+      setRenderKeyboard(true)
+      return
+    }
+
+    // First visit — start preloading
+    const threshold = 95
+
+    const onProgress = (_url: string, loaded: number, total: number) => {
+      const pct = Math.min(Math.round((loaded / total) * 100), 100)
+      setLoadingProgress((prev) => Math.max(prev, pct))
+    }
+
+    const onLoad = () => {
+      modelLoadedRef.current = true
+      setLoadingProgress(100)
+      checkAndTriggerExit()
+    }
+
+    THREE.DefaultLoadingManager.onProgress = onProgress
+    THREE.DefaultLoadingManager.onLoad = onLoad
+
+    useGLTF.preload('/keyboard_website.glb')
+    useGLTF.preload('/bike.glb')
+
+    const fallback = setTimeout(() => {
+      if (loadingProgress < threshold) {
+        setLoadingProgress((prev) => Math.max(prev, 90))
+      }
+    }, 5000)
+
+    const safety = setTimeout(() => {
+      if (!loadingDoneRef.current) {
+        modelLoadedRef.current = true
+        typingDoneRef.current = true
+        setLoadingPhase('exiting')
+      }
+    }, 8000)
+
+    return () => {
+      clearTimeout(fallback)
+      clearTimeout(safety)
+    }
+  }, [checkAndTriggerExit])
+
+  useEffect(() => {
+    if (loadingPhase === 'exiting') {
+      const timer = setTimeout(() => {
+        setLoadingPhase('done')
+        setShowKeyboard(true)
+        setShowBackground(true)
+        setRenderKeyboard(true)
+      }, 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [loadingPhase])
 
   // 컴포넌트가 언마운트될 때 타임아웃을 정리합니다.
   useEffect(() => {
@@ -103,6 +187,8 @@ export default function ClientPage({ lng }: { lng: string }) {
 
   return (
     <>
+      <LoadingScreen progress={loadingProgress} loadingPhase={loadingPhase} onTypingComplete={handleTypingComplete} />
+
       <div className={HeaderContainer}>
         <Header lng={lng} handleClose={handleCloseModel} />
       </div>
@@ -172,8 +258,9 @@ const HeaderContainer = css({
 const MobileNavContainer = css({
   display: 'block',
   position: 'fixed',
-  bottom: '12vh',
-  right: '2rem',
+  bottom: '4rem',
+  left: '50%',
+  transform: 'translateX(-50%)',
   zIndex: 20,
   flexDirection: 'column',
   gap: '1rem',
@@ -191,6 +278,7 @@ const ArrowButton = css({
   alignItems: 'center',
   transition: 'transform 0.3s',
   padding: '0.5rem',
+  animation: 'bounce',
 })
 
 const TextContentStyle = css({
@@ -199,7 +287,7 @@ const TextContentStyle = css({
   height: '100dvh',
   zIndex: 1,
   pointerEvents: 'none',
-  lg: { width: '100vw' },
+  lg: { width: '100vw', height: '90dvh' },
   xl: { width: '50vw' },
 })
 const containerStyles = css({
