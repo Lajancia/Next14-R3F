@@ -18,10 +18,10 @@ import { Canvas } from '@react-three/fiber'
 const AnimatedKeyboard = animated(Keyboard)
 
 function Loader() {
-  const { progress } = useProgress()
+  // const { progress } = useProgress()
   return (
     <Html center>
-      <div className={StyledLoader}> {progress} % loaded</div>
+      {/* <div className={StyledLoader}> {progress} % loaded</div> */}
     </Html>
   )
 }
@@ -46,7 +46,11 @@ export default function Keyboards({ showKeyboard, scaleSet }) {
     }
   }, [])
 
-  const { scale } = useSpring({ scale: showKeyboard ? scaleSet : 0, config: { duration: 200 } })
+  const { scale } = useSpring({
+    scale: showKeyboard ? scaleSet : 0,
+    from: { scale: 0 }, // force zoom-in from 0 even on first mount
+    config: { duration: 200 },
+  })
 
   return (
     <Canvas

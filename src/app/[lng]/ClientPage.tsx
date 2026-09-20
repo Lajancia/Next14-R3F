@@ -41,7 +41,7 @@ export default function ClientPage({ lng }: { lng: string }) {
       sessionStorage.setItem('hermes_loaded', '1')
       setTimeout(() => {
         setLoadingPhase('exiting')
-      }, 300)
+      }, 800) // 300 → 800: 모델 100% + 타이핑 완료 후 0.5s 추가 대기 후 슬라이드 업
     }
   }, [])
 

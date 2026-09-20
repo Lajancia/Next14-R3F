@@ -3,6 +3,7 @@
 import { css } from '../../../styled-system/css'
 import '../../../styled-system/styles.css'
 import { usePathname, useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import Cookies from 'js-cookie'
 import MobileMenu from '../../parts/menu/MobileMenu'
@@ -151,18 +152,18 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
             Gallery
           </button>
           <div className={StyledHeaderSetting}>
-            <a
+            <Link
               href={`/ko${pathname.replace(/\/(en|ko)/, '')}`}
               className={StyledLanguageButton({ currentPath: pathname.includes('ko'), isHome })}
             >
               KO
-            </a>
-            <a
+            </Link>
+            <Link
               href={`/en${pathname.replace(/\/(en|ko)/, '')}`}
               className={StyledLanguageButton({ currentPath: pathname.includes('en'), isHome })}
             >
               EN
-            </a>
+            </Link>
             <button
               className={StyledThemeButton({ isHome })}
               onClick={handleToggleTheme}
@@ -277,7 +278,11 @@ const StyledHeaderSetting = css({
 const StyledLanguageButton = (props: StyledProps) =>
   css({
     fontSize: '1.5rem',
-    color: props.isHome ? 'MainText' : props.currentPath ? 'orange' : 'MainText',
+    color: props.isHome
+      ? props.currentPath
+        ? { base: 'orange', xl: 'black' }
+        : { base: 'MainText', xl: 'white' }
+      : props.currentPath ? 'orange' : 'MainText',
   })
 
 const StyledThemeButton = (props: StyledProps) =>

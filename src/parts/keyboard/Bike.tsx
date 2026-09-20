@@ -17,10 +17,10 @@ import { Canvas } from '@react-three/fiber'
 const AnimatedBike = animated(Bike)
 
 function Loader() {
-  const { progress } = useProgress()
+  // const { progress } = useProgress()
   return (
     <Html center>
-      <div className={StyledLoader}> {progress} % loaded</div>
+      {/* <div className={StyledLoader}> {progress} % loaded</div> */}
     </Html>
   )
 }
@@ -45,7 +45,11 @@ export default function Motorcycle({ showBike, scaleSet }: any) {
     }
   }, [])
 
-  const { scale } = useSpring({ scale: showBike ? scaleSet : 0, config: { duration: 200 } })
+  const { scale } = useSpring({
+    scale: showBike ? scaleSet : 0,
+    from: { scale: 0 }, // force zoom-in from 0 even on first mount
+    config: { duration: 200 },
+  })
 
   return (
     <Canvas
