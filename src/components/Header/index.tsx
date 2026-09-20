@@ -8,6 +8,7 @@ import Cookies from 'js-cookie'
 import MobileMenu from '../../parts/menu/MobileMenu'
 import useOpenModalStore from '../../utils/state/menuState'
 import { useGLTF, useTexture } from '@react-three/drei'
+import { FaMoon, FaSun } from 'react-icons/fa'
 
 const toggleTheme = () => {
   if (!Cookies.get('theme')) {
@@ -20,7 +21,13 @@ const toggleTheme = () => {
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
   document.cookie = `theme=${newTheme}; path=/`
   window.document.documentElement.setAttribute('data-color-mode', newTheme)
+  return newTheme
 }
+
+const getCurrentTheme = () =>
+  document.documentElement.getAttribute('data-color-mode') ||
+  Cookies.get('theme') ||
+  'dark'
 
 type HeaderProps = {
   lng: string
@@ -37,6 +44,7 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
   const [buttonClick, setButtonClick] = useState(false)
   const { openModal } = useOpenModalStore()
   const [currentPath, setCurrentPath] = useState(pathname)
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => (typeof window === 'undefined' ? 'dark' : getCurrentTheme()) as 'light' | 'dark')
 
   const handleGalleryMove = () => {
     if (pathname.includes('/gallery')) return
@@ -69,6 +77,10 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
       router.push(`/${lng}/aboutMe`)
       setButtonClick(false)
     }, 800)
+  }
+
+  const handleToggleTheme = () => {
+    setTheme(toggleTheme() as 'light' | 'dark')
   }
 
   const handleOpen = () => {
@@ -147,7 +159,13 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
             >
               EN
             </a>
-            <button className={StyledThemeButton} onClick={toggleTheme} />
+            <button
+              className={StyledThemeButton}
+              onClick={handleToggleTheme}
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              {theme === 'dark' ? <FaSun /> : <FaMoon />}
+            </button>
           </div>
         </div>
       </div>
@@ -243,12 +261,24 @@ const StyledLanguageButton = (props: StyledProps) =>
   css({ fontSize: '1.5rem', color: props.currentPath ? 'orange' : 'MainText' })
 
 const StyledThemeButton = css({
-  color: 'MainText',
-  backgroundColor: 'MainText',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   width: '2rem',
   height: '2rem',
   borderRadius: '50%',
+  border: '1px solid',
+  borderColor: 'MainText',
+  color: 'MainText',
+  backgroundColor: 'transparent',
+  fontSize: '1.1rem',
   cursor: 'pointer',
+  transition: 'color 0.3s, border-color 0.3s',
+  '&:hover': { color: 'orange', borderColor: 'orange' },
+  '& svg': {
+    width: '1.1rem',
+    height: '1.1rem',
+  },
 })
 
 const StyledRightSetting = css({
