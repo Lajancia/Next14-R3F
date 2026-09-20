@@ -37,13 +37,13 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
   const { openModal } = useOpenModalStore()
   const [currentPath, setCurrentPath] = useState(pathname)
 
-  const handlePipelineMove = () => {
-    if (pathname.includes('/pipeline')) return
+  const handleGalleryMove = () => {
+    if (pathname.includes('/gallery')) return
     setButtonClick(true)
-    setCurrentPath('/pipeline')
+    setCurrentPath('/gallery')
     handleClose()
     setTimeout(() => {
-      router.push(`/${lng}/pipeline`)
+      router.push(`/${lng}/gallery`)
       setButtonClick(false)
     }, 800)
   }
@@ -108,10 +108,10 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
         <div className={StyledRightSetting}>
           <button
             disabled={buttonClick}
-            onClick={() => handlePipelineMove()}
-            className={StyledLink({ currentPath: currentPath.includes('/pipeline') ? true : false })}
+            onClick={() => handleGalleryMove()}
+            className={StyledLink({ currentPath: currentPath.includes('/gallery') ? true : false })}
           >
-            Pipeline
+            Gallery
           </button>
           <div className={StyledHeaderSetting}>
             <a

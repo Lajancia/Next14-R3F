@@ -70,7 +70,7 @@ export default function BoxesCursor() {
       {/* @ts-ignore */}
       <group>
         <Box position={[-4, 2, 0]} text={'React'} />
-        <Box position={[0, 2, 0]} text={'Next14'} />
+        <Box position={[0, 2, 0]} text={'Next16'} />
         <Box position={[4, 2, 0]} text={'Typescript'} />
       </group>
       <group>

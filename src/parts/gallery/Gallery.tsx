@@ -3,7 +3,7 @@
 import * as THREE from 'three'
 import { useRef, useState, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Image, ScrollControls, Scroll, useScroll, Text, View, useProgress, Html } from '@react-three/drei'
+import { Image, ScrollControls, Scroll, useScroll, Text, useProgress, Html } from '@react-three/drei'
 import { proxy, useSnapshot } from 'valtio'
 import { easing } from 'maath'
 import { css } from '../../../styled-system/css'
@@ -24,10 +24,51 @@ const imagePaths = []
 for (let i = 1; i <= 24; i++) {
   imagePaths.push(`/img/gallery/${i}.jpeg`)
 }
+
+const imageTitles = [
+  'Retro Typewriter',
+  'Minimalist Workspace',
+  'Cyberpunk City',
+  'Lo-Fi Corner',
+  'Vintage Radio',
+  'Neon Sign',
+  'Desk Setup',
+  'Arcade Machine',
+  'Bookshelf',
+  'Camera Lens',
+  'Vinyl Record',
+  'Potted Plant',
+  'Coffee Cup',
+  'Lamp Shade',
+  'Clock Tower',
+  'Bicycle',
+  'Street Lamp',
+  'Phone Booth',
+  'Sneakers',
+  'Backpack',
+  'Headphones',
+  'Glasses',
+  'Wrist Watch',
+  'Skateboard',
+]
+
 const state = proxy({
   clicked: null,
   urls: imagePaths,
+  centerIndex: 0,
 })
+
+function CenterTracker() {
+  const scroll = useScroll()
+  const { urls } = useSnapshot(state)
+  useFrame(() => {
+    const idx = Math.round(scroll.offset * (urls.length - 1))
+    if (state.centerIndex !== idx) {
+      state.centerIndex = idx
+    }
+  })
+  return null
+}
 
 function Minimap({ geometry, material, easing }: MinimapProps) {
   const ref = useRef<Group>(null)
@@ -118,14 +159,21 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
 }
 
 function Items({ w = 0.7, gap = 0.15 }) {
-  const { urls } = useSnapshot(state)
+  const { urls, centerIndex, clicked } = useSnapshot(state)
   const { width } = useThree((state) => state.viewport)
   const xW = w + gap
+  const activeIndex = clicked !== null ? clicked : centerIndex
+  const activeTitle = imageTitles[activeIndex] || ''
 
   return (
     <ScrollControls horizontal damping={0.1} pages={(width - xW + urls.length * xW) / width}>
-      <Text fontSize={0.3} position={[0, -2.5, 0]} color={'#373737'}>
-        3D Modeling
+      <CenterTracker />
+      <Text
+        fontSize={0.3}
+        position={[0, -2.5, 0]}
+        color={'#373737'}
+      >
+        {activeTitle}
       </Text>
       <Scroll>
         {

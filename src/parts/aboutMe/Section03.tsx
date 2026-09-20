@@ -19,6 +19,7 @@ const SkillList = [
   'Linux',
   'React Hook Form',
   'Zustand',
+  'Jotai',
   'TanStack Query',
   'Vite',
   'Tailwind CSS',
@@ -39,6 +40,7 @@ const SkillList = [
   'RDKit',
   'OpenSeadragon',
   'ApexCharts',
+  'Three.js',
 ]
 
 const Section03 = ({ showSection }: SectionProps) => {
