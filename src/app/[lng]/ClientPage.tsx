@@ -81,7 +81,7 @@ export default function ClientPage({ lng }: { lng: string }) {
       clearTimeout(fallback)
       clearTimeout(safety)
     }
-  }, [loadingProgress])
+  }, [])
 
   useEffect(() => {
     if (loadingPhase === 'exiting') {
