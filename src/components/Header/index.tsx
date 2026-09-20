@@ -220,8 +220,8 @@ const StyledBlurOverlay = css({
   zIndex: -1,
   pointerEvents: 'none',
   backdropFilter: 'blur(6px)',
-  maskImage: 'linear-gradient(to top, black 0%, rgba(0,0,0,0.5) 55%, transparent 100%)',
-  WebkitMaskImage: 'linear-gradient(to top, black 0%, rgba(0,0,0,0.5) 55%, transparent 100%)',
+  maskImage: 'linear-gradient(to bottom, black 0%, rgba(0,0,0,0.5) 55%, transparent 100%)',
+  WebkitMaskImage: 'linear-gradient(to bottom, black 0%, rgba(0,0,0,0.5) 55%, transparent 100%)',
 })
 
 const StyledHomeLink = (props: StyledProps) =>
