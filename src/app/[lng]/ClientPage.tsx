@@ -28,11 +28,18 @@ export default function ClientPage({ lng }: { lng: string }) {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const unmountTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Loading screen state
+  // Loading screen state — only on first visit
   const [isLoading, setIsLoading] = useState(true)
   const [loadingProgress, setLoadingProgress] = useState(0)
 
   useEffect(() => {
+    const isFirstVisit = !sessionStorage.getItem('hermes_loaded')
+    if (!isFirstVisit) {
+      setIsLoading(false)
+      setLoadingProgress(100)
+      return
+    }
+
     const threshold = 95
 
     const onProgress = (_url: string, loaded: number, total: number) => {
@@ -42,6 +49,7 @@ export default function ClientPage({ lng }: { lng: string }) {
 
     const onLoad = () => {
       setLoadingProgress(100)
+      sessionStorage.setItem('hermes_loaded', '1')
       setTimeout(() => setIsLoading(false), 400)
     }
 
