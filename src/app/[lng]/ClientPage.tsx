@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import Header from '../../components/Header'
 import Info from '../../parts/keyboard/Info'
 import { css } from '../../../styled-system/css'
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef, useCallback, useLayoutEffect } from 'react'
 import Footer from '../../components/Footer'
 import { useTranslation } from '../i18n/client'
 import LoadingScreen from '../../components/LoadingScreen'
@@ -28,15 +28,16 @@ export default function ClientPage({ lng }: { lng: string }) {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const unmountTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Loading screen state — only on first visit
-  const [isLoading, setIsLoading] = useState(false)
+  // Loading screen state — always start visible (matches SSR)
+  const [isLoading, setIsLoading] = useState(true)
   const [loadingProgress, setLoadingProgress] = useState(0)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const isFirstVisit = !sessionStorage.getItem('hermes_loaded')
 
     if (!isFirstVisit) {
-      // Already cached — show content immediately, no loading screen
+      // Already cached — hide loading immediately before paint
+      setIsLoading(false)
       setLoadingProgress(100)
       setShowKeyboard(true)
       setShowBackground(true)
@@ -44,9 +45,7 @@ export default function ClientPage({ lng }: { lng: string }) {
       return
     }
 
-    // First visit — show loading screen
-    setIsLoading(true)
-
+    // First visit — start preloading
     const threshold = 95
 
     const onProgress = (_url: string, loaded: number, total: number) => {
@@ -68,11 +67,9 @@ export default function ClientPage({ lng }: { lng: string }) {
     THREE.DefaultLoadingManager.onProgress = onProgress
     THREE.DefaultLoadingManager.onLoad = onLoad
 
-    // Start preloading models sequentially
     useGLTF.preload('/keyboard_website.glb')
     useGLTF.preload('/bike.glb')
 
-    // Fallback: if preload finishes before onProgress fires
     const fallback = setTimeout(() => {
       if (loadingProgress < threshold) {
         setLoadingProgress((prev) => Math.max(prev, 90))
