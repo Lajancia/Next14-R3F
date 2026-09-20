@@ -116,7 +116,7 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
 
   return (
     <>
-      <MobileMenu />
+      <MobileMenu lng={lng} />
       <div className={StyledHeaderWrapper}>
         {!isHome && <div className={StyledBlurOverlay} />}
         <button onClick={() => handleOpen()} className={StyledMobileMenu}>
