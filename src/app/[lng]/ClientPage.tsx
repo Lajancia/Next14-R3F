@@ -31,6 +31,7 @@ export default function ClientPage({ lng }: { lng: string }) {
   // Loading screen state — always start visible (matches SSR)
   const [loadingPhase, setLoadingPhase] = useState<'loading' | 'exiting' | 'done'>('loading')
   const [loadingProgress, setLoadingProgress] = useState(0)
+  const loadingDoneRef = useRef(false)
 
   useLayoutEffect(() => {
     const isFirstVisit = !sessionStorage.getItem('hermes_loaded')
@@ -54,6 +55,7 @@ export default function ClientPage({ lng }: { lng: string }) {
     }
 
     const onLoad = () => {
+      loadingDoneRef.current = true
       setLoadingProgress(100)
       sessionStorage.setItem('hermes_loaded', '1')
       setTimeout(() => {
@@ -74,7 +76,9 @@ export default function ClientPage({ lng }: { lng: string }) {
     }, 5000)
 
     const safety = setTimeout(() => {
-      setLoadingPhase('exiting')
+      if (!loadingDoneRef.current) {
+        setLoadingPhase('exiting')
+      }
     }, 8000)
 
     return () => {
