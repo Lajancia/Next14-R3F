@@ -114,6 +114,7 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
     <>
       <MobileMenu />
       <div className={StyledHeaderWrapper}>
+        <div className={StyledBlurOverlay} />
         <button onClick={() => handleOpen()} className={StyledMobileMenu}>
           MENU
         </button>
@@ -206,9 +207,20 @@ const StyledHeaderWrapper = css({
   padding: '2rem 0',
   width: '100%',
   height: '10%',
-  backdropFilter: 'blur(6px)',
   lg: { height: '10vh', padding: '3rem 2rem' },
   xl: { height: '20vh', padding: '2rem 2rem' },
+})
+
+const StyledBlurOverlay = css({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  pointerEvents: 'none',
+  backdropFilter: 'blur(6px)',
+  maskImage: 'linear-gradient(to top, black 0%, rgba(0,0,0,0.5) 55%, transparent 100%)',
+  WebkitMaskImage: 'linear-gradient(to top, black 0%, rgba(0,0,0,0.5) 55%, transparent 100%)',
 })
 
 const StyledHomeLink = (props: StyledProps) =>
