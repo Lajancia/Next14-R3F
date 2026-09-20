@@ -29,7 +29,10 @@ export default function ClientPage({ lng }: { lng: string }) {
   const unmountTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Loading screen state — only on first visit
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return !sessionStorage.getItem('hermes_loaded')
+  })
   const [loadingProgress, setLoadingProgress] = useState(0)
 
   useEffect(() => {
