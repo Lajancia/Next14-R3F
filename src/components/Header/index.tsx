@@ -277,7 +277,11 @@ const StyledHeaderSetting = css({
 const StyledLanguageButton = (props: StyledProps) =>
   css({
     fontSize: '1.5rem',
-    color: props.isHome ? 'MainText' : props.currentPath ? 'orange' : 'MainText',
+    color: props.isHome
+      ? props.currentPath
+        ? { base: 'orange', xl: 'black' }
+        : { base: 'MainText', xl: 'white' }
+      : props.currentPath ? 'orange' : 'MainText',
   })
 
 const StyledThemeButton = (props: StyledProps) =>
