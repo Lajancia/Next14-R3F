@@ -29,19 +29,23 @@ export default function ClientPage({ lng }: { lng: string }) {
   const unmountTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Loading screen state — only on first visit
-  const [isLoading, setIsLoading] = useState(() => {
-    if (typeof window === 'undefined') return false
-    return !sessionStorage.getItem('hermes_loaded')
-  })
+  const [isLoading, setIsLoading] = useState(false)
   const [loadingProgress, setLoadingProgress] = useState(0)
 
   useEffect(() => {
     const isFirstVisit = !sessionStorage.getItem('hermes_loaded')
+
     if (!isFirstVisit) {
-      setIsLoading(false)
+      // Already cached — show content immediately, no loading screen
       setLoadingProgress(100)
+      setShowKeyboard(true)
+      setShowBackground(true)
+      setRenderKeyboard(true)
       return
     }
+
+    // First visit — show loading screen
+    setIsLoading(true)
 
     const threshold = 95
 
@@ -53,7 +57,12 @@ export default function ClientPage({ lng }: { lng: string }) {
     const onLoad = () => {
       setLoadingProgress(100)
       sessionStorage.setItem('hermes_loaded', '1')
-      setTimeout(() => setIsLoading(false), 400)
+      setTimeout(() => {
+        setIsLoading(false)
+        setShowKeyboard(true)
+        setShowBackground(true)
+        setRenderKeyboard(true)
+      }, 400)
     }
 
     THREE.DefaultLoadingManager.onProgress = onProgress
@@ -72,6 +81,9 @@ export default function ClientPage({ lng }: { lng: string }) {
 
     const safety = setTimeout(() => {
       setIsLoading(false)
+      setShowKeyboard(true)
+      setShowBackground(true)
+      setRenderKeyboard(true)
     }, 8000)
 
     return () => {
@@ -79,14 +91,6 @@ export default function ClientPage({ lng }: { lng: string }) {
       clearTimeout(safety)
     }
   }, [loadingProgress])
-
-  useEffect(() => {
-    if (!isLoading) {
-      setShowKeyboard(true)
-      setShowBackground(true)
-      setRenderKeyboard(true)
-    }
-  }, [isLoading])
 
   // 컴포넌트가 언마운트될 때 타임아웃을 정리합니다.
   useEffect(() => {
