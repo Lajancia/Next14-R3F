@@ -7,7 +7,7 @@ import Link from 'next/link'
 import useOpenModalStore from '../../utils/state/menuState'
 import { useEffect } from 'react'
 
-export default function MobileMenu() {
+export default function MobileMenu({ lng }: { lng: string }) {
   const { modalState, closeModal } = useOpenModalStore()
   const handleClose = () => {
     setTimeout(() => {
@@ -21,9 +21,9 @@ export default function MobileMenu() {
     <Modal isOpen={modalState}>
       <div className={StyledBackground}>
         <div className={StyledWrapper} onClick={handleClose}>
-          <Link href={'/'}>Home</Link>
-          <Link href={'/aboutMe'}>About Me</Link>
-          <Link href={'/gallery'}>Gallery</Link>
+          <Link href={`/${lng}`}>Home</Link>
+          <Link href={`/${lng}/aboutMe`}>About Me</Link>
+          <Link href={`/${lng}/gallery`}>Gallery</Link>
           <button
             onClick={() => {
               closeModal()
