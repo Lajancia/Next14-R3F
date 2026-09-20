@@ -46,7 +46,11 @@ export default function Keyboards({ showKeyboard, scaleSet }) {
     }
   }, [])
 
-  const { scale } = useSpring({ scale: showKeyboard ? scaleSet : 0, config: { duration: 200 } })
+  const { scale } = useSpring({
+    scale: showKeyboard ? scaleSet : 0,
+    from: { scale: 0 }, // force zoom-in from 0 even on first mount
+    config: { duration: 200 },
+  })
 
   return (
     <Canvas
