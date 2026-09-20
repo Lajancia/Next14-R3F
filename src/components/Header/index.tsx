@@ -7,7 +7,7 @@ import { useState, useEffect, useRef } from 'react'
 import Cookies from 'js-cookie'
 import MobileMenu from '../../parts/menu/MobileMenu'
 import useOpenModalStore from '../../utils/state/menuState'
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, useTexture } from '@react-three/drei'
 
 const toggleTheme = () => {
   if (!Cookies.get('theme')) {
@@ -88,8 +88,7 @@ const Header = ({ lng, handleClose }: HeaderProps) => {
     if (!preloadGallery.current) {
       preloadGallery.current = true
       for (let i = 1; i <= 24; i++) {
-        const img = new Image()
-        img.src = `/img/gallery/${i}.jpeg`
+        useTexture.preload(`/img/gallery/${i}.jpeg`)
       }
     }
   }
