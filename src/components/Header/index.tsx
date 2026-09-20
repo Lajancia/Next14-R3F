@@ -217,6 +217,7 @@ const StyledBlurOverlay = css({
   left: 0,
   right: 0,
   bottom: 0,
+  zIndex: -1,
   pointerEvents: 'none',
   backdropFilter: 'blur(6px)',
   maskImage: 'linear-gradient(to top, black 0%, rgba(0,0,0,0.5) 55%, transparent 100%)',
