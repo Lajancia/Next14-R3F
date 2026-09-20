@@ -206,6 +206,7 @@ const StyledHeaderWrapper = css({
   padding: '2rem 0',
   width: '100%',
   height: '10%',
+  backdropFilter: 'blur(6px)',
   lg: { height: '10vh', padding: '3rem 2rem' },
   xl: { height: '20vh', padding: '2rem 2rem' },
 })

@@ -168,11 +168,7 @@ function Items({ w = 0.7, gap = 0.15 }) {
   return (
     <ScrollControls horizontal damping={0.1} pages={(width - xW + urls.length * xW) / width}>
       <CenterTracker />
-      <Text
-        fontSize={0.3}
-        position={[0, 1.6, 0]}
-        color={'#373737'}
-      >
+      <Text fontSize={0.3} position={[0, -2, 0]} color={'#373737'}>
         {activeTitle}
       </Text>
       <Scroll>
