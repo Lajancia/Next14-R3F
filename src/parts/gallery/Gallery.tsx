@@ -26,30 +26,30 @@ for (let i = 1; i <= 24; i++) {
 }
 
 const imageTitles = [
-  'Retro Typewriter',
-  'Minimalist Workspace',
-  'Cyberpunk City',
-  'Lo-Fi Corner',
-  'Vintage Radio',
-  'Neon Sign',
-  'Desk Setup',
-  'Arcade Machine',
-  'Bookshelf',
-  'Camera Lens',
-  'Vinyl Record',
-  'Potted Plant',
-  'Coffee Cup',
-  'Lamp Shade',
-  'Clock Tower',
-  'Bicycle',
-  'Street Lamp',
-  'Phone Booth',
-  'Sneakers',
-  'Backpack',
-  'Headphones',
-  'Glasses',
-  'Wrist Watch',
-  'Skateboard',
+  'Dune(Blender)',
+  'Planet(Blender)',
+  'Architect(Blender)',
+  'Tenet(Blender)',
+  'Light(Blender)',
+  'Space(Blender)',
+  'Door(Blender)',
+  'Journey(Blender)',
+  'Astronaut(Blender)',
+  'Castle(Blender)',
+  'Death Stranding(Blender)',
+  'Black hole(Blender)',
+  'Dune2(Blender)',
+  'Library(Blender)',
+  'Ocean(Blender)',
+  'Bread(Blender)',
+  'Macro Keyboard(Blender)',
+  'Whisper(Pen drawing)',
+  'Spade Ace(Pen drawing)',
+  'Tatara Gaze(Pen drawing)',
+  'Unknown(Blender)',
+  'Fairy tale(Procreate)',
+  'Atramors(Procreate)',
+  'Last city(Procreate)',
 ]
 
 const state = proxy({
@@ -170,7 +170,7 @@ function Items({ w = 0.7, gap = 0.15 }) {
       <CenterTracker />
       <Text
         fontSize={0.3}
-        position={[0, -2.5, 0]}
+        position={[0, 1.6, 0]}
         color={'#373737'}
       >
         {activeTitle}

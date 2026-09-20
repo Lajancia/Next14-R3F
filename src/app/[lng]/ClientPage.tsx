@@ -187,11 +187,7 @@ export default function ClientPage({ lng }: { lng: string }) {
 
   return (
     <>
-      <LoadingScreen
-        progress={loadingProgress}
-        loadingPhase={loadingPhase}
-        onTypingComplete={handleTypingComplete}
-      />
+      <LoadingScreen progress={loadingProgress} loadingPhase={loadingPhase} onTypingComplete={handleTypingComplete} />
 
       <div className={HeaderContainer}>
         <Header lng={lng} handleClose={handleCloseModel} />
@@ -262,7 +258,7 @@ const HeaderContainer = css({
 const MobileNavContainer = css({
   display: 'block',
   position: 'fixed',
-  bottom: '2rem',
+  bottom: '4rem',
   left: '50%',
   transform: 'translateX(-50%)',
   zIndex: 20,
@@ -291,7 +287,7 @@ const TextContentStyle = css({
   height: '100dvh',
   zIndex: 1,
   pointerEvents: 'none',
-  lg: { width: '100vw' },
+  lg: { width: '100vw', height: '90dvh' },
   xl: { width: '50vw' },
 })
 const containerStyles = css({
