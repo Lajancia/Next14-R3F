@@ -57,9 +57,7 @@ export default function ClientPage({ lng }: { lng: string }) {
       // Already cached — hide loading immediately before paint
       setLoadingPhase('done')
       setLoadingProgress(100)
-      setShowKeyboard(true)
-      setShowBackground(true)
-      setRenderKeyboard(true)
+      setRenderKeyboard(true)  // mount first, effect shows after 100ms
       return
     }
 
@@ -107,13 +105,30 @@ export default function ClientPage({ lng }: { lng: string }) {
     if (loadingPhase === 'exiting') {
       const timer = setTimeout(() => {
         setLoadingPhase('done')
-        setShowKeyboard(true)
-        setShowBackground(true)
+        // Mount first, show after a tick → spring animates 0→scaleSet
         setRenderKeyboard(true)
       }, 1000)
       return () => clearTimeout(timer)
     }
   }, [loadingPhase])
+
+  // Mount → delayed show so spring picks up the transition
+  useEffect(() => {
+    if (!renderKeyboard) return
+    const timer = setTimeout(() => {
+      setShowKeyboard(true)
+      setShowBackground(true)
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [renderKeyboard])
+
+  useEffect(() => {
+    if (!renderBike) return
+    const timer = setTimeout(() => {
+      setShowBike(true)
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [renderBike])
 
   // 컴포넌트가 언마운트될 때 타임아웃을 정리합니다.
   useEffect(() => {
@@ -137,8 +152,7 @@ export default function ClientPage({ lng }: { lng: string }) {
     }, 1000)
 
     timeoutRef.current = setTimeout(() => {
-      setRenderBike(true)
-      setShowBike(true)
+      setRenderBike(true)  // effect will showBike=true after 100ms
       setIsTransitioning(false)
     }, 1000)
   }, [isTransitioning, showKeyboard])
@@ -153,8 +167,7 @@ export default function ClientPage({ lng }: { lng: string }) {
     }, 1000)
 
     timeoutRef.current = setTimeout(() => {
-      setRenderKeyboard(true)
-      setShowKeyboard(true)
+      setRenderKeyboard(true)  // effect will showKeyboard=true after 100ms
       setIsTransitioning(false)
     }, 1000)
   }, [isTransitioning, showBike])

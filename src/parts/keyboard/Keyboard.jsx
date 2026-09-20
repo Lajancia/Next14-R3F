@@ -18,10 +18,10 @@ import { Canvas } from '@react-three/fiber'
 const AnimatedKeyboard = animated(Keyboard)
 
 function Loader() {
-  const { progress } = useProgress()
+  // const { progress } = useProgress()
   return (
     <Html center>
-      <div className={StyledLoader}> {progress} % loaded</div>
+      {/* <div className={StyledLoader}> {progress} % loaded</div> */}
     </Html>
   )
 }

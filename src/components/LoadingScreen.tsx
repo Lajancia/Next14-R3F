@@ -73,7 +73,7 @@ const LoadingScreen = ({ progress, loadingPhase, onTypingComplete }: LoadingScre
               style={{ width: `${progress}%` }}
             />
           </div>
-          <span className={StyledProgressText}>{progress}%</span>
+          {/* <span className={StyledProgressText}>{progress}%</span> */}
         </div>
       </div>
     </motion.div>

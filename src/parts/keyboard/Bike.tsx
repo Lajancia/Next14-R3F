@@ -17,10 +17,10 @@ import { Canvas } from '@react-three/fiber'
 const AnimatedBike = animated(Bike)
 
 function Loader() {
-  const { progress } = useProgress()
+  // const { progress } = useProgress()
   return (
     <Html center>
-      <div className={StyledLoader}> {progress} % loaded</div>
+      {/* <div className={StyledLoader}> {progress} % loaded</div> */}
     </Html>
   )
 }
