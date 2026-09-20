@@ -1,6 +1,5 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
 import { css } from '../../styled-system/css'
 
 type LoadingScreenProps = {
@@ -9,33 +8,24 @@ type LoadingScreenProps = {
 }
 
 const LoadingScreen = ({ progress, isLoading }: LoadingScreenProps) => {
-  return (
-    <AnimatePresence>
-      {isLoading && (
-        <motion.div
-          className={StyledOverlay}
-          initial={{ y: 0 }}
-          exit={{ y: '-100%' }}
-          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-        >
-          <div className={StyledCenter}>
-            <span className={StyledTitle}>Soominlab</span>
-          </div>
+  if (!isLoading) return null
 
-          <div className={StyledProgressArea}>
-            <div className={StyledProgressTrack}>
-              <motion.div
-                className={StyledProgressFill}
-                initial={{ width: '0%' }}
-                animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-              />
-            </div>
-            <span className={StyledProgressText}>{progress}%</span>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+  return (
+    <div className={StyledOverlay}>
+      <div className={StyledCenter}>
+        <span className={StyledTitle}>Soominlab</span>
+      </div>
+
+      <div className={StyledProgressArea}>
+        <div className={StyledProgressTrack}>
+          <div
+            className={StyledProgressFill}
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+        <span className={StyledProgressText}>{progress}%</span>
+      </div>
+    </div>
   )
 }
 
@@ -93,6 +83,7 @@ const StyledProgressFill = css({
   height: '100%',
   backgroundColor: '#ffffff',
   borderRadius: '1px',
+  transition: 'width 0.3s ease-out',
 })
 
 const StyledProgressText = css({
