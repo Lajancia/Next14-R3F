@@ -69,17 +69,17 @@ const StyledInfoWrapper = css({
   bottom: 10,
   // Header(height: 20vh)와 겹치지 않도록 vh 단위로 고정
   // (% 마진은 컨테이너 너비 기준이라 화면 크기에 따라 header 침범)
-  marginTop: '22vh',
+  marginTop: '18vh',
   marginBottom: 0,
   lg: {
-    marginTop: '22vh',
+    marginTop: '18vh',
     height: '75%',
     padding: '5rem',
     bottom: '0',
     marginBottom: 'auto',
   },
   xl: {
-    marginTop: '22vh',
+    marginTop: '18vh',
     height: '75%',
     bottom: 'auto',
     marginBottom: 'auto',
