@@ -62,7 +62,6 @@ const StyledInfoWrapper = css({
   flexDirection: 'column',
   justifyContent: 'center',
   padding: '2rem',
-  marginBottom: '5vh',
   height: '65%',
   color: 'white',
   gap: '1rem',
