@@ -72,7 +72,7 @@ const StyledInfoWrapper = css({
   marginTop: '18vh',
   marginBottom: 0,
   lg: {
-    marginTop: '18vh',
+    marginTop: '25%',
     height: '75%',
     padding: '5rem',
     bottom: '0',
