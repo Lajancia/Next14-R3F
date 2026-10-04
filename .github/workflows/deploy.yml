@@ -1,0 +1,40 @@
+name: Build & Deploy (GitOps)
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: g3941813-svg
+          password: ${{ secrets.GHCR_GITOPS_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: dockerfile
+          push: true
+          tags: |
+            ghcr.io/g3941813-svg/next14-r3f:${{ github.sha }}
+            ghcr.io/g3941813-svg/next14-r3f:${GITHUB_SHA::7}
+            ghcr.io/g3941813-svg/next14-r3f:latest
+      - name: Update GitOps repo
+        uses: actions/checkout@v4
+        with:
+          repository: g3941813-svg/next-r3f-ops
+          token: ${{ secrets.GHCR_GITOPS_TOKEN }}
+          path: gitops
+      - name: Bump image tag
+        run: |
+          cd gitops
+          sed -i "s|image: ghcr.io/g3941813-svg/next14-r3f:.*|image: ghcr.io/g3941813-svg/next14-r3f:${GITHUB_SHA::7}|" next-r3f.yaml
+          git config user.name "GH Actions CI"
+          git config user.email "ci@soominlab.com"
+          git add next-r3f.yaml
+          git commit -m "chore: update next14-r3f image tag to ${GITHUB_SHA::7}"
+          git push
